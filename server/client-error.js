@@ -1,4 +1,4 @@
-import { Children } from "react";
+
 
 class ClientError {
   constructor(status, message) {
@@ -6,5 +6,4 @@ class ClientError {
     this.message = message;
   }
 }
-
 module.exports = ClientError;
