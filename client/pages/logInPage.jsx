@@ -1,6 +1,4 @@
 import React from 'react';
-import Title from '../../server/public/images/logoTitle.png';
-import Background from '../../server/public/images/flighttrak247.jpg';
 
 export default class LoginPage extends React.Component {
   constructor(props) {
@@ -17,8 +15,8 @@ export default class LoginPage extends React.Component {
     return (
       <div className="logInPageContainer">
         <div className="backgroundColor"></div>
-        <img src={Title} className="logo" />
-        <img src={Background} className="backgroundPic" />
+        <img src="/images/logoTitle.png" className="logo" />
+        <img src="/images/flighttrak247.jpg" className="backgroundPic" />
         <div className="rowInput">
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
@@ -29,7 +27,9 @@ export default class LoginPage extends React.Component {
               <label>Password:</label>
               <input name="password" type="password" className="form-control" readOnly value={this.state.password} required />
             </div>
-            <button type="submit" className="btn btn-danger"><a href="#home" className="submit">Log In</a></button>
+            <div className="logInBtn">
+            <button type="submit" className="btn btn-danger"><a href="#home" className="submit style">Log In</a></button>
+            </div>
           </form>
         </div>
       </div>

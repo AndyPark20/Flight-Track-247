@@ -10,6 +10,25 @@ body {
 
 /***********************  Log In page sign in  ****************/
 
+label {
+  color: white;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logInBtn {
+  text-align: center;
+}
+
 .logInPageContainer {
   display: flex;
   justify-content: center;
@@ -24,6 +43,7 @@ body {
 }
 
 .logo {
+  width: 22%;
   position: absolute;
   top: 10%;
   z-index: 1;
