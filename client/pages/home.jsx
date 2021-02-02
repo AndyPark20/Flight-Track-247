@@ -2,12 +2,13 @@ import React from 'react';
 import Nav from '../components/navigationTop';
 import NavBottom from '../components/navigationBottom';
 import PlaneRender from '../components/renderPlanes';
+import Loader from '../lib/loading'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 export default class Home extends React.Component {
   constructor(props){
     super(props);
-    this.state=({value:[]})
+    this.state = ({ value: [], load: false, pinPointPlane: false })
   }
 
   componentDidMount(){
@@ -23,9 +24,9 @@ export default class Home extends React.Component {
           return res.json()
         })
         .then(data => {
-          const sliced = data.states.slice(0, 750)
-          this.setState({ value: sliced})
-          console.log(this.state)
+          const sliced = data.states.slice(0, 1000)
+          this.setState({ value: sliced, load: true, pinPointPlane: false })
+
         })
         .catch(err=>{
           console.error(err)
@@ -39,6 +40,11 @@ export default class Home extends React.Component {
           <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div className="fixed-top">
               <Nav />
+            </div>
+          </div>
+          <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div className="loader">
+              <Loader spinLoad={this.state.load} />
             </div>
           </div>
           <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
