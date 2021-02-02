@@ -1,10 +1,12 @@
 import React from 'react';
 import { MapContainer, CircleMarker, Popup, TileLayer, Marker } from 'react-leaflet';
 import Home from '../pages/home';
+import PopUp from './popup';
 
 export default class PlaneRender extends React.Component {
   constructor(props) {
     super(props);
+    this.state={flightCiao:''}
     this.renderPlane = this.renderPlane.bind(this)
   }
 
@@ -21,6 +23,10 @@ export default class PlaneRender extends React.Component {
     }
   }
   render() {
-    return (<div>{this.renderPlane()}</div>)
+    return (
+    <div>{this.renderPlane()}
+        <PopUp flight={this.state.flightCiao} />
+    </div>
+    )
   }
 }
