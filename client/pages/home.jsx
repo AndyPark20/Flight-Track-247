@@ -5,6 +5,7 @@ import PlaneRender from '../components/renderPlanes';
 import Loader from '../lib/loading';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import MyContext from '../lib/context';
+import PopUp from '../components/popup';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -46,6 +47,11 @@ export default class Home extends React.Component {
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
               <div className="fixed-top">
                 <Nav />
+              </div>
+            </div>
+            <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div className="fixed">
+                <PopUp />
               </div>
             </div>
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

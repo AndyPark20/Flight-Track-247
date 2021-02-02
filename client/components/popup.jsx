@@ -1,5 +1,5 @@
 import React from 'react';
-import MyContext from './context';
+import MyContext from '../lib/context';
 
 export default class PopUp extends React.Component{
   constructor(props){
@@ -30,7 +30,7 @@ export default class PopUp extends React.Component{
             <div className="panel" key={i}>
               <div className="planeInfoRow">
                 <div className="col-12 planeInfoSection">
-                  <img className="airplaneLogo" src={airplane} />
+                  <img className="airplaneLogo" src="/images/airplane.png" alt="airplane" />
                   <div className="planeInfo">
                     <p>Country of Reg.</p>
                     {this.renderCountry()}
@@ -46,7 +46,7 @@ export default class PopUp extends React.Component{
                 </div>
               </div>
               <div className="col-12 planeInfoSection">
-                <img className="airplaneLogo" src={Gauge} />
+                <img className="airplaneLogo" src="images/gauge.png" alt="instrument cluster" />
                 <div className="planeInfo">
                   <p>Altitude</p>
                   <p>{Math.round(values[7] * 3.28084)}ft</p>
@@ -61,7 +61,7 @@ export default class PopUp extends React.Component{
                 </div>
               </div>
               <div className="col-12 planeInfoSection">
-                <img className="airplaneLogo" src={Alt} />
+                <img className="airplaneLogo" src="images/altitude.png" alt="altitude meter" />
                 <div className="planeInfo">
                   <p>Latitude</p>
                   <p>{values[6]}&deg; </p>
@@ -76,7 +76,7 @@ export default class PopUp extends React.Component{
                 </div>
               </div>
               <div className="col-12 planeInfoSection">
-                <img className="airplaneLogo" src={Radar} />
+                <img className="airplaneLogo" src="images/radar.png" alt="radar" />
                 <div className="planeInfo">
                 </div>
                 <div className="planeInfo">
@@ -103,8 +103,7 @@ export default class PopUp extends React.Component{
     return (
       <div className="pop">
         <div className="row">
-          <div classname="column">
-            {this.testing()}
+          <div className="column">
           </div>
         </div>
       </div>
