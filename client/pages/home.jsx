@@ -9,6 +9,10 @@ export default class Home extends React.Component {
     this.state=({value:[]})
   }
 
+  componentDidMount(){
+    this.getData()
+  }
+
   getData() {
       fetch('https://opensky-network.org/api/states/all', {
         method: 'GET',
@@ -20,6 +24,10 @@ export default class Home extends React.Component {
         .then(data => {
           const sliced = data.states.slice(0, 750)
           this.setState({ value: sliced})
+          console.log(this.state)
+        })
+        .catch(err=>{
+          console.error(err)
         })
       }
 
