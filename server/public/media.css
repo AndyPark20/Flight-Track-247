@@ -1,11 +1,4 @@
-@media screen and (min-width: 320px) {
-  .leaflet{
-    bottom:7.0%
- }
-  .logo {
-    width: 40%;
-  }
-}
+
 @media screen and (min-width:375px){
   .leaflet{
     bottom:4.9%;
@@ -14,16 +7,8 @@
    top:69%;
  }
 }
-@media screen and (min-width:414px){
-  .leaflet{
-    bottom:5.5%
- }
-}
   /********  HORIZONTAL LAYOUT!  ****/
 @media screen and (min-width: 568px) {
-  .leaflet{
-    bottom:12.0%
- }
   .logo {
     width: 15%;
   }
@@ -31,50 +16,8 @@
     width:40%;
   }
 }
-@media screen and (min-width:667px){
-  .leaflet{
-    bottom:10.5%
- }
-}
-@media screen and (min-width: 736px) {
-  .leaflet{
-    bottom:9.5%
- }
-  .logo {
-    width: 15%;
-  }
-}
 @media screen and (min-width: 768px) {
-  .leaflet{
-    bottom:3.8%
- }
   .logo {
-    width: 25%;
+    width: 18%;
   }
-}
-@media screen and (min-width:812px){
-  .leaflet{
-    bottom:10.5%
- }
-}
-@media screen and (min-width:1024px){
-  .leaflet{
-    bottom:2.8%
- }
-}
-@media screen and (min-width:1366px){
-  .leaflet{
-    bottom:3.8%
- }
-}
-@media screen and (min-width:1900px){
-  .leaflet{
-    bottom:4.0%
- }
-}
-
-@media screen and (min-width:2100px){
-  .leaflet{
-    bottom:3.0%
- }
 }

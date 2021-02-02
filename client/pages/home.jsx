@@ -6,7 +6,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 export default class Home extends React.Component {
   render() {
     return (
-      <div className="homeContainer">
+      <div className="container container-sm container-md container-lg container-xl container-fluid">
         <div className="d-flex flex-column">
           <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div className="fixed-top">
