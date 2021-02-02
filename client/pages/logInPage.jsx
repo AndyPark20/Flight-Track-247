@@ -1,22 +1,24 @@
 import React from 'react';
+import Title from '../../server/public/images/logoTitle.png';
+import Background from '../../server/public/images/flighttrak247.jpg';
 
-export default class LoginPage extends React.Component{
+export default class LoginPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state=({ username: "DemoPressLogIn", password: "123Everyday" })
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.state = ({ username: 'DemoPressLogIn', password: '123Everyday' });
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(event){
+  handleSubmit(event) {
     event.preventDefault();
   }
 
-  render(){
+  render() {
     return (
-      <div className="LogInPageContainer">
-        <div className="black"></div>
+      <div className="logInPageContainer">
+        <div className="backgroundColor"></div>
         <img src={Title} className="logo" />
-        <img src={Back} className="introPic" />
+        <img src={Background} className="backgroundPic" />
         <div className="rowInput">
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
@@ -31,6 +33,6 @@ export default class LoginPage extends React.Component{
           </form>
         </div>
       </div>
-    )
+    );
   }
 }
