@@ -1,16 +1,20 @@
 import React from 'react';
 import MyContext from '../lib/context';
+import Moment from 'react-moment';
+import 'moment-timezone'
 
 export default class PopUp extends React.Component{
   constructor(props){
     super(props);
+    this.planeInfo = this.planeInfo.bind(this);
   }
 
   renderCountry(){
     const flightCiao = this.props.flight;
+    console.log(flightCiao)
     if(this.context !==undefined){
       const flag = this.context.map((values,i)=>{
-        if(values[0]===number){
+        if(values[0]===flightCiao){
           if(values[2]==="United States"){
             return <img key={i} className="flag" src="/images/usa.png" alt="American Flag"/>
           }else if(values[2] === "Mexico"){
@@ -24,7 +28,7 @@ export default class PopUp extends React.Component{
 
   planeInfo(){
     if (this.context !== undefined) {
-      const test = this.context.map((values, i) => {
+      const airplane = this.context.map((values, i) => {
         if (values[0] === this.props.flight) {
           return (
             <div className="panel" key={i}>
@@ -96,14 +100,16 @@ export default class PopUp extends React.Component{
           )
         }
       })
-      return test;
+      return airplane;
     }
   }
+
   render() {
     return (
       <div className="pop">
         <div className="row">
           <div className="column">
+            {this.planeInfo()}
           </div>
         </div>
       </div>
