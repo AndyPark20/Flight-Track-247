@@ -14,13 +14,21 @@ export default class Home extends React.Component {
   }
 
   getData() {
-    fetch('/api/home')
-    .then(res=>{
-      return res.json()
-    })
-    .then(data=>{
-      console.log(data)
-    })
+      fetch('https://opensky-network.org/api/states/all', {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' }
+      })
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          const sliced = data.states.slice(0, 750)
+          this.setState({ value: sliced})
+          console.log(this.state)
+        })
+        .catch(err=>{
+          console.error(err)
+        })
       }
 
   render() {
