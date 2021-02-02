@@ -1,8 +1,5 @@
 
 @media screen and (min-width:375px){
-  .leaflet{
-    bottom:4.9%;
- }
  .panel{
    top:69%;
  }
@@ -20,4 +17,10 @@
   .logo {
     width: 18%;
   }
+}
+@media screen and (min-width: 1440px) {
+.loaderText{
+  font-size:1.5rem;
+}
+
 }
