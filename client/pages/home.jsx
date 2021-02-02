@@ -9,6 +9,20 @@ export default class Home extends React.Component {
     this.state=({value:[]})
   }
 
+  getData() {
+      fetch('https://opensky-network.org/api/states/all', {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' }
+      })
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          const sliced = data.states.slice(0, 750)
+          this.setState({ value: sliced})
+        })
+      }
+
   render() {
     return (
       <div className="container container-sm container-md container-lg container-xl container-fluid">
