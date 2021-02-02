@@ -11,8 +11,8 @@ export default class Home extends React.Component {
     this.state = ({ value: [], load: false, pinPointPlane: false })
   }
 
-  componentDidMount(){
-    this.getData()
+  componentDidMount() {
+    this.intervalId = setInterval(() => this.getData(), 5000)
   }
 
   getData() {
@@ -32,6 +32,10 @@ export default class Home extends React.Component {
           console.error(err)
         })
       }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId)
+  }
 
   render() {
     return (
