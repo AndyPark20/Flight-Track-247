@@ -9,17 +9,19 @@
     .logo {
       width: 15%;
     }
-
-    @media screen and (min-width: 736px) {
-      .logo {
-        width: 15%;
-      }
-
-      @media screen and (min-width: 768px) {
-        .logo {
-          width: 25%;
-        }
-      }
+    .searchLengthBar{
+      width:40%;
     }
   }
-}
+
+  @media screen and (min-width: 736px) {
+    .logo {
+       width: 15%;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .logo {
+       width: 25%;
+    }
+  }
