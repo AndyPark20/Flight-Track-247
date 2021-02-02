@@ -4,6 +4,7 @@ const staticMiddleware = require('./static-middleware');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const cors = require('cors');
+const fetch = require('node-fetch')
 const jsonMiddleware = express.json();
 const app = express();
 
