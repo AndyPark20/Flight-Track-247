@@ -1,14 +1,17 @@
 import React from 'react';
 import Nav from '../components/navigationTop';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import NavBottom from '../components/navigationBottom';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 export default class Home extends React.Component {
   render() {
     return (
-      <div className="container">
-        <div className="row">
+      <div className="homeContainer">
+        <div className="d-flex flex-column">
           <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div className="fixed-top">
               <Nav />
+            </div>
           </div>
           <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <MapContainer className="leaflet" center={[35.0522, -118.2437]} zoom={4} minZoom={3} maxBoundsViscosity={1.0} worldCopyJump={true} zoomControl={false} >
@@ -16,7 +19,9 @@ export default class Home extends React.Component {
             </MapContainer >
           </div>
           <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <Nav />
+            <div className="footer fixed-bottom">
+            <NavBottom />
+            </div>
           </div>
         </div>
       </div>
