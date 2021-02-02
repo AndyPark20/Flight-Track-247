@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from '../components/navigationTop';
 import NavBottom from '../components/navigationBottom';
+import PlaneRender from '../components/renderPlanes';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 export default class Home extends React.Component {
@@ -43,6 +44,7 @@ export default class Home extends React.Component {
           <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <MapContainer className="leaflet" center={[35.0522, -118.2437]} zoom={4} minZoom={3} maxBoundsViscosity={1.0} worldCopyJump={true} zoomControl={false} >
               <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" zoomControl={false} />
+              <PlaneRender planeDot={this.state.value} click={this.testing} />
             </MapContainer >
           </div>
           <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
