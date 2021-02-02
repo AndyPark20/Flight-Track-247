@@ -4,6 +4,11 @@ import NavBottom from '../components/navigationBottom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 export default class Home extends React.Component {
+  constructor(props){
+    super(props);
+    this.state=({value:[]})
+  }
+
   render() {
     return (
       <div className="container container-sm container-md container-lg container-xl container-fluid">
