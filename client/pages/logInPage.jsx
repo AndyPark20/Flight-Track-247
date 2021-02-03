@@ -1,4 +1,5 @@
 import React from 'react';
+import MyContext from '../lib/context';
 
 export default class LoginPage extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ export default class LoginPage extends React.Component {
   }
 
   handleSubmit(event) {
+    const{valued}=this.props
     const req={
       method:'POST',
       headers:{
@@ -21,7 +23,7 @@ export default class LoginPage extends React.Component {
       return res.json()
     })
     .then(result=>{
-      console.log(result)
+      valued(result)
     })
   }
 
@@ -51,40 +53,4 @@ export default class LoginPage extends React.Component {
   }
 }
 
-// app.post('/api/auth/login', (req, res, next) => {
-//   const { userName, password } = req.body;
-//   if (!userName || !password) {
-//     throw new ClientError(401, 'invalid login');
-//   }
-
-//   const sql = `
-//     select "userId",
-//            "password"
-//       from "UserInfo"
-//      where "userName" = $1
-//   `
-//   const params = [userName];
-//   return db.query(sql, params)
-//     .then(result => {
-//       if (!result.rows[0]) {
-//         throw new ClientError(401, 'invalid login');
-//       }
-//       const hashedPw = result.rows[0].password;
-//       argon2.verify(hashedPw, password)
-//         .then(passwordMatched => {
-//           if (!passwordMatched) {
-//             throw new ClientError(401, 'invalid login');
-//           }
-//           const payload = {
-//             userId: result.rows[0].userId,
-//             userName: userName
-//           };
-//           res.status(200).json({
-//             token: jwt.sign(payload, process.env.TOKEN_SECRET),
-//             userName: payload
-//           });
-//         })
-//         .catch(err => next(err));
-//     })
-//     .catch(err => next(err));
-// })
+LoginPage.contextType = MyContext
