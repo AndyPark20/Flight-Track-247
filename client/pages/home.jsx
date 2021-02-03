@@ -18,21 +18,42 @@ export default class Home extends React.Component {
   }
 
   getData() {
-    fetch('https://opensky-network.org/api/states/all', {
-      method: 'GET',
-      headers: { 'Content-type': 'application/json' }
-    })
-      .then(res => {
-        return res.json()
+    if (!this.state.pinPointPlane) {
+      fetch('https://opensky-network.org/api/states/all', {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' }
       })
-      .then(data => {
-        const sliced = data.states.slice(0, 1000)
-        this.setState({ value: sliced, load: true, pinPointPlane: false })
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          const sliced = data.states.slice(0, 1000)
+          this.setState({ value: sliced, load: true, pinPointPlane: false })
 
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    } else {
+      fetch(`https://opensky-network.org/api/states/all?icao24=${this.state.icao}&time${0}`, {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' }
       })
-      .catch(err => {
-        console.error(err)
-      })
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          const slicedSolo = data.states.slice(0, 1)
+          this.setState({ load: true, value: slicedSolo })
+        })
+    }
+  }
+
+  updateSearch(event) {
+    this.setState({ icao: event.target.value })
+    if (event.key === 'Enter') {
+      this.setState({ pinPointPlane: true, load: false })
+    }
   }
 
   componentWillUnmount() {
