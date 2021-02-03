@@ -216,6 +216,11 @@ width:100%;
   align-items: center;
 }
 
+.flightOption{
+  display: flex;
+  align-items: center;
+}
+
 .airplaneLogo{
   width:10%;
 }
@@ -251,6 +256,13 @@ width:100%;
 
 .saveFlightBtn{
  background-color:#0074d9;
+ color:white;
+ border:none;
+ margin: 0 15px;
+}
+
+.saveFlightBtnRed{
+ background-color:#8b0000;
  color:white;
  border:none;
 }
