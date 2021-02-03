@@ -16,9 +16,8 @@ export default class App extends React.Component {
 
   signIn(message) {
     const { password, userId } = message;
-
     if (password && userId) {
-      this.setState({ user: true })
+      this.setState({ user: true})
     }
   }
 
@@ -28,16 +27,15 @@ export default class App extends React.Component {
       const changedHash = window.location.hash;
       const parsed = parseRoute(changedHash);
       this.setState({ route: parsed });
-
     });
   }
 
   renderPage() {
     const { route } = this.state;
-    if (route.user === 'home' || this.state.user) {
+    if (route.path === 'home' || this.state.user) {
       return <Home />;
     } else if (route.path === '') {
-      return <LoginPage valued={this.signIn}/>;
+      return <LoginPage signIn={this.signIn}/>;
     }
   }
 

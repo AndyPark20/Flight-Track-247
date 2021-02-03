@@ -9,7 +9,7 @@ export default class LoginPage extends React.Component {
   }
 
   handleSubmit(event) {
-    const{valued}=this.props
+    const{signIn}=this.props
     const req={
       method:'POST',
       headers:{
@@ -23,7 +23,7 @@ export default class LoginPage extends React.Component {
       return res.json()
     })
     .then(result=>{
-      valued(result)
+      signIn(result)
     })
   }
 
