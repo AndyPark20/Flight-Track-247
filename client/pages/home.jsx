@@ -11,6 +11,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({ value: [], load: false, pinPointPlane: false })
+    this.updateSearch = this.updateSearch.bind(this)
   }
 
   componentDidMount() {

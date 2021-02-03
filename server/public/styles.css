@@ -182,11 +182,11 @@ width:100%;
   text-align:center;
   color:  #666666;
   font-weight:bold;
-  font-size:.9rem;
+  font-size:1.0rem;
 }
 
 .textStyle{
-  font-family: 'Slabo 27px', serif;
+  font-family: 'Markazi Text', serif;
   line-height:1.0;
 }
 
@@ -265,4 +265,13 @@ width:100%;
  background-color:#8b0000;
  color:white;
  border:none;
+}
+
+/************INPUT placeholder font **************************/
+
+input::placeholder{
+  font-size:1.0rem;
+  font-family: 'Markazi Text', serif;
+  font-weight:bold;
+  color:black;
 }
