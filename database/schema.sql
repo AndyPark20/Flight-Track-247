@@ -6,42 +6,29 @@ drop schema "public" cascade;
 
 create schema "public";
 
-CREATE TABLE "UserInfo" (
-	"userId" serial NOT NULL,
-	"username" serial NOT NULL,
-	"password" serial NOT NULL,
-	"CreatedAt" DATETIME NOT NULL,
-	CONSTRAINT "UserInfo_pk" PRIMARY KEY ("userId")
-) WITH (
-  OIDS=FALSE
+CREATE TABLE "userInfo" (
+  "userId" serial NOT NULL,
+  "username" text NOT NULL,
+  "password" text NOT NULL,
+  "createdAt" timestamp NOT NULL default now(),
+  primary key ("userId")
 );
-
-
-
-CREATE TABLE "Saved Airport" (
-	"userId" serial NOT NULL,
-	"Airport Code" TEXT NOT NULL,
-	"Date" DATE NOT NULL,
-	"start_time" TIME NOT NULL,
-	"end_time" TIME NOT NULL,
-	"type" TEXT NOT NULL
-) WITH (
-  OIDS=FALSE
+CREATE TABLE "savedAirport" (
+  "savedAirportId" serial not null,
+	"userId" integer NOT NULL,
+	"airportCode" text NOT NULL,
+	"date" date NOT NULL,
+	"startTime" integer NOT NULL,
+	"endTime" integer NOT NULL,
+	"type" text NOT NULL,
+  primary key ("savedAirportId")
 );
-
-
-
-CREATE TABLE "Flight" (
-	"userId" serial NOT NULL,
+CREATE TABLE "flight" (
+  "flightId" serial not null,
+	"userId" integer NOT NULL,
 	"icao24" VARCHAR(255) NOT NULL,
-	"time" DATETIME NOT NULL
-) WITH (
-  OIDS=FALSE
+	"time" integer NOT NULL,
+  primary key ("flightId")
 );
-
-
-
-
-ALTER TABLE "Saved Airport" ADD CONSTRAINT "Saved Airport_fk0" FOREIGN KEY ("userId") REFERENCES "UserInfo"("userId");
-
-ALTER TABLE "Flight" ADD CONSTRAINT "Flight_fk0" FOREIGN KEY ("userId") REFERENCES "UserInfo"("userId");
+ALTER TABLE "savedAirport" ADD CONSTRAINT "savedAirport_fk0" FOREIGN KEY ("userId") REFERENCES "userInfo"("userId");
+ALTER TABLE "flight" ADD CONSTRAINT "flight_fk0" FOREIGN KEY ("userId") REFERENCES "userInfo"("userId");
