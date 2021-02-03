@@ -11,6 +11,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({ value: [], load: false, pinPointPlane: false })
+    this.updateSearch = this.updateSearch.bind(this)
   }
 
   componentDidMount() {
@@ -18,21 +19,47 @@ export default class Home extends React.Component {
   }
 
   getData() {
-    fetch('https://opensky-network.org/api/states/all', {
-      method: 'GET',
-      headers: { 'Content-type': 'application/json' }
-    })
-      .then(res => {
-        return res.json()
+    if (!this.state.pinPointPlane) {
+      fetch('https://opensky-network.org/api/states/all', {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' }
       })
-      .then(data => {
-        const sliced = data.states.slice(0, 1000)
-        this.setState({ value: sliced, load: true, pinPointPlane: false })
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          const sliced = data.states.slice(0, 1000)
+          this.setState({ value: sliced, load: true, pinPointPlane: false })
 
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    } else {
+      fetch(`https://opensky-network.org/api/states/all?icao24=${this.state.icao}&time${0}`, {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' }
       })
-      .catch(err => {
-        console.error(err)
-      })
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          if(data !==null){
+            const slicedSolo = data.states.slice(0, 1)
+            this.setState({ load: true, value: slicedSolo })
+          }
+        })
+        .catch(err=>{
+          console.error(err)
+        })
+    }
+  }
+
+  updateSearch(event) {
+    this.setState({ icao: event.target.value })
+    if (event.key === 'Enter') {
+      this.setState({ pinPointPlane: true, load: false })
+    }
   }
 
   componentWillUnmount() {
@@ -46,7 +73,7 @@ export default class Home extends React.Component {
           <div className="d-flex flex-column">
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
               <div className="fixed-top">
-                <Nav />
+                <Nav update={this.updateSearch} />
               </div>
             </div>
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

@@ -7,6 +7,23 @@ export default class PopUp extends React.Component{
   constructor(props){
     super(props);
     this.planeInfo = this.planeInfo.bind(this);
+    this.changeView = this.changeView.bind(this);
+
+  }
+
+  changeView(event){
+    if (event.target.className ==='saveFlightBtnRed'){
+      this.props.click()
+    }
+  }
+
+
+  hidePopUp(){
+    if(this.props.view){
+      return 'pop hidden';
+    }else{
+      return 'pop';
+    }
   }
 
   renderCountry(){
@@ -91,11 +108,11 @@ export default class PopUp extends React.Component{
                   <p>{values[14]}</p>
                 </div>
               </div>
-              <div className="col-12 planeInfoSection ">
+              <div className="planeInfoSection flightOption">
                 <button type="click" className="saveFlightBtn">SAVE FLIGHT</button>
+                <button type="click" className="saveFlightBtnRed">CLOSE</button>
               </div>
             </div>
-
           )
         }
       })
@@ -105,7 +122,7 @@ export default class PopUp extends React.Component{
 
   render() {
     return (
-      <div className="pop">
+      <div className={this.hidePopUp()} onClick={(event)=>this.changeView(event)}>
         <div className="row">
           <div className="column">
             {this.planeInfo()}
