@@ -67,7 +67,7 @@ export default class Home extends React.Component {
           <div className="d-flex flex-column">
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
               <div className="fixed-top">
-                <Nav />
+                <Nav update={this.updateSearch} />
               </div>
             </div>
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
