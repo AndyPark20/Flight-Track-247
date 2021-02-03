@@ -44,8 +44,13 @@ export default class Home extends React.Component {
           return res.json()
         })
         .then(data => {
-          const slicedSolo = data.states.slice(0, 1)
-          this.setState({ load: true, value: slicedSolo })
+          if(data !==null){
+            const slicedSolo = data.states.slice(0, 1)
+            this.setState({ load: true, value: slicedSolo })
+          }
+        })
+        .catch(err=>{
+          console.error(err)
         })
     }
   }
