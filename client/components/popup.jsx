@@ -93,7 +93,7 @@ export default class PopUp extends React.Component{
                 </div>
               </div>
               <div className="col-12 planeInfoSection ">
-                <button>SAVE FLIGHT</button>
+                <button type="click" className="saveFlightBtn">SAVE FLIGHT</button>
               </div>
             </div>
 

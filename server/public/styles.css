@@ -197,7 +197,7 @@ width:100%;
 /******Plane information panel************/
 
 .planeInfo > p {
-  font-size:.8rem;
+  font-size:.6rem;
   padding: 0 5%;
   color:white;
   margin:0px;
@@ -221,7 +221,7 @@ width:100%;
 }
 
 .size{
-  font-size:.8rem;
+  font-size:.6rem;
   color:white;
 }
 
@@ -234,13 +234,23 @@ width:100%;
 }
 
  .panel{
-   width:100%;
+  width:100%;
   position:fixed;
   left:0;
   z-index:400;
   height:100vh;
-  top:65%;
+  top:63%;
   background:rgba(0,0,0,0.73);
   color:black;
   transition: 0.5s
+}
+
+.flag{
+  width:30%;
+}
+
+.saveFlightBtn{
+ background-color:#0074d9;
+ color:white;
+ border:none;
 }

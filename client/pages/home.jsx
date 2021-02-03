@@ -14,7 +14,8 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    this.intervalId = setInterval(() => this.getData(), 5000)
+    // this.intervalId = setInterval(() => this.getData(), 5000)
+    this.getData();
   }
 
   getData() {
@@ -60,7 +61,7 @@ export default class Home extends React.Component {
               </div>
             </div>
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-              <MapContainer className="leaflet" center={[35.0522, -118.2437]} zoom={4} minZoom={3} maxBoundsViscosity={1.0} worldCopyJump={true} zoomControl={false} >
+              <MapContainer className="leaflet" center={[43.0522, -118.2437]} zoom={4} minZoom={3} maxBoundsViscosity={1.0} worldCopyJump={true} zoomControl={false} >
                 <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" zoomControl={false} />
                 <PlaneRender planeDot={this.state.value} click={this.testing} />
               </MapContainer >

@@ -1,26 +1,68 @@
 
 @media screen and (min-width:375px){
- .panel{
-   top:69%;
- }
+  .panel{
+      top:65%;
+  }
 }
   /********  HORIZONTAL LAYOUT!  ****/
 @media screen and (min-width: 568px) {
+  .planeInfo > p{
+    font-size:.60rem;
+  }
   .logo {
     width: 15%;
   }
   .searchLengthBar{
     width:40%;
   }
+  .panel{
+    padding-top:5%;
+     top:10%;
+    left:63%;
+ }
+  .flag{
+    width:40%;
+}
+  .airplaneLogo{
+    width:5%;
+}
+  .planeInfo{
+    flex-basis:10%;
+}
+  .logo{
+    width:20%;
+}
 }
 @media screen and (min-width: 768px) {
   .logo {
-    width: 18%;
+    width: 15%;
+  }
+   .panel{
+   padding-top:7%;
+   top:0;
+ }
+  .size{
+    font-size:.65rem;
   }
 }
-@media screen and (min-width: 1440px) {
+
+@media screen and (min-width:1900px){
+  .planeInfo > p{
+  font-size:.75rem;
+}
+ .panel{
+  left:82%;
+ }
+.flag{
+  width:40%;
+}
+.airplaneLogo{
+  width:2%;
+}
 .loaderText{
   font-size:1.5rem;
 }
-
+.planeInfo{
+  flex-basis:5%;
+}
 }
