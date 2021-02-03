@@ -9,12 +9,17 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       user: false,
-      route: parseRoute(window.location.hash)
+      route: parseRoute(window.location.hash),
+
     };
     this.signIn=this.signIn.bind(this);
+
   }
 
+
+
   signIn(message) {
+    console.log(message)
     const { password, userId } = message;
     if (password && userId) {
       this.setState({ user: true})
@@ -32,15 +37,15 @@ export default class App extends React.Component {
 
   renderPage() {
     const { route } = this.state;
-    if (route.path === 'home' || this.state.user) {
+    if (this.state.user || route.path ==='home') {
       return <Home />;
-    } else if (route.path === '') {
+    }
+    if (route.path === '') {
       return <LoginPage signIn={this.signIn}/>;
     }
   }
 
   render() {
-
     return (
         <div className="mainContainer">{this.renderPage()}</div>
     );

@@ -23,6 +23,7 @@ export default class LoginPage extends React.Component {
       return res.json()
     })
     .then(result=>{
+      location.hash='home';
       signIn(result)
     })
   }
@@ -44,7 +45,7 @@ export default class LoginPage extends React.Component {
               <input name="password" type="password" className="form-control" readOnly value={this.state.password} required />
             </div>
             <div className="logInBtn">
-            <button type="submit" className="btn btn-danger">Log In</button>
+              <button type="submit" className="btn btn-danger">Log In</button>
             </div>
           </form>
         </div>
