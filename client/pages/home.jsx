@@ -14,8 +14,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    // this.intervalId = setInterval(() => this.getData(), 5000)
-    this.getData();
+    this.intervalId = setInterval(() => this.getData(), 5000)
   }
 
   getData() {

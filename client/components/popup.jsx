@@ -11,7 +11,6 @@ export default class PopUp extends React.Component{
 
   renderCountry(){
     const flightCiao = this.props.flight;
-    console.log(flightCiao)
     if(this.context !==undefined){
       const flag = this.context.map((values,i)=>{
         if(values[0]===flightCiao){
