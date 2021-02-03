@@ -6,24 +6,19 @@ import 'moment-timezone'
 export default class PopUp extends React.Component{
   constructor(props){
     super(props);
-    // this.state=({view:false})
     this.planeInfo = this.planeInfo.bind(this);
     this.changeView = this.changeView.bind(this);
 
   }
 
   changeView(event){
-    console.log(event.target.className)
     if (event.target.className ==='saveFlightBtnRed'){
-      // this.setState({view:true})
       this.props.click()
     }
   }
 
 
-
   hidePopUp(){
-    console.log(this.props.view)
     if(this.props.view){
       return 'pop hidden';
     }else{
