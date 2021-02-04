@@ -44,6 +44,7 @@ export default class PopUp extends React.Component {
 
   saveFlight(event, values) {
     event.stopPropagation();
+    console.log(values);
     const unixTime = ((new Date().getTime() / 1000).toFixed(0))
     const req = {
       method: 'POST',

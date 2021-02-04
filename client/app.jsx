@@ -2,6 +2,7 @@ import React from 'react';
 import Home from './pages/home';
 import LoginPage from './pages/logInPage';
 import { parseRoute } from './lib';
+import DropDown from './pages/dropDown';
 
 
 export default class App extends React.Component {
@@ -13,6 +14,7 @@ export default class App extends React.Component {
 
     };
     this.signIn=this.signIn.bind(this);
+    this.renderPage=this.renderPage.bind(this);
 
   }
 
@@ -25,7 +27,6 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-
     window.addEventListener('hashchange', () => {
       const changedHash = window.location.hash;
       const parsed = parseRoute(changedHash);
@@ -36,11 +37,15 @@ export default class App extends React.Component {
 
   renderPage() {
     const { route } = this.state;
-    if (this.state.user || route.path ==='home') {
+    console.log(this.state.route)
+    if (this.state.user || route.path === "home") {
       return <Home />;
     }
-    if (route.path === '') {
+    if(route.path === "") {
       return <LoginPage signIn={this.signIn}/>;
+    }
+    if(route.path ==="save"){
+      return <DropDown />;
     }
   }
 
