@@ -28,7 +28,7 @@ export default class Home extends React.Component {
           return res.json()
         })
         .then(data => {
-          const sliced = data.states.slice(0, 1000)
+          const sliced = data.states.slice(0,1000)
           this.setState({ value: sliced, load: true, pinPointPlane: false })
 
         })

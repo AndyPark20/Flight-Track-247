@@ -2,38 +2,38 @@ import React from 'react';
 import MyContext from '../lib/context';
 import Moment from 'react-moment';
 import 'moment-timezone'
+import { unix } from 'moment-timezone';
 
-export default class PopUp extends React.Component{
-  constructor(props){
+export default class PopUp extends React.Component {
+  constructor(props) {
     super(props);
+    this.state = ({ flight: '' })
     this.planeInfo = this.planeInfo.bind(this);
     this.changeView = this.changeView.bind(this);
-
   }
 
-  changeView(event){
-    if (event.target.className ==='saveFlightBtnRed'){
+  changeView(event) {
+    if (event.target.className === 'saveFlightBtnRed') {
       this.props.click()
     }
   }
 
-
-  hidePopUp(){
-    if(this.props.view){
+  hidePopUp() {
+    if (this.props.view) {
       return 'pop hidden';
-    }else{
+    } else {
       return 'pop';
     }
   }
 
-  renderCountry(){
+  renderCountry() {
     const flightCiao = this.props.flight;
-    if(this.context !==undefined){
-      const flag = this.context.map((values,i)=>{
-        if(values[0]===flightCiao){
-          if(values[2]==="United States"){
-            return <img key={i} className="flag" src="/images/usa.png" alt="American Flag"/>
-          }else if(values[2] === "Mexico"){
+    if (this.context !== undefined) {
+      const flag = this.context.map((values, i) => {
+        if (values[0] === flightCiao) {
+          if (values[2] === "United States") {
+            return <img key={i} className="flag" src="/images/usa.png" alt="American Flag" />
+          } else if (values[2] === "Mexico") {
             return <img key={i} className="flag" src="/images/mexico.png" alt="Mexican Flag" />
           }
         }
@@ -42,7 +42,22 @@ export default class PopUp extends React.Component{
     }
   }
 
-  planeInfo(){
+  saveFlight(event, values) {
+    event.stopPropagation();
+    const unixTime = ((new Date().getTime() / 1000).toFixed(0))
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({icao24: values, time: unixTime})
+    }
+    fetch('/api/flight', req)
+      .then(res => res.json())
+      .then(result => console.log(result));
+  }
+
+  planeInfo() {
     if (this.context !== undefined) {
       const airplane = this.context.map((values, i) => {
         if (values[0] === this.props.flight) {
@@ -109,8 +124,8 @@ export default class PopUp extends React.Component{
                 </div>
               </div>
               <div className="planeInfoSection flightOption">
-                <button type="click" className="saveFlightBtn">SAVE FLIGHT</button>
-                <button type="click" className="saveFlightBtnRed">CLOSE</button>
+                <button className="saveFlightBtn" onClick={(event) => { this.saveFlight(event, values[0]) }}>SAVE FLIGHT</button>
+                <button className="saveFlightBtnRed">CLOSE</button>
               </div>
             </div>
           )
@@ -122,7 +137,7 @@ export default class PopUp extends React.Component{
 
   render() {
     return (
-      <div className={this.hidePopUp()} onClick={(event)=>this.changeView(event)}>
+      <div className={this.hidePopUp()} onClick={(event) => this.changeView(event)}>
         <div className="row">
           <div className="column">
             {this.planeInfo()}

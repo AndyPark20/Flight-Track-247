@@ -37,6 +37,11 @@ app.post('/api/login',(req,res,next)=>{
     })
 })
 
+app.post('/api/flight', (req, res, next) => {
+console.log(req.body)
+res.json(req.body)
+})
+
 
 app.use(errorMiddleware);
 app.listen(process.env.PORT, () => {

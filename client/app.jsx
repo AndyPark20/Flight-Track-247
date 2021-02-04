@@ -16,8 +16,6 @@ export default class App extends React.Component {
 
   }
 
-
-
   signIn(message) {
     console.log(message)
     const { password, userId } = message;
@@ -32,6 +30,7 @@ export default class App extends React.Component {
       const changedHash = window.location.hash;
       const parsed = parseRoute(changedHash);
       this.setState({ route: parsed });
+
     });
   }
 
