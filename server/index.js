@@ -35,11 +35,30 @@ app.post('/api/login',(req,res,next)=>{
       const info =result.rows[0]
       res.json(info)
     })
+    .catch(err=>{
+      return next(err)
+    })
 })
 
 app.post('/api/flight', (req, res, next) => {
-console.log(req.body)
-res.json(req.body)
+  const{icao24, time} = req.body;
+  if(!icao24 || !time){
+    throw new ClientError(401,'Invalid Entry')
+  }
+  const sql=`
+  insert into "flight" ("icao24","time")
+  values($1, $2)
+  returning *
+  `;
+  const params=[icao24,time];
+  db.query(sql,params)
+    .then(result=>{
+      const info=result.rows
+      console.log(result);
+    })
+    .catch(err=>{
+      return next(err)
+    })
 })
 
 
