@@ -72,7 +72,9 @@ export default class Home extends React.Component {
     }
   }
 
-
+  componentWillUnmount(){
+    clearInterval(this.intervalId)
+  }
 
   render() {
     return (
