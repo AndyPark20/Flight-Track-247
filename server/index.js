@@ -18,9 +18,9 @@ app.use(jsonMiddleware);
 app.use(staticMiddleware);
 
 
-app.post('/api/login',(req,res,next)=>{
-  const {username, password } =req.body
-  if(!username || !password){
+app.post('/api/login', (req, res, next) => {
+  const { username, password } = req.body
+  if (!username || !password) {
     throw new ClientError(401, 'Invalid Login')
   }
   const sql = `
@@ -29,34 +29,53 @@ app.post('/api/login',(req,res,next)=>{
   from "userInfo"
   where "username" = $1
   `;
-  const params=[username];
-  db.query(sql,params)
-    .then(result=>{
-      const info =result.rows[0]
+  const params = [username];
+  db.query(sql, params)
+    .then(result => {
+      const info = result.rows[0]
       res.json(info)
     })
-    .catch(err=>{
+    .catch(err => {
       return next(err)
     })
 })
 
 app.post('/api/flight', (req, res, next) => {
-  const{icao24, time} = req.body;
-  if(!icao24 || !time){
-    throw new ClientError(401,'Invalid Entry')
+  const userId = 1
+  const { icao24, time } = req.body;
+  if (!icao24 || !time) {
+    throw new ClientError(401, 'Invalid Entry')
   }
-  const sql=`
-  insert into "flight" ("icao24","time")
-  values($1, $2)
+  const sql = `
+  insert into "flight" ("userId","icao24","time")
+  values($1, $2,$3)
   returning *
   `;
-  const params=[icao24,time];
-  db.query(sql,params)
-    .then(result=>{
-      const info=result.rows
-      console.log(result);
+  const params = [userId, icao24, time];
+  db.query(sql, params)
+    .then(result => {
+      const info = result.rows
+      res.status(201).json(info);
+      return;
     })
-    .catch(err=>{
+    .catch(err => {
+      return next(err)
+    })
+})
+
+app.get('/api/flight', (req, res, next) => {
+
+  const sql = `
+      select *
+      from "flight"
+    `;
+  db.query(sql)
+    .then(result => {
+      const info = result.rows
+      res.status(200).json(info)
+      return;
+    })
+    .catch(err => {
       return next(err)
     })
 })
