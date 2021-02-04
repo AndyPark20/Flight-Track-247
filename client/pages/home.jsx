@@ -12,6 +12,7 @@ export default class Home extends React.Component {
     super(props);
     this.state = ({ value: [], load: false, pinPointPlane: false })
     this.updateSearch = this.updateSearch.bind(this)
+    this.getData = this.getData.bind(this)
   }
 
   componentDidMount() {
@@ -20,40 +21,35 @@ export default class Home extends React.Component {
 
   getData() {
     if (!this.state.pinPointPlane) {
-      fetch('https://opensky-network.org/api/states/all', {
-        method: 'GET',
-        headers: { 'Content-type': 'application/json' }
-      })
+      fetch('/api/all')
         .then(res => {
-          return res.json()
+          return res.json();
         })
         .then(data => {
-          const sliced = data.states.slice(0,1000)
+          const sliced = data.states.slice(0, 1000)
           this.setState({ value: sliced, load: true, pinPointPlane: false })
-
         })
         .catch(err => {
           console.error(err)
         })
-    } else {
-      fetch(`https://opensky-network.org/api/states/all?icao24=${this.state.icao}&time${0}`, {
-        method: 'GET',
-        headers: { 'Content-type': 'application/json' }
+    }else{
+      fetch(`/api/select/${this.state.icao}`)
+      .then(result=>{
+        return result.json();
       })
-        .then(res => {
-          return res.json()
-        })
-        .then(data => {
-          if(data !==null){
-            const slicedSolo = data.states.slice(0, 1)
-            this.setState({ load: true, value: slicedSolo })
-          }
-        })
-        .catch(err=>{
+      .then(info=>{
+        if (info !== null || info !==undefined) {
+            const slicedSolo = info.states.slice(0, 1)
+          this.setState({ value: slicedSolo, load: true, pinPointPlane:true  })
+        }
+      })
+        .catch(err => {
           console.error(err)
         })
-    }
+
+      }
   }
+
 
   updateSearch(event) {
     this.setState({ icao: event.target.value })
@@ -103,3 +99,41 @@ export default class Home extends React.Component {
     );
   }
 }
+
+
+  // getData() {
+  //   if (!this.state.pinPointPlane) {
+  //     fetch('https://opensky-network.org/api/states/all', {
+  //       method: 'GET',
+  //       headers: { 'Content-type': 'application/json' }
+  //     })
+  //       .then(res => {
+  //         return res.json()
+  //       })
+  //       .then(data => {
+  //         const sliced = data.states.slice(0,1000)
+  //         this.setState({ value: sliced, load: true, pinPointPlane: false })
+
+  //       })
+  //       .catch(err => {
+  //         console.error(err)
+  //       })
+  //   } else {
+  //     fetch(`https://opensky-network.org/api/states/all?icao24=${this.state.icao}&time${0}`, {
+  //       method: 'GET',
+  //       headers: { 'Content-type': 'application/json' }
+  //     })
+  //       .then(res => {
+  //         return res.json()
+  //       })
+  //       .then(data => {
+  //         if(data !==null){
+  //           const slicedSolo = data.states.slice(0, 1)
+  //           this.setState({ load: true, value: slicedSolo })
+  //         }
+  //       })
+  //       .catch(err=>{
+  //         console.error(err)
+  //       })
+  //   }
+  // }

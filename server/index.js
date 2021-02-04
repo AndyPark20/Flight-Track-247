@@ -80,6 +80,42 @@ app.get('/api/flight', (req, res, next) => {
     })
 })
 
+app.get('/api/all',(req,res,next)=>{
+  fetch('https://opensky-network.org/api/states/all', {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' }
+      })
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          res.status(200).json(data)
+
+        })
+        .catch(err => {
+          return next(err);
+        })
+})
+
+app.get('/api/select/:icao', (req, res, next) => {
+  fetch(`https://opensky-network.org/api/states/all?icao24=${req.params.icao}&time${0}`, {
+    method: 'GET',
+    headers: { 'Content-type': 'application/json' }
+  })
+    .then(res => {
+      return res.json()
+    })
+    .then(data => {
+      res.status(200).json(data)
+
+    })
+    .catch(err => {
+      return next(err);
+    })
+})
+
+
+
 
 app.use(errorMiddleware);
 app.listen(process.env.PORT, () => {
