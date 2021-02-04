@@ -10,57 +10,69 @@ import PopUp from '../components/popup';
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({ value: [], load: false, pinPointPlane: false })
+    this.state = ({ value: [], load: false, pinPointPlane: false, icao: '' })
     this.updateSearch = this.updateSearch.bind(this)
     this.getData = this.getData.bind(this)
+    this.getSinglePlane = this.getSinglePlane.bind(this)
   }
 
   componentDidMount() {
-    this.intervalId = setInterval(() => this.getData(), 5000)
+    if (this.state.icao === '' && !this.state.pinPointPlane) {
+      this.intervalId = setInterval(() => this.getData(), 15000)
+    } else {
+      this.getSinglePlane()
+    }
   }
 
   getData() {
-    if (!this.state.pinPointPlane) {
-      fetch('/api/all')
-        .then(res => {
-          return res.json();
-        })
-        .then(data => {
-          const sliced = data.states.slice(0, 1000)
-          this.setState({ value: sliced, load: true, pinPointPlane: false })
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    }else{
-      fetch(`/api/select/${this.state.icao}`)
-      .then(result=>{
-        return result.json();
-      })
-      .then(info=>{
-        if (info !== null || info !==undefined) {
-            const slicedSolo = info.states.slice(0, 1)
-          this.setState({ value: slicedSolo, load: true, pinPointPlane:true  })
-        }
-      })
-        .catch(err => {
-          console.error(err)
-        })
+    const fetchController = new AbortController();
+    const { signal } = fetchController;
 
-      }
+    let time = setTimeout(() => {
+      fetchController.abort();
+    }, 10000)
+    fetch('/api/all', { signal })
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        clearTimeout(time);
+        const sliced = data.states.slice(0, 1000)
+        this.setState({ value: sliced, load: true, pinPointPlane: false })
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 
+  getSinglePlane() {
+    clearInterval(this.intervalId)
+    fetch(`/api/select/${this.state.icao}`)
+      .then(result => {
+        return result.json();
+      })
+      .then(info => {
+        console.log(info)
+        if (info !== null || info !== undefined) {
+          const slicedSolo = info.states.slice(0, 1)
+          this.setState({ value: slicedSolo, load: true, pinPointPlane: true })
+          console.log(this.state)
+        }
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
 
   updateSearch(event) {
     this.setState({ icao: event.target.value })
     if (event.key === 'Enter') {
       this.setState({ pinPointPlane: true, load: false })
+      this.getSinglePlane()
     }
   }
 
-  componentWillUnmount() {
-    clearInterval(this.intervalId)
-  }
+
 
   render() {
     return (
@@ -101,6 +113,7 @@ export default class Home extends React.Component {
 }
 
 
+
   // getData() {
   //   if (!this.state.pinPointPlane) {
   //     fetch('https://opensky-network.org/api/states/all', {
@@ -137,3 +150,25 @@ export default class Home extends React.Component {
   //       })
   //   }
   // }
+
+// getData() {
+//   const fetchController = new AbortController();
+//   const { signal } = fetchController;
+
+//   let time = setTimeout(() => {
+//     fetchController.abort();
+//   }, 1000)
+
+//   fetch('/api/all', { signal })
+//     .then(res => {
+//       return res.json();
+//     })
+//     .then(data => {
+//       clearTimeout(time);
+//       const sliced = data.states.slice(0, 1000)
+//       this.setState({ value: sliced, load: true, pinPointPlane: false })
+//     })
+//     .catch(err => {
+//       console.error(err)
+//     })
+// }
