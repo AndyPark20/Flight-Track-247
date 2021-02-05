@@ -378,3 +378,7 @@ h6{
 .icaoNumber:hover{
   color: #4169e1;
 }
+
+.renderSavedInfo{
+  height:100vh;
+}

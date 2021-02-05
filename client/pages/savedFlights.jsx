@@ -11,6 +11,7 @@ export default class Savedflights extends React.Component {
     super(props);
     this.state = ({ saved: [] })
     this.renderSavedFlights = this.renderSavedFlights.bind(this)
+    this.deleteFlight=this.deleteFlight.bind(this)
   }
 
   componentDidMount() {
@@ -22,8 +23,29 @@ export default class Savedflights extends React.Component {
       })
   }
 
-  testing(){
-    console.log('hello')
+  deleteFlight(info){
+    fetch(`api/delete/${info}`,{
+      method:'DELETE',
+      headers:{
+        'Content-type': 'application/json'
+      }
+    })
+    .then(res=>{
+        return res.json()
+    })
+    .then(result=>{
+      console.log(result)
+      this.state.saved.map(values=>{
+        if(values.flightId === result.flightId){
+          const array=this.state.saved.concat();
+          array.splice(values.flightId -1,1)
+          this.setState({saved:array})
+        }
+      })
+    })
+    .catch(err=>{
+      return err;
+    })
   }
 
 
@@ -52,7 +74,7 @@ export default class Savedflights extends React.Component {
           </div>
           <div className="col-3">
             <h5 className="render">Options</h5>
-            {this.state.saved.map((values, i) => { return <a key={i}><h6 id={values[0]} className="delete">DELETE</h6></a> })}
+            {this.state.saved.map((values, i) => { return <a key={i} onClick={() => this.deleteFlight(values.flightId)}><h6 className="delete">DELETE</h6></a> })}
             </div>
         </div>
       </div>

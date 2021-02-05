@@ -114,7 +114,28 @@ app.get('/api/select/:icao', (req, res, next) => {
     })
 })
 
-
+app.delete('/api/delete/:flightId',(req,res,next)=>{
+ const flight=parseInt(req.params.flightId,10);
+ if(flight !==Math.abs(flight)){
+   return (res.status(400).json('Error'));
+ }else{
+   const sql=`
+   delete from "flight"
+   where "flightId" =$1
+   returning *;
+   `;
+   const params =[flight]
+   db.query(sql,params)
+   .then(result=>{
+     const [info]= result.rows;
+     console.log(info)
+    res.json(info)
+   })
+   .catch(err=>{
+     return next(err)
+   })
+ }
+})
 
 
 app.use(errorMiddleware);

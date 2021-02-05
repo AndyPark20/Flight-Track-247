@@ -26,6 +26,9 @@ export default class LoginPage extends React.Component {
       location.hash='home';
       signIn(result)
     })
+    .catch(err=>{
+      console.error(err);
+    })
   }
 
   render() {
