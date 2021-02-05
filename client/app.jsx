@@ -36,6 +36,7 @@ export default class App extends React.Component {
   }
 
   retrievePlane(event){
+    console.log(event)
     this.setState({icao24:event})
   }
 
