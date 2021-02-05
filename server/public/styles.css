@@ -382,3 +382,26 @@ h6{
 .renderSavedInfo{
   height:100vh;
 }
+
+/************************SEARCH AIRPORT**********************/
+
+form{
+  width:100%;
+}
+
+.formAirport{
+  text-align:center;
+  display:flex;
+ flex-direction:column;
+ align-items: center;
+}
+
+.searchAirportInfo{
+  height:100vh;
+  display:flex;
+}
+
+.inputSearchAirport{
+  text-align: center;
+  width:80%;
+}

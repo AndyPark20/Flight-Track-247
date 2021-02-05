@@ -5,6 +5,7 @@ import { parseRoute } from './lib';
 import DropDown from './pages/dropDown';
 import SavedFlights from './pages/savedFlights';
 import MyContext from './lib/context';
+import SearchAirport from './pages/searchAirport';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -36,7 +37,6 @@ export default class App extends React.Component {
   }
 
   retrievePlane(event){
-    console.log(event)
     this.setState({icao24:event})
   }
 
@@ -55,6 +55,9 @@ export default class App extends React.Component {
     }
     if(route.path ==="flights"){
       return <SavedFlights retrieve={this.retrievePlane} />
+    }
+    if (route.path ==='searchAirport'){
+      return <SearchAirport />
     }
   }
 
