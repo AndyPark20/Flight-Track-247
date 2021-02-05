@@ -289,12 +289,62 @@ input::placeholder{
 
 /********************DROP CONTAINER ****************************/
 
+h5{
+  color:white;
+}
+
 .dropContainer{
   width:100%;
   height:100vh;
   background-color: black;
 }
 
-.title{
+.colDrop{
+
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.optionMenu{
+  text-align:center;
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  position:fixed;
+  z-index:10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/***********SAVED FLIGHTS****************************/
+
+h3{
+  color:white;
+}
+
+h6{
+  color:white;
+  font-size:.8rem;
+}
+
+.savedFlightContainer{
+  width:100%;
+  height:100%;
+  background-color: black;
+}
+
+.savedFlightRendered{
+  margin-bottom:10%;
+}
+.savedFlightTitle{
+  display:flex;
+  justify-content: center;
+}
+
+/***************Saved Flight render component ***************/
+
+.savedFlightRow{
   display:flex;
 }

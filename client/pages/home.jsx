@@ -45,6 +45,7 @@ export default class Home extends React.Component {
       })
   }
 
+
   getSinglePlane() {
     clearInterval(this.intervalId)
     fetch(`/api/select/${this.state.icao}`)

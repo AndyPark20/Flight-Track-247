@@ -1,7 +1,21 @@
 
+@media screen and (min-width:320px){
+  h5{
+    font-size:1.00rem;
+  }
+    h6{
+    font-size:0.55rem;
+  }
+
+}
+
 @media screen and (min-width:375px){
   .panel{
       top:65%;
+  }
+
+  h6{
+    font-size:0.7rem;
   }
 
 }
@@ -32,6 +46,9 @@
 }
   .logo{
     width:20%;
+}
+h6{
+  font-size:0.8rem;
 }
 }
 @media screen and (min-width: 768px) {
