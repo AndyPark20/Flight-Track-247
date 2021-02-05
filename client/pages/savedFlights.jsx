@@ -4,6 +4,7 @@ import Moment from 'react-moment';
 import moment from 'moment';
 import 'moment-timezone';
 import { unix } from 'moment-timezone';
+import Button from 'react-bootstrap/Button';
 
 export default class Savedflights extends React.Component {
   constructor(props) {
@@ -17,41 +18,45 @@ export default class Savedflights extends React.Component {
       .then(res => res.json())
       .then(result => {
         this.setState({ saved: result })
+
       })
-    }
+  }
+
+  testing(){
+    console.log('hello')
+  }
 
 
   renderSavedFlights() {
-    console.log(this.state.saved)
-    // const savedInfo = this.state.saved.map((values,i)=>{
-      return(
-        <div className="savedFlightRendered">
-          <div className="savedFlightRow">
-            <div className="col-3">
-              <h5>Date</h5>
-              {this.state.saved.map((values,i)=>{
-                // return <h6 key={i}><Moment className="size" unix tz="America/Los_Angeles">{values.time}</Moment></h6>
-                return <h6 key={i}>{moment.unix(values.time).format("MMM Do YY")}</h6>
-              })}
-            </div>
-            <div className="col-3">
-              <h5>Time</h5>
-              {this.state.saved.map((values, i) => {
-                return <h6 key={i}>{moment.unix(values.time).format("LT")}</h6>
-              })}
-            </div>
-            <div className="col-3">
-              <h5>Icao24</h5>
-              {this.state.saved.map((values, i) => {
-                return <h6 key={i}>{values.icao24}</h6>
-              })}
-            </div>
-            <div className="col-3">
-              <h5>Options</h5>
-            </div>
+    return (
+      <div className="savedFlightRendered">
+        <div className="savedFlightRow">
+          <div className="col-3">
+            <h5 className="render">Date</h5>
+            {this.state.saved.map((values, i) => {
+              // return <h6 key={i}><Moment className="size" unix tz="America/Los_Angeles">{values.time}</Moment></h6>
+              return <h6 key={i}>{moment.unix(values.time).format("MMM Do YY")}</h6>
+            })}
           </div>
+          <div className="col-3">
+            <h5 className="render">Time</h5>
+            {this.state.saved.map((values, i) => {
+              return <h6 key={i}>{moment.unix(values.time).format("LT")}</h6>
+            })}
+          </div>
+          <div className="col-3">
+            <h5 className="render">Icao24</h5>
+            {this.state.saved.map((values, i) => {
+              return <a key={i} onClick={()=>this.testing()}><h6 className="icaoNumber">{values.icao24}</h6></a>
+            })}
+          </div>
+          <div className="col-3">
+            <h5 className="render">Options</h5>
+            {this.state.saved.map((values, i) => { return <a key={i}><h6 id={values[0]} className="delete">DELETE</h6></a> })}
+            </div>
         </div>
-      )
+      </div>
+    )
     // })
     // return savedInfo
   }

@@ -324,9 +324,14 @@ h3{
   color:white;
 }
 
+.render{
+  border-bottom:1px solid white;
+}
+
 h6{
   color:white;
   font-size:.8rem;
+  border-bottom:1px solid white;
 }
 
 .savedFlightContainer{
@@ -346,5 +351,30 @@ h6{
 /***************Saved Flight render component ***************/
 
 .savedFlightRow{
+  text-align: center;
   display:flex;
+}
+
+.flightDelete{
+  width:20%;
+  height:1rem;
+}
+
+.delete{
+  font-size: .75rem;
+  color:red;
+  border:1px solid red;;
+}
+
+.delete:hover{
+  color:white;
+}
+
+.icaoNumber{
+  border: 1px solid white;
+  color:white;
+}
+
+.icaoNumber:hover{
+  color: #4169e1;
 }
