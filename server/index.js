@@ -128,7 +128,6 @@ app.delete('/api/delete/:flightId',(req,res,next)=>{
    db.query(sql,params)
    .then(result=>{
      const [info]= result.rows;
-     console.log(info)
     res.json(info)
    })
    .catch(err=>{

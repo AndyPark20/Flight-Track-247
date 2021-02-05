@@ -35,14 +35,22 @@ export default class Savedflights extends React.Component {
     })
     .then(result=>{
       console.log(result)
-      this.state.saved.map(values=>{
-        if(values.flightId === result.flightId){
-          const array=this.state.saved.concat();
-          array.splice(values.flightId -1,1)
-          this.setState({saved:array})
+      const filtered = this.state.saved.filter(values=>{
+        if(values.flightId !==result.flightId){
+          return values
         }
+        })
+        this.setState({saved:filtered})
       })
-    })
+      // this.state.saved.map(values=>{
+      //   if(values.flightId === result.flightId){
+      //     const array=this.state.saved.concat();
+      //     array.splice(values.flightId,1)
+      //     console.log('splice',array)
+      //     this.setState({saved:array})
+      //   }
+      // })
+    // })
     .catch(err=>{
       return err;
     })
