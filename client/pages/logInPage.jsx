@@ -1,4 +1,5 @@
 import React from 'react';
+import MyContext from '../lib/context';
 
 export default class LoginPage extends React.Component {
   constructor(props) {
@@ -8,7 +9,26 @@ export default class LoginPage extends React.Component {
   }
 
   handleSubmit(event) {
+    const{signIn}=this.props
+    const req={
+      method:'POST',
+      headers:{
+        'Content-type': 'application/json'
+      },
+      body:JSON.stringify(this.state)
+    }
     event.preventDefault();
+    fetch('/api/login', req)
+    .then(res=>{
+      return res.json()
+    })
+    .then(result=>{
+      location.hash='home';
+      signIn(result)
+    })
+    .catch(err=>{
+      console.error(err);
+    })
   }
 
   render() {
@@ -28,7 +48,7 @@ export default class LoginPage extends React.Component {
               <input name="password" type="password" className="form-control" readOnly value={this.state.password} required />
             </div>
             <div className="logInBtn">
-            <button type="submit" className="btn btn-danger"><a href="#home" className="submit style">Log In</a></button>
+              <button type="submit" className="btn btn-danger">Log In</button>
             </div>
           </form>
         </div>
@@ -36,3 +56,5 @@ export default class LoginPage extends React.Component {
     );
   }
 }
+
+LoginPage.contextType = MyContext

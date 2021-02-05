@@ -1,8 +1,36 @@
 
+@media screen and (min-width:320px){
+  h5{
+    font-size:.75rem;
+  }
+    h6{
+    font-size:0.55rem;
+  }
+.icaoNumber{
+  font-size:.50rem;
+}
+.delete{
+  font-size: .50rem;
+}
+.savedFlightRendered{
+  margin-bottom:15%;
+}
+}
+
 @media screen and (min-width:375px){
   .panel{
       top:65%;
   }
+
+  h6{
+    font-size:0.7rem;
+  }
+  .delete{
+  font-size: .65rem;
+}
+.icaoNumber{
+  font-size:.65rem;
+}
 
 }
   /********  HORIZONTAL LAYOUT!  ****/
@@ -32,6 +60,16 @@
 }
   .logo{
     width:20%;
+}
+.delete{
+  font-size: .75rem;
+}
+.icaoNumber{
+  font-size:.75rem;
+}
+
+h6{
+  font-size:0.8rem;
 }
 }
 @media screen and (min-width: 768px) {
