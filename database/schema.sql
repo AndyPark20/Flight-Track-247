@@ -17,7 +17,7 @@ CREATE TABLE "savedAirport" (
   "savedAirportId" serial not null,
 	"userId" integer NOT NULL,
 	"airportCode" text NOT NULL,
-	"date" date NOT NULL,
+	"date" integer NOT NULL,
 	"startTime" integer NOT NULL,
 	"endTime" integer NOT NULL,
 	"type" text NOT NULL,
