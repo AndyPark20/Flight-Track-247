@@ -14,16 +14,16 @@ export default class Home extends React.Component {
     this.updateSearch = this.updateSearch.bind(this)
     this.getData = this.getData.bind(this)
     this.getSinglePlane = this.getSinglePlane.bind(this)
-    this.retrieveSavedPlane =this.retrieveSavedPlane.bind(this)
   }
 
   componentDidMount() {
+    this.setState({ savedFlight: this.props.savedPlanes })
     if (this.state.icao === '' && !this.state.pinPointPlane && this.state.savedFlight ==='') {
       this.intervalId = setInterval(() => this.getData(), 15000)
     } else if (this.state.icao !== '' && this.state.pinPointPlane && this.state.savedFlight === '') {
       this.getSinglePlane()
-    } else if(this.state.savedFlight !==''){
-        console.log('hello')
+    }else if(this.state.savedFlight !==''){
+      this.retrieveSavedPlane();
     }
 
   }
@@ -69,10 +69,27 @@ export default class Home extends React.Component {
       })
   }
 
-  retrieveSavedPlane(){
-    this.setState({savedFlight:this.props.savedPlanes})
+  componentDidUpdate(pP, pS, sS) {
+    if(pS.savedFlight !==this.state.savedFlight){
+      clearInterval(this.intervalId)
+      console.log(this.props.savedPlanes)
+      const savedicao = this.props.savedPlanes
+      fetch(`/api/select/${savedicao}`)
+        .then(result => {
+          return result.json();
+        })
+        .then(info => {
+          console.log("INFO", info)
+          if (info !== null || info !== undefined) {
+            const slicedSolo = info.states.slice(0, 1)
+            this.setState({ value: slicedSolo, load: true, pinPointPlane: true })
+          }
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }
   }
-
 
   updateSearch(event) {
     this.setState({ icao: event.target.value })

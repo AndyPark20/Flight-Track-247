@@ -48,10 +48,6 @@ export default class Savedflights extends React.Component {
     })
   }
 
-  testing(){
-    console.log(this.context)
-  }
-
 
   renderSavedFlights() {
     return (
@@ -72,7 +68,7 @@ export default class Savedflights extends React.Component {
           <div className="col-3">
             <h5 className="render">Icao24</h5>
             {this.state.saved.map((values, i) => {
-              return <a key={i} onClick={()=>this.props.retrieve(values.icao24)}><h6 className="icaoNumber">{values.icao24}</h6></a>
+              return <a key={i} href="#home" onClick={()=>this.props.retrieve(values.icao24)}><h6 className="icaoNumber">{values.icao24}</h6></a>
             })}
           </div>
           <div className="col-3">
