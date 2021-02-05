@@ -4,18 +4,20 @@ import LoginPage from './pages/logInPage';
 import { parseRoute } from './lib';
 import DropDown from './pages/dropDown';
 import SavedFlights from './pages/savedFlights';
-
+import MyContext from './lib/context';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      icao24:'',
       user: false,
       route: parseRoute(window.location.hash),
 
     };
     this.signIn=this.signIn.bind(this);
     this.renderPage=this.renderPage.bind(this);
+    this.retrievePlane = this.retrievePlane.bind(this)
 
   }
 
@@ -25,14 +27,16 @@ export default class App extends React.Component {
       this.setState({ user: true})
     }
   }
-
   componentDidMount() {
     window.addEventListener('hashchange', () => {
       const changedHash = window.location.hash;
       const parsed = parseRoute(changedHash);
       this.setState({ route: parsed });
-
     });
+  }
+
+  retrievePlane(event){
+    this.setState({icao24:event})
   }
 
 
@@ -40,7 +44,7 @@ export default class App extends React.Component {
     const { route } = this.state;
     if (route.path === "home") {
 
-      return <Home refresh={this.state.route.path} />;
+      return <Home refresh={this.state.route.path} savedPlanes={this.state.icao24} />;
     }
     if(route.path === "") {
       return <LoginPage signIn={this.signIn}/>;
@@ -49,7 +53,7 @@ export default class App extends React.Component {
       return <DropDown />;
     }
     if(route.path ==="flights"){
-      return <SavedFlights />
+      return <SavedFlights retrieve={this.retrievePlane} />
     }
   }
 
@@ -58,3 +62,5 @@ export default class App extends React.Component {
 
   }
 }
+
+App.contextType = MyContext

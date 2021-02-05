@@ -5,6 +5,7 @@ import moment from 'moment';
 import 'moment-timezone';
 import { unix } from 'moment-timezone';
 import Button from 'react-bootstrap/Button';
+import MyContext from '../lib/context';
 
 export default class Savedflights extends React.Component {
   constructor(props) {
@@ -42,18 +43,13 @@ export default class Savedflights extends React.Component {
         })
         this.setState({saved:filtered})
       })
-      // this.state.saved.map(values=>{
-      //   if(values.flightId === result.flightId){
-      //     const array=this.state.saved.concat();
-      //     array.splice(values.flightId,1)
-      //     console.log('splice',array)
-      //     this.setState({saved:array})
-      //   }
-      // })
-    // })
     .catch(err=>{
       return err;
     })
+  }
+
+  testing(){
+    console.log(this.context)
   }
 
 
@@ -64,7 +60,6 @@ export default class Savedflights extends React.Component {
           <div className="col-3">
             <h5 className="render">Date</h5>
             {this.state.saved.map((values, i) => {
-              // return <h6 key={i}><Moment className="size" unix tz="America/Los_Angeles">{values.time}</Moment></h6>
               return <h6 key={i}>{moment.unix(values.time).format("MMM Do YY")}</h6>
             })}
           </div>
@@ -77,7 +72,7 @@ export default class Savedflights extends React.Component {
           <div className="col-3">
             <h5 className="render">Icao24</h5>
             {this.state.saved.map((values, i) => {
-              return <a key={i} onClick={()=>this.testing()}><h6 className="icaoNumber">{values.icao24}</h6></a>
+              return <a key={i} onClick={()=>this.props.retrieve(values.icao24)}><h6 className="icaoNumber">{values.icao24}</h6></a>
             })}
           </div>
           <div className="col-3">
@@ -87,8 +82,6 @@ export default class Savedflights extends React.Component {
         </div>
       </div>
     )
-    // })
-    // return savedInfo
   }
 
 
@@ -117,3 +110,5 @@ export default class Savedflights extends React.Component {
     )
   }
 }
+
+Savedflights.contextType = MyContext

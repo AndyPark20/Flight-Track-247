@@ -10,18 +10,22 @@ import PopUp from '../components/popup';
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({ value: [], load: false, pinPointPlane: false, icao: '' })
+    this.state = ({ value: [], load: false, pinPointPlane: false, icao: '', savedFlight:'' })
     this.updateSearch = this.updateSearch.bind(this)
     this.getData = this.getData.bind(this)
     this.getSinglePlane = this.getSinglePlane.bind(this)
+    this.retrieveSavedPlane =this.retrieveSavedPlane.bind(this)
   }
 
   componentDidMount() {
-    if (this.state.icao === '' && !this.state.pinPointPlane) {
+    if (this.state.icao === '' && !this.state.pinPointPlane && this.state.savedFlight ==='') {
       this.intervalId = setInterval(() => this.getData(), 15000)
-    } else {
+    } else if (this.state.icao !== '' && this.state.pinPointPlane && this.state.savedFlight === '') {
       this.getSinglePlane()
+    } else if(this.state.savedFlight !==''){
+        console.log('hello')
     }
+
   }
 
   getData() {
@@ -65,6 +69,11 @@ export default class Home extends React.Component {
       })
   }
 
+  retrieveSavedPlane(){
+    this.setState({savedFlight:this.props.savedPlanes})
+  }
+
+
   updateSearch(event) {
     this.setState({ icao: event.target.value })
     if (event.key === 'Enter') {
@@ -79,7 +88,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <MyContext.Provider value={this.state.value}>
+      <MyContext.Provider value={this.state.value} >
         <div className="container container-sm container-md container-lg container-xl container-fluid">
           <div className="d-flex flex-column">
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -114,64 +123,3 @@ export default class Home extends React.Component {
     );
   }
 }
-
-
-
-  // getData() {
-  //   if (!this.state.pinPointPlane) {
-  //     fetch('https://opensky-network.org/api/states/all', {
-  //       method: 'GET',
-  //       headers: { 'Content-type': 'application/json' }
-  //     })
-  //       .then(res => {
-  //         return res.json()
-  //       })
-  //       .then(data => {
-  //         const sliced = data.states.slice(0,1000)
-  //         this.setState({ value: sliced, load: true, pinPointPlane: false })
-
-  //       })
-  //       .catch(err => {
-  //         console.error(err)
-  //       })
-  //   } else {
-  //     fetch(`https://opensky-network.org/api/states/all?icao24=${this.state.icao}&time${0}`, {
-  //       method: 'GET',
-  //       headers: { 'Content-type': 'application/json' }
-  //     })
-  //       .then(res => {
-  //         return res.json()
-  //       })
-  //       .then(data => {
-  //         if(data !==null){
-  //           const slicedSolo = data.states.slice(0, 1)
-  //           this.setState({ load: true, value: slicedSolo })
-  //         }
-  //       })
-  //       .catch(err=>{
-  //         console.error(err)
-  //       })
-  //   }
-  // }
-
-// getData() {
-//   const fetchController = new AbortController();
-//   const { signal } = fetchController;
-
-//   let time = setTimeout(() => {
-//     fetchController.abort();
-//   }, 1000)
-
-//   fetch('/api/all', { signal })
-//     .then(res => {
-//       return res.json();
-//     })
-//     .then(data => {
-//       clearTimeout(time);
-//       const sliced = data.states.slice(0, 1000)
-//       this.setState({ value: sliced, load: true, pinPointPlane: false })
-//     })
-//     .catch(err => {
-//       console.error(err)
-//     })
-// }
