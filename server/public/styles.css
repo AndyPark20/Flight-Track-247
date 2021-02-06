@@ -318,6 +318,10 @@ h5{
   transform: translate(-50%, -50%);
 }
 
+.dropDownText{
+  font-size:1rem;
+}
+
 /***********SAVED FLIGHTS****************************/
 
 h3{

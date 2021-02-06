@@ -63,6 +63,32 @@ app.post('/api/flight', (req, res, next) => {
     })
 })
 
+app.post('/api/airport',(req,res,next)=>{
+  const userId=1
+  console.log(req.body)
+  const {code, start,date, end,type}=req.body;
+  if(!code || !start || !end || !type){
+    throw new ClientError(401,'Invalid Entry')
+  }
+  const sql=`
+  insert into "savedAirport" ("userId", "airportCode", "date" , "startTime", "endTime", "type")
+  values ($1, $2, $3, $4, $5, $6)
+  returning *
+  `;
+
+  const params =[userId,code,date,start,end,type]
+  db.query(sql,params)
+  .then(result=>{
+    const info = result.rows
+    res.status(201).json(info);
+    return;
+  })
+  .catch(err=>{
+    return next(err)
+  })
+
+})
+
 app.get('/api/flight', (req, res, next) => {
 
   const sql = `

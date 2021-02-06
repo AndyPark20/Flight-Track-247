@@ -23,11 +23,11 @@ export default class LoginPage extends React.Component {
       return res.json()
     })
     .then(result=>{
-      location.hash='home';
+      location.hash='home'
       signIn(result)
     })
     .catch(err=>{
-      console.error(err);
+      console.error(err)
     })
   }
 
