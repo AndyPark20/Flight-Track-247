@@ -17,7 +17,27 @@ export default class SavedAirport extends React.Component {
               <h3>Search Airport</h3>
             </div>
           </div>
-          <div className="searchAirportContainer">
+          <div className="airportContainer">
+            <div className="airportRow">
+              <div className="airportCol">
+              <form >
+                    <label className="labelStyle"> Airport Code:</label>
+                    <input className="inputStyle" type="text" name="airportCode" placeholder="KSNA=John Wayne Airport" required></input>
+                    <label className="labelStyle"> Start-Date & time:</label>
+                    <input className="inputStyle" type="datetime-local" name="startTime" required></input>
+                    <label className="labelStyle"> End-Date & time:</label>
+                    <input className="inputStyle" type="datetime-local" name="endTime" required></input>
+                    <label className="labelStyle">  Departure or Arrival:</label>
+                    <input className="inputStyle" type="text" name="dOrA" placeholder="Departure or Arrival" required></input>
+                  <div className="btnSubmit">
+                    <Button className="buttonStyle" variant="primary">SUBMIT</Button>
+                  </div>
+              </form>
+              </div>
+            </div>
+          </div>
+
+          {/* <div className="searchAirportContainer">
             <div className="searchAirportInfo">
               <form className="airport">
                 <div className="airportSubmit">
@@ -37,13 +57,13 @@ export default class SavedAirport extends React.Component {
                     <label className="formAirport"> Departure or Arrival:  </label>
                     <input className="airportCode" type="text" name="dOrA" placeholder="Departure or Arrival" required></input>
                   </div>
-                  <div className="btn">
+                  <div className="btnSubmit">
                   <Button className="buttonStyle" variant="primary">SUBMIT</Button>
                   </div>
                 </div>
               </form>
             </div>
-          </div>
+          </div> */}
           <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div className="footer fixed-bottom">
               <NavBottom />
