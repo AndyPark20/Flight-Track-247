@@ -15,6 +15,7 @@
 .savedFlightRendered{
   margin-bottom:15%;
 }
+
 }
 
 @media screen and (min-width:375px){
@@ -68,11 +69,17 @@
   font-size:.75rem;
 }
 
+
 h6{
   font-size:0.8rem;
 }
 }
 @media screen and (min-width: 768px) {
+
+  .labelStyle{
+  font-size:1.0rem;
+}
+
   .logo {
     width: 15%;
   }
@@ -104,4 +111,13 @@ h6{
 .planeInfo{
   flex-basis:5%;
 }
+.searchAirportContainer{
+  margin-top:5%;
+  width:100%;
+}
+
+form.airportForm{
+  width:30%;
+}
+
 }

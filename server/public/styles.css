@@ -318,6 +318,10 @@ h5{
   transform: translate(-50%, -50%);
 }
 
+.dropDownText{
+  font-size:1rem;
+}
+
 /***********SAVED FLIGHTS****************************/
 
 h3{
@@ -381,4 +385,40 @@ h6{
 
 .renderSavedInfo{
   height:100vh;
+}
+
+/************************SEARCH AIRPORT**********************/
+
+.airportContainer{
+  margin-top:2%;
+  width:100%;
+}
+
+.airportRow{
+  width:100%;
+  height:100vh;
+}
+
+.airportCol{
+  width:100%;
+  display:flex;
+  justify-content: center;
+}
+
+.airportForm{
+  width:90%;
+}
+
+.labelStyle, .inputStyle{
+  display:block;
+  width:100%;
+}
+
+.btnSubmit{
+  margin-top:2%;
+  text-align:end;
+}
+
+.labelStyle{
+  font-size:.8rem;
 }

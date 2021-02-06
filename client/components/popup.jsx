@@ -55,7 +55,12 @@ export default class PopUp extends React.Component {
     }
     fetch('/api/flight', req)
       .then(res => res.json())
-      .then(result => console.log(result));
+      .then(result => {
+        return result;
+      })
+      .catch(err=>{
+        console.error(err)
+      })
   }
 
   planeInfo() {
