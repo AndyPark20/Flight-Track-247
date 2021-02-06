@@ -63,31 +63,52 @@ app.post('/api/flight', (req, res, next) => {
     })
 })
 
-app.post('/api/airport',(req,res,next)=>{
-  const userId=1
-  console.log(req.body)
-  const {code, start,date, end,type}=req.body;
-  if(!code || !start || !end || !type){
-    throw new ClientError(401,'Invalid Entry')
-  }
-  const sql=`
-  insert into "savedAirport" ("userId", "airportCode", "date" , "startTime", "endTime", "type")
-  values ($1, $2, $3, $4, $5, $6)
-  returning *
-  `;
 
-  const params =[userId,code,date,start,end,type]
-  db.query(sql,params)
-  .then(result=>{
-    const info = result.rows
-    res.status(201).json(info);
-    return;
+app.get('/api/get/airport/:code/:date/:end/:start/:type', (req, res, next) => {
+  fetch(`https://opensky-network.org/api/flights/${req.params.type}?airport=${req.params.code}&begin=${req.params.start}&end=${req.params.end}`, {
+    method: 'GET',
+    headers: { 'Content-type': 'application/json' }
   })
-  .catch(err=>{
-    return next(err)
-  })
+    .then(res => {
+      return res.json()
+    })
+    .then(data => {
+      res.status(200).json(data)
 
+    })
+    .catch(err => {
+      return next(err);
+    })
 })
+
+
+
+
+// app.post('/api/airport',(req,res,next)=>{
+//   const userId=1
+//   console.log(req.body)
+//   const {code, start,date, end,type}=req.body;
+//   if(!code || !start || !end || !type){
+//     throw new ClientError(401,'Invalid Entry')
+//   }
+//   const sql=`
+//   insert into "savedAirport" ("userId", "airportCode", "date" , "startTime", "endTime", "type")
+//   values ($1, $2, $3, $4, $5, $6)
+//   returning *
+//   `;
+
+//   const params =[userId,code,date,start,end,type]
+//   db.query(sql,params)
+//   .then(result=>{
+//     const info = result.rows
+//     res.status(201).json(info);
+//     return;
+//   })
+//   .catch(err=>{
+//     return next(err)
+//   })
+
+// })
 
 app.get('/api/flight', (req, res, next) => {
 
@@ -106,21 +127,21 @@ app.get('/api/flight', (req, res, next) => {
     })
 })
 
-app.get('/api/all',(req,res,next)=>{
+app.get('/api/all', (req, res, next) => {
   fetch('https://opensky-network.org/api/states/all', {
-        method: 'GET',
-        headers: { 'Content-type': 'application/json' }
-      })
-        .then(res => {
-          return res.json()
-        })
-        .then(data => {
-          res.status(200).json(data)
+    method: 'GET',
+    headers: { 'Content-type': 'application/json' }
+  })
+    .then(res => {
+      return res.json()
+    })
+    .then(data => {
+      res.status(200).json(data)
 
-        })
-        .catch(err => {
-          return next(err);
-        })
+    })
+    .catch(err => {
+      return next(err);
+    })
 })
 
 app.get('/api/select/:icao', (req, res, next) => {
@@ -140,26 +161,26 @@ app.get('/api/select/:icao', (req, res, next) => {
     })
 })
 
-app.delete('/api/delete/:flightId',(req,res,next)=>{
- const flight=parseInt(req.params.flightId,10);
- if(flight !==Math.abs(flight)){
-   return (res.status(400).json('Error'));
- }else{
-   const sql=`
+app.delete('/api/delete/:flightId', (req, res, next) => {
+  const flight = parseInt(req.params.flightId, 10);
+  if (flight !== Math.abs(flight)) {
+    return (res.status(400).json('Error'));
+  } else {
+    const sql = `
    delete from "flight"
    where "flightId" =$1
    returning *;
    `;
-   const params =[flight]
-   db.query(sql,params)
-   .then(result=>{
-     const [info]= result.rows;
-    res.json(info)
-   })
-   .catch(err=>{
-     return next(err)
-   })
- }
+    const params = [flight]
+    db.query(sql, params)
+      .then(result => {
+        const [info] = result.rows;
+        res.json(info)
+      })
+      .catch(err => {
+        return next(err)
+      })
+  }
 })
 
 

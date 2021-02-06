@@ -16,25 +16,33 @@ export default class Home extends React.Component {
     this.getSinglePlane = this.getSinglePlane.bind(this)
   }
 
+  // componentDidMount() {
+  //   this.setState({ savedFlight: this.props.savedPlanes })
+  //   if (this.state.icao === '' && !this.state.pinPointPlane && this.state.savedFlight ==='') {
+  //     this.intervalId = setInterval(() => this.getData(), 15000)
+  //   } else if (this.state.icao !== '' && this.state.pinPointPlane && this.state.savedFlight === '') {
+  //     this.getSinglePlane()
+  //   }else if(this.state.savedFlight !==''){
+  //     this.retrieveSavedPlane();
+  //   }
+
+  // }
+
   componentDidMount() {
     this.setState({ savedFlight: this.props.savedPlanes })
-    if (this.state.icao === '' && !this.state.pinPointPlane && this.state.savedFlight ==='') {
-      this.intervalId = setInterval(() => this.getData(), 15000)
-    } else if (this.state.icao !== '' && this.state.pinPointPlane && this.state.savedFlight === '') {
-      this.getSinglePlane()
-    }else if(this.state.savedFlight !==''){
-      this.retrieveSavedPlane();
-    }
+    clearInterval(this.intervalId)
+    this.intervalId = setInterval(() => this.getData(), 15000)
 
   }
 
+
   getData() {
+    console.log('firing')
     const fetchController = new AbortController();
     const { signal } = fetchController;
-
     let time = setTimeout(() => {
       fetchController.abort();
-    }, 10000)
+    }, 15000)
     fetch('/api/all', { signal })
       .then(res => {
         return res.json();

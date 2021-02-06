@@ -6,6 +6,7 @@ import DropDown from './pages/dropDown';
 import SavedFlights from './pages/savedFlights';
 import MyContext from './lib/context';
 import SearchAirport from './pages/searchAirport';
+import SavedAirport from './pages/savedAirport';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,11 +15,13 @@ export default class App extends React.Component {
       icao24:'',
       user: false,
       route: parseRoute(window.location.hash),
-
+      savedAirport:[]
     };
+
     this.signIn=this.signIn.bind(this);
     this.renderPage=this.renderPage.bind(this);
-    this.retrievePlane = this.retrievePlane.bind(this)
+    this.retrievePlane = this.retrievePlane.bind(this);
+    this.retrieveAirport = this.retrieveAirport.bind(this);
 
   }
 
@@ -40,6 +43,9 @@ export default class App extends React.Component {
     this.setState({icao24:event})
   }
 
+  retrieveAirport(event){
+    this.setState({savedAirport:event})
+  }
 
   renderPage() {
     const { route } = this.state;
@@ -57,7 +63,10 @@ export default class App extends React.Component {
       return <SavedFlights retrieve={this.retrievePlane} />
     }
     if (route.path ==='searchAirport'){
-      return <SearchAirport />
+      return <SearchAirport find={this.retrieveAirport}/>
+    }
+    if (route.path ==='savedAirport'){
+      return <SavedAirport result={this.state.savedAirport} />
     }
   }
 
