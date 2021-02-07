@@ -92,7 +92,7 @@ a:hover {
 /*****************************************************************/
 
 .homeLogo{
-  width:55px;
+  width:50px;
   height:50px;
 }
 
@@ -396,12 +396,17 @@ h6{
   font-size:.8rem;
 }
 
-/**********Saved Airport *********************/
+/**********Airport Result *********************/
 
 .savedAirportContainer{
   height:100vh;
   border:2px solid red;
   background-color:black;
+}
+
+.add{
+ width:30px;
+  height:30px;
 }
 
 /**********Rendering Airlines*******************/

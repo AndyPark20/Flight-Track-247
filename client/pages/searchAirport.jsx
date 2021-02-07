@@ -52,7 +52,7 @@ export default class SearchAirport extends React.Component {
         if (!result.error) {
         this.setState({list:result})
           this.props.find(this.state)
-          location.hash = 'savedAirport'
+          location.hash = 'airportResult'
           return result;
         }
       })
