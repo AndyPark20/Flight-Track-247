@@ -363,7 +363,8 @@ export default class App extends React.Component {
         { icao24: "a118cb", firstSeen: 1612476152, estDepartureAirport: "95CA", lastSeen: 1612479100, estArrivalAirport: "KSNA", callsign: 'SWA541524' },
         { icao24: "a88ccf", firstSeen: 1612475470, estDepartureAirport: "KPHX", lastSeen: 1612479000, estArrivalAirport: "KSNA", callsign: 'UAL151515' },
         { icao24: "a0efa9", firstSeen: 1612477481, estDepartureAirport: "KSNA", lastSeen: 1612478880, estArrivalAirport: "KSNA", callsign: 'SKW1515151' }
-      ]
+      ],
+      code: {code: "KSNA", date: 1612738610, start: 1612512000, end: 1612598340, type: "arrival"}
     };
 
     this.signIn = this.signIn.bind(this);
@@ -400,7 +401,7 @@ export default class App extends React.Component {
       end: event.end,
       type: event.type.charAt(0).toUpperCase() + event.type.slice(1)
     });
-    console.log(this.state)
+    console.log('APP CODE', this.state.code)
   }
 
   renderPage() {
@@ -422,7 +423,7 @@ export default class App extends React.Component {
       return <SearchAirport find={this.retrieveAirport} />
     }
     if (route.path === 'airportResult') {
-      return <AirportResult result={this.state} />
+      return <AirportResult result={this.state} airportData={this.state.code} />
     }
     if(route.path ==='savedAirport'){
       return <SavedAirport />
