@@ -16,10 +16,9 @@ export default class SavedAirport extends React.Component {
   }
 
   renderTimeDate() {
-    console.log('TEST',this.props.result)
     return (
       <div className="d-flex flex-column align-items-center text-center">
-        <h3>{`${this.props.result.type} @${this.props.result.code}`}</h3>
+        <h3>{`${this.props.result.code['code']} ${this.props.result.type} `}</h3>
         <h5>{`${moment.unix(this.props.result.start).format("l")} ~ ${moment.unix(this.props.result.end).format("l")}`}</h5>
         <h5>{`${moment.unix(this.props.result.start).format('HH:mm')} ~ ${moment.unix(this.props.result.end).format('HH:mm')}`}</h5>
         <h5 className="flightFound">({this.props.result.savedAirport.length} Flights Found)</h5>
