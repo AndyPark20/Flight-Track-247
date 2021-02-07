@@ -407,6 +407,9 @@ h6{
 /**********Rendering Airlines*******************/
 
 .airline{
-  width:100%;
-  height:1.34rem;
+  width:30%;
+}
+
+.flightFound{
+  color:#0892d0;
 }
