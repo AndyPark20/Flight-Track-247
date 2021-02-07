@@ -16,7 +16,8 @@ export default class SearchAirport extends React.Component {
       date: null,
       start: null,
       end: null,
-      type: ''
+      type: '',
+      list:[]
     })
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -48,9 +49,9 @@ export default class SearchAirport extends React.Component {
     fetch(`/api/get/airport/${this.state.code}/${this.state.date}/${this.state.end}/${this.state.start}/${this.state.type}`)
       .then(res => res.json())
       .then(result => {
-        console.log(result)
         if (!result.error) {
-          this.props.find(result)
+        this.setState({list:result})
+          this.props.find(this.state)
           location.hash = 'savedAirport'
           return result;
         }
@@ -76,7 +77,7 @@ export default class SearchAirport extends React.Component {
               <label className="labelStyle"> End-Date & time:</label>
               <input className="inputStyle" type="datetime-local" name="endTime" onChange={this.handleInputChange} required></input>
               <label className="labelStyle">  Departure or Arrival:</label>
-              <input className="inputStyle" type="text" name="dOrA" placeholder="Departure or Arrival" onChange={this.handleInputChange} required></input>
+              <input className="inputStyle" type="text" name="dOrA" placeholder="departure or arrival" onChange={this.handleInputChange} required></input>
               <div className="btnSubmit">
                 <Button type="submit" className="buttonStyle" variant="primary">SUBMIT</Button>
               </div>
