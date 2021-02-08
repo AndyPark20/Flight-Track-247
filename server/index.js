@@ -65,7 +65,8 @@ app.post('/api/flight', (req, res, next) => {
 
 
 app.get('/api/get/airport/:code/:date/:end/:start/:type', (req, res, next) => {
-  fetch(`https://opensky-network.org/api/flights/${req.params.type}?airport=${req.params.code}&begin=${req.params.start}&end=${req.params.end}`, {
+  const lowercase = req.params.type.toLowerCase()
+  fetch(`https://opensky-network.org/api/flights/${lowercase}?airport=${req.params.code}&begin=${req.params.start}&end=${req.params.end}`, {
     method: 'GET',
     headers: { 'Content-type': 'application/json' }
   })
@@ -73,6 +74,7 @@ app.get('/api/get/airport/:code/:date/:end/:start/:type', (req, res, next) => {
       return res.json()
     })
     .then(data => {
+      console.log('DATA',data)
       res.status(200).json(data)
 
     })

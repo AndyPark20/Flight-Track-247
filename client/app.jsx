@@ -25,6 +25,7 @@ export default class App extends React.Component {
     this.retrievePlane = this.retrievePlane.bind(this);
     this.retrieveAirport = this.retrieveAirport.bind(this);
     this.savedAirportRetrieve = this.savedAirportRetrieve.bind(this)
+    this.testing = this.testing.bind(this)
 
   }
 
@@ -70,7 +71,9 @@ export default class App extends React.Component {
     });
   }
 
-
+  testing(){
+    console.log(this.state)
+  }
 
   renderPage() {
     const { route } = this.state;
@@ -99,7 +102,12 @@ export default class App extends React.Component {
   }
 
   render() {
-    return<div className="mainContainer">{this.renderPage()}</div>
+    return(
+      <div>
+        {this.testing()}
+    <div className="mainContainer">{this.renderPage()}</div>
+      </div>
+    )
 
   }
 }

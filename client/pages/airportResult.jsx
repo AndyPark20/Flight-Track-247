@@ -12,14 +12,16 @@ import { Next } from 'react-bootstrap/esm/PageItem';
 export default class SavedAirport extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({
-      value:[]
-    }),
     this.renderTimeDate = this.renderTimeDate.bind(this)
     this.renderSavedAirport = this.renderSavedAirport.bind(this)
     this.saveAirportInfo = this.saveAirportInfo.bind(this)
+    this.testing= this.testing.bind(this)
   }
 
+
+  testing(){
+    console.log('UPDATE AIRPORTRESULT',this.props.result)
+  }
 
   renderTimeDate() {
     return (
@@ -178,7 +180,13 @@ export default class SavedAirport extends React.Component {
     fetch('/api/airport',{
       method:'POST',
       headers:{'Content-type':'application/json'},
-      body: JSON.stringify(this.props.airportData)
+      body: JSON.stringify({
+        code:this.props.result.code,
+        start:this.props.result.start,
+        date: this.props.result.date,
+        end:this.props.result.end,
+        type:this.props.result.type
+      })
     })
     .then(res=>{
       return res.json()
@@ -194,6 +202,7 @@ export default class SavedAirport extends React.Component {
   render() {
     return (
       <div className="vh-100 w-100 black d-flex flex-column">
+        {this.testing()}
         <div className="row align-items-start d-flex justify-content-between align-items-center px-4">
           <a href="#save"><img className='homeLogo save' src="/images/back.png" alt="logo" /></a>
           <a onClick={()=>this.saveAirportInfo()}><img className='save add' src="/images/add.png" alt="logo" /></a>
