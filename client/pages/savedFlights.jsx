@@ -35,7 +35,6 @@ export default class Savedflights extends React.Component {
         return res.json()
       })
       .then(result => {
-        console.log(result)
         const filtered = this.state.saved.filter(values => {
           if (values.flightId !== result.flightId) {
             return values

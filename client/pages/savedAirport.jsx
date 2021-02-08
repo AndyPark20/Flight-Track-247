@@ -52,17 +52,18 @@ componentDidMount(){
     console.log(event.target.id)
     this.state.value.map((values,i)=>{
       if(parseInt(event.target.id) === values.savedAirportId){
-        console.log(values)
         fetch(`/api/get/airport/${values.airportCode}/${values.date}/${values.endTime}/${values.startTime}/${values.type}`)
           .then(res => res.json())
           .then(result => {
-            if (!result.error) {
-              console.log('personal retrieve', result)
+            if (!result.error && this.state.value.length !==0) {
               this.props.selectedAirport({list:result, otherInfo:values})
+              location.hash = 'airportResult';
               return result;
             }
           })
-
+          .catch(err=>{
+            console.error(err);
+          })
       }
     })
   }
@@ -75,7 +76,7 @@ componentDidMount(){
             {this.state.value.map((values, i) => {
                   return (
                     <div key={i} className="d-flex justify-content-between align-items-center border-bottom text-align text-center">
-                      <a href="#airportResult" onClick={(event) => this.selectAirport(event)}><h4 id={values.savedAirportId} className="airportCode">{values.airportCode}</h4></a>
+                      <a onClick={(event) => this.selectAirport(event)}><h4 id={values.savedAirportId} className="airportCode">{values.airportCode}</h4></a>
                       <div className="d-flex flex-column">
                         <h6>Start Date:</h6>
                         <h5 className="airportSavedInfo">{moment.unix(values.startTime).format("L")}</h5>

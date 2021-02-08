@@ -18,7 +18,6 @@ export default class SavedAirport extends React.Component {
     this.renderTimeDate = this.renderTimeDate.bind(this)
     this.renderSavedAirport = this.renderSavedAirport.bind(this)
     this.saveAirportInfo = this.saveAirportInfo.bind(this)
-    this.testing = this.testing.bind(this)
   }
 
 
@@ -31,10 +30,6 @@ export default class SavedAirport extends React.Component {
         <h5 className="flightFound">({this.props.result.savedAirport.length} Flights Found)</h5>
       </div>
     )
-  }
-
-  testing(){
-    console.log('AirportResult', this.props.result)
   }
 
   renderSavedAirport() {
@@ -180,7 +175,6 @@ export default class SavedAirport extends React.Component {
   }
 
   saveAirportInfo(){
-    console.log('Plus button Save',this.props.airportData)
     fetch('/api/airport',{
       method:'POST',
       headers:{'Content-type':'application/json'},
@@ -200,7 +194,6 @@ export default class SavedAirport extends React.Component {
   render() {
     return (
       <div className="vh-100 w-100 black d-flex flex-column">
-        {this.testing()}
         <div className="row align-items-start d-flex justify-content-between align-items-center px-4">
           <a href="#save"><img className='homeLogo save' src="/images/back.png" alt="logo" /></a>
           <a onClick={()=>this.saveAirportInfo()}><img className='save add' src="/images/add.png" alt="logo" /></a>

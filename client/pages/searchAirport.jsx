@@ -21,6 +21,7 @@ export default class SearchAirport extends React.Component {
     })
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+
   }
 
   handleInputChange(event) {
@@ -40,8 +41,9 @@ export default class SearchAirport extends React.Component {
 
   }
 
+
+
   handleSubmit(event) {
-    console.log("WHAT IS THE VALUE?",this.state)
     event.preventDefault()
     fetch(`/api/get/airport/${this.state.code}/${this.state.date}/${this.state.end}/${this.state.start}/${this.state.type}`)
       .then(res => res.json())
