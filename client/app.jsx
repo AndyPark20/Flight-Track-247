@@ -25,6 +25,7 @@ export default class App extends React.Component {
     this.retrievePlane = this.retrievePlane.bind(this);
     this.retrieveAirport = this.retrieveAirport.bind(this);
     this.savedAirportRetrieve = this.savedAirportRetrieve.bind(this)
+
   }
 
   signIn(message) {
@@ -48,7 +49,7 @@ export default class App extends React.Component {
   retrieveAirport(event) {
     this.setState({
       savedAirport: event.list,
-      code: event,
+      code: event.code,
       date: event.date,
       start: event.start,
       end: event.end,
@@ -57,14 +58,19 @@ export default class App extends React.Component {
   }
 
   savedAirportRetrieve(event){
+    console.log('LOOK HERE!',event)
+    console.log('WHAT IS THE CODE', event.otherInfo.airportCode)
     this.setState({
-      code: event.airportCode,
-      date: event.date,
-      start:event.startTime,
-      end:event.endTime,
-      type: event.type.charAt(0).toUpperCase() + event.type.slice(1)
+      savedAirport:event.list,
+      code: event.otherInfo.airportCode,
+      date: event.otherInfo.date,
+      start:event.otherInfo.startTime,
+      end:event.otherInfo.endTime,
+      type: event.otherInfo.type.charAt(0).toUpperCase() + event.otherInfo.type.slice(1)
     });
   }
+
+
 
   renderPage() {
     const { route } = this.state;
@@ -85,10 +91,10 @@ export default class App extends React.Component {
       return <SearchAirport find={this.retrieveAirport} />
     }
     if (route.path === 'airportResult') {
-      return <AirportResult result={this.state} airportData={this.state.code} />
+      return <AirportResult result={this.state} airportData={this.state} />
     }
     if(route.path ==='savedAirport'){
-      return <SavedAirport airportData={this.state.code} selectedAirport={this.savedAirportRetrieve} />
+      return <SavedAirport airportData={this.state} selectedAirport={this.savedAirportRetrieve} />
     }
   }
 

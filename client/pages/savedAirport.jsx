@@ -52,7 +52,17 @@ componentDidMount(){
     console.log(event.target.id)
     this.state.value.map((values,i)=>{
       if(parseInt(event.target.id) === values.savedAirportId){
-        this.props.selectedAirport(values)
+        console.log(values)
+        fetch(`/api/get/airport/${values.airportCode}/${values.date}/${values.endTime}/${values.startTime}/${values.type}`)
+          .then(res => res.json())
+          .then(result => {
+            if (!result.error) {
+              console.log('personal retrieve', result)
+              this.props.selectedAirport({list:result, otherInfo:values})
+              return result;
+            }
+          })
+
       }
     })
   }

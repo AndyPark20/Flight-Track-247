@@ -12,19 +12,20 @@ import { Next } from 'react-bootstrap/esm/PageItem';
 export default class SavedAirport extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = ({
-    //   value:[]
-    // }),
+    this.state = ({
+      value:[]
+    }),
     this.renderTimeDate = this.renderTimeDate.bind(this)
     this.renderSavedAirport = this.renderSavedAirport.bind(this)
     this.saveAirportInfo = this.saveAirportInfo.bind(this)
+    this.testing = this.testing.bind(this)
   }
 
 
   renderTimeDate() {
     return (
       <div className="d-flex flex-column align-items-center text-center">
-        {/* <h3>{`${this.props.result.code['code']} ${this.props.result.type} `}</h3> */}
+        <h3>{`${this.props.result.code} ${this.props.result.type} `}</h3>
         <h5>{`${moment.unix(this.props.result.start).format("l")} ~ ${moment.unix(this.props.result.end).format("l")}`}</h5>
         <h5>{`${moment.unix(this.props.result.start).format('HH:mm')} ~ ${moment.unix(this.props.result.end).format('HH:mm')}`}</h5>
         <h5 className="flightFound">({this.props.result.savedAirport.length} Flights Found)</h5>
@@ -32,9 +33,11 @@ export default class SavedAirport extends React.Component {
     )
   }
 
+  testing(){
+    console.log('AirportResult', this.props.result)
+  }
+
   renderSavedAirport() {
-    // this.setState({value:this.props.result})
-    // console.log('TEST IN AIRPORT RESULT',this.state)
     return (
       <div className="mb-10">
         <div className="row d-flex align-self-center">
@@ -197,6 +200,7 @@ export default class SavedAirport extends React.Component {
   render() {
     return (
       <div className="vh-100 w-100 black d-flex flex-column">
+        {this.testing()}
         <div className="row align-items-start d-flex justify-content-between align-items-center px-4">
           <a href="#save"><img className='homeLogo save' src="/images/back.png" alt="logo" /></a>
           <a onClick={()=>this.saveAirportInfo()}><img className='save add' src="/images/add.png" alt="logo" /></a>
