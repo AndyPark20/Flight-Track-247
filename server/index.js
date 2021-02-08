@@ -74,7 +74,6 @@ app.get('/api/get/airport/:code/:date/:end/:start/:type', (req, res, next) => {
       return res.json()
     })
     .then(data => {
-      console.log('DATA',data)
       res.status(200).json(data)
 
     })
@@ -86,7 +85,6 @@ app.get('/api/get/airport/:code/:date/:end/:start/:type', (req, res, next) => {
 
 app.post('/api/airport',(req,res,next)=>{
   const userId=1
-  console.log(req.body)
   const {code, start,date, end,type}=req.body;
   if(!code || !start || !end || !type){
     throw new ClientError(401,'Invalid Entry')
@@ -102,14 +100,12 @@ app.post('/api/airport',(req,res,next)=>{
 
   .then(result=>{
     const info = result.rows
-    console.log(info)
     res.status(201).json(info);
     return;
   })
   .catch(err=>{
     return next(err)
   })
-
 })
 
 app.get('/api/airport',(req,res,next)=>{
@@ -223,7 +219,6 @@ app.delete('/api/delete/:flightId', (req, res, next) => {
       })
   }
 })
-
 
 app.use(errorMiddleware);
 app.listen(process.env.PORT, () => {

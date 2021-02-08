@@ -49,14 +49,12 @@ componentDidMount(){
   }
 
   selectAirport(event){
-    console.log('airport happening',this.state.value)
     this.state.value.map((values,i)=>{
       if(parseInt(event.target.id) === values.savedAirportId){
         fetch(`/api/get/airport/${values.airportCode}/${values.date}/${values.endTime}/${values.startTime}/${values.type}`)
           .then(res => res.json())
           .then(result => {
             if (!result.error && this.state.value.length !==0) {
-              console.log('Is this it?',result)
               this.props.selectedAirport({list:result, otherInfo:values})
               location.hash = 'airportResult';
               return result;

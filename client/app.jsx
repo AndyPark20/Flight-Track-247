@@ -25,8 +25,6 @@ export default class App extends React.Component {
     this.retrievePlane = this.retrievePlane.bind(this);
     this.retrieveAirport = this.retrieveAirport.bind(this);
     this.savedAirportRetrieve = this.savedAirportRetrieve.bind(this)
-    this.testing = this.testing.bind(this)
-
   }
 
   signIn(message) {
@@ -59,8 +57,6 @@ export default class App extends React.Component {
   }
 
   savedAirportRetrieve(event){
-    console.log('LOOK HERE!',event)
-    console.log('WHAT IS THE CODE', event.otherInfo.airportCode)
     this.setState({
       savedAirport:event.list,
       code: event.otherInfo.airportCode,
@@ -69,10 +65,6 @@ export default class App extends React.Component {
       end:event.otherInfo.endTime,
       type: event.otherInfo.type.charAt(0).toUpperCase() + event.otherInfo.type.slice(1)
     });
-  }
-
-  testing(){
-    console.log(this.state)
   }
 
   renderPage() {
@@ -102,13 +94,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    return(
-      <div>
-        {this.testing()}
-    <div className="mainContainer">{this.renderPage()}</div>
-      </div>
-    )
-
+    return<div className="mainContainer">{this.renderPage()}</div>
   }
 }
 

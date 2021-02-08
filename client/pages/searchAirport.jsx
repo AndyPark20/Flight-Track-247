@@ -6,8 +6,6 @@ import moment from 'moment';
 import 'moment-timezone';
 import { unix } from 'moment-timezone';
 
-
-
 export default class SearchAirport extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +19,6 @@ export default class SearchAirport extends React.Component {
     })
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-
   }
 
   handleInputChange(event) {
@@ -40,8 +37,6 @@ export default class SearchAirport extends React.Component {
     }
 
   }
-
-
 
   handleSubmit(event) {
     event.preventDefault()

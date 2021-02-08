@@ -16,28 +16,13 @@ export default class Home extends React.Component {
     this.getSinglePlane = this.getSinglePlane.bind(this)
   }
 
-  // componentDidMount() {
-  //   this.setState({ savedFlight: this.props.savedPlanes })
-  //   if (this.state.icao === '' && !this.state.pinPointPlane && this.state.savedFlight ==='') {
-  //     this.intervalId = setInterval(() => this.getData(), 15000)
-  //   } else if (this.state.icao !== '' && this.state.pinPointPlane && this.state.savedFlight === '') {
-  //     this.getSinglePlane()
-  //   }else if(this.state.savedFlight !==''){
-  //     this.retrieveSavedPlane();
-  //   }
-
-  // }
-
   componentDidMount() {
     this.setState({ savedFlight: this.props.savedPlanes })
     clearInterval(this.intervalId)
     this.intervalId = setInterval(() => this.getData(), 15000)
-
   }
 
-
   getData() {
-    console.log('firing')
     const fetchController = new AbortController();
     const { signal } = fetchController;
     let time = setTimeout(() => {
@@ -57,7 +42,6 @@ export default class Home extends React.Component {
       })
   }
 
-
   getSinglePlane() {
     clearInterval(this.intervalId)
     fetch(`/api/select/${this.state.icao}`)
@@ -65,11 +49,9 @@ export default class Home extends React.Component {
         return result.json();
       })
       .then(info => {
-        console.log(info)
         if (info !== null || info !== undefined) {
           const slicedSolo = info.states.slice(0, 1)
           this.setState({ value: slicedSolo, load: true, pinPointPlane: true })
-          console.log(this.state)
         }
       })
       .catch(err => {
@@ -80,14 +62,12 @@ export default class Home extends React.Component {
   componentDidUpdate(pP, pS, sS) {
     if(pS.savedFlight !==this.state.savedFlight){
       clearInterval(this.intervalId)
-      console.log(this.props.savedPlanes)
       const savedicao = this.props.savedPlanes
       fetch(`/api/select/${savedicao}`)
         .then(result => {
           return result.json();
         })
         .then(info => {
-          console.log("INFO", info)
           if (info !== null || info !== undefined) {
             const slicedSolo = info.states.slice(0, 1)
             this.setState({ value: slicedSolo, load: true, pinPointPlane: true })

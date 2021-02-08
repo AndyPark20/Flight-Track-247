@@ -47,7 +47,6 @@ export default class Savedflights extends React.Component {
       })
   }
 
-
   renderSavedFlights() {
     return (
       <div className="mb-10">

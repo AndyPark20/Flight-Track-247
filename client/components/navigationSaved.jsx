@@ -6,7 +6,6 @@ export default class Nav extends React.Component {
     this.state = ({ icao: '' })
   }
 
-
   render() {
     return (
       <div className="topNavContainer">
