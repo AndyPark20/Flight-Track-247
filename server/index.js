@@ -110,6 +110,45 @@ app.post('/api/airport',(req,res,next)=>{
 
 })
 
+app.get('/api/airport',(req,res,next)=>{
+  const sql =`
+    select *
+    from "savedAirport"
+  `;
+
+  db.query(sql)
+  .then(result=>{
+    const info=result.rows
+    res.status(200).json(info)
+    return;
+  })
+  .catch(err=>{
+    return next(err)
+  })
+})
+
+app.delete('/api/deleteAirport/:airportId', (req, res, next) => {
+  const airport = parseInt(req.params.airportId, 10);
+  if (airport !== Math.abs(airport)) {
+    return (res.status(400).json('Error'));
+  } else {
+    const sql = `
+   delete from "savedAirport"
+   where "savedAirportId" =$1
+   returning *;
+   `;
+    const params = [airport]
+    db.query(sql, params)
+      .then(result => {
+        const [info] = result.rows;
+        res.json(info)
+      })
+      .catch(err => {
+        return next(err)
+      })
+  }
+})
+
 app.get('/api/flight', (req, res, next) => {
 
   const sql = `

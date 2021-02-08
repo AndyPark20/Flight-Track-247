@@ -423,3 +423,9 @@ h6 {
 .flightFound {
   color: #0892d0;
 }
+
+/********* SAVED AIRPORT *******************/
+
+.airportCode{
+  color:#ffcb05;
+}

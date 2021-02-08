@@ -6,11 +6,14 @@
     h6{
     font-size:0.55rem;
   }
+  .airportSavedInfo{
+    font-size:.55rem;
+  }
 .icaoNumber{
   font-size:.50rem;
 }
 .delete{
-  font-size: .50rem;
+  font-size: .65rem;
 }
 .savedFlightRendered{
   margin-bottom:15%;

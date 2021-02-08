@@ -21,7 +21,6 @@ export default class SearchAirport extends React.Component {
     })
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-
   }
 
   handleInputChange(event) {
@@ -40,8 +39,6 @@ export default class SearchAirport extends React.Component {
     }
 
   }
-
-
 
   handleSubmit(event) {
     console.log("WHAT IS THE VALUE?",this.state)

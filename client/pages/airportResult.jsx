@@ -33,6 +33,8 @@ export default class SavedAirport extends React.Component {
   }
 
   renderSavedAirport() {
+    // this.setState({value:this.props.result})
+    // console.log('TEST IN AIRPORT RESULT',this.state)
     return (
       <div className="mb-10">
         <div className="row d-flex align-self-center">
