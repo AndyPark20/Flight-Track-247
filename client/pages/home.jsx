@@ -27,7 +27,7 @@ export default class Home extends React.Component {
     const { signal } = fetchController;
     let time = setTimeout(() => {
       fetchController.abort();
-    }, 15000)
+    }, 30000)
     fetch('/api/all', { signal })
       .then(res => {
         return res.json();
@@ -37,7 +37,7 @@ export default class Home extends React.Component {
           fetchController.abort();
         }else{
           clearTimeout(time);
-          const sliced = data.states.slice(0, 1000)
+          const sliced = data.states.slice(0, 750)
           this.setState({ value: sliced, load: true, pinPointPlane: false })
         }
       })
@@ -83,7 +83,7 @@ export default class Home extends React.Component {
     }
     if(this.state.value !== pS.value && !pS.icao && !pS.savedFlight){
        clearInterval(this.intervalId)
-       this.intervalId = setInterval(() => this.getData(), 15000)
+       this.intervalId = setInterval(() => this.getData(), 30000)
     }
   }
 

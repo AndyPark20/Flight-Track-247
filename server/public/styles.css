@@ -278,6 +278,12 @@ a:hover {
   border: none;
 }
 
+.notifySaved{
+  color:#ffcb05;
+  font-weight:bold;
+  border:none;
+}
+
 /************ INPUT placeholder font **************************/
 
 input::placeholder {
