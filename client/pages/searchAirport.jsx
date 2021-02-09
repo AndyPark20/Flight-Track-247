@@ -33,7 +33,8 @@ export default class SearchAirport extends React.Component {
       const endUnix = moment(event.target.value).unix()
       this.setState({ end: endUnix })
     } else if (target === 'dOrA') {
-      this.setState({ type: event.target.value })
+      const typeLowered=event.target.value.toLowerCase()
+      this.setState({ type: typeLowered })
     }
 
   }
