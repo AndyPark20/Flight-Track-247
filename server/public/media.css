@@ -6,15 +6,19 @@
     h6{
     font-size:0.55rem;
   }
+  .airportSavedInfo{
+    font-size:.55rem;
+  }
 .icaoNumber{
   font-size:.50rem;
 }
 .delete{
-  font-size: .50rem;
+  font-size: .65rem;
 }
 .savedFlightRendered{
   margin-bottom:15%;
 }
+
 
 }
 
@@ -32,6 +36,7 @@
 .icaoNumber{
   font-size:.65rem;
 }
+
 
 }
   /********  HORIZONTAL LAYOUT!  ****/
@@ -68,12 +73,12 @@
 .icaoNumber{
   font-size:.75rem;
 }
-
-
 h6{
   font-size:0.8rem;
 }
+
 }
+
 @media screen and (min-width: 768px) {
 
   .labelStyle{
@@ -90,6 +95,14 @@ h6{
   .size{
     font-size:.65rem;
   }
+
+}
+
+@media screen and (min-width:1024px){
+.airline{
+  width:10%;
+}
+
 }
 
 @media screen and (min-width:1900px){
@@ -118,6 +131,13 @@ h6{
 
 form.airportForm{
   width:30%;
+}
+
+h6{
+  font-size:1.2rem;
+}
+h5{
+  font-size:.9rem;
 }
 
 }

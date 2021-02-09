@@ -6,9 +6,7 @@ import moment from 'moment';
 import 'moment-timezone';
 import { unix } from 'moment-timezone';
 
-
-
-export default class SavedAirport extends React.Component {
+export default class SearchAirport extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
@@ -16,11 +14,11 @@ export default class SavedAirport extends React.Component {
       date: null,
       start: null,
       end: null,
-      type: ''
+      type: '',
+      list:[]
     })
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.reset = this.reset.bind(this)
   }
 
   handleInputChange(event) {
@@ -30,7 +28,7 @@ export default class SavedAirport extends React.Component {
     } else if (target === 'startTime') {
       const startUnix = moment(event.target.value).unix()
       const currentDate = moment(new Date()).unix()
-      this.setState({ start: startUnix, date:currentDate})
+      this.setState({ start: startUnix, date: currentDate })
     } else if (target === 'endTime') {
       const endUnix = moment(event.target.value).unix()
       this.setState({ end: endUnix })
@@ -40,73 +38,49 @@ export default class SavedAirport extends React.Component {
 
   }
 
-  reset(){
-
-  }
-
   handleSubmit(event) {
-    console.log(this.state)
     event.preventDefault()
-    const req = {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    }
-    fetch('/api/airport', req)
-      .then(res => {
-        return res.json()
-      })
+    fetch(`/api/get/airport/${this.state.code}/${this.state.date}/${this.state.end}/${this.state.start}/${this.state.type}`)
+      .then(res => res.json())
       .then(result => {
-        if(!result.error){
-          location.hash = 'savedAirport'
+        if (!result.error) {
+        this.setState({list:result})
+          this.props.find(this.state)
+          location.hash = 'airportResult'
           return result;
         }
-
       })
-      .catch(err => {
-        console.error(err)
-      })
-
   }
-
 
   render() {
     return (
-
-      <div className="savedFlightContainer">
-        <div className="d-flex flex-column">
-          <div className="savedFlightContainer">
-            <a href="#save"><img className='homeLogo save' src="/images/back.png" alt="logo" /></a>
-            <div className="savedFlightTitle">
-              <h3>Search Airport</h3>
-            </div>
-          </div>
-          <div className="airportContainer">
-            <div className="airportRow">
-              <div className="airportCol">
-                <form className="airportForm" onSubmit={this.handleSubmit} >
-                  <label className="labelStyle"> Airport Code:</label>
-                  <input className="inputStyle" type="text" name="airportCode" placeholder="KSNA=John Wayne Airport" onChange={this.handleInputChange} required></input>
-                  <label className="labelStyle"> Start-Date & time:</label>
-                  <input className="inputStyle" type="datetime-local" name="startTime" onChange={this.handleInputChange} required></input>
-                  <label className="labelStyle"> End-Date & time:</label>
-                  <input className="inputStyle" type="datetime-local" name="endTime" onChange={this.handleInputChange} required></input>
-                  <label className="labelStyle">  Departure or Arrival:</label>
-                  <input className="inputStyle" type="text" name="dOrA" placeholder="Departure or Arrival" onChange={this.handleInputChange} required></input>
-                  <div className="btnSubmit">
-                    <Button type="submit" className="buttonStyle" variant="primary">SUBMIT</Button>
-                  </div>
-                </form>
+      <div className="vh-100 w-100 black d-flex flex-column">
+        <div className="row align-items-start d-flex justify-content-start pl-3">
+          <a href="#save"><img className='homeLogo save' src="/images/back.png" alt="logo" /></a>
+        </div>
+        <div className="d-flex justify-content-center">
+          <h3>Search Airport</h3>
+        </div>
+        <div className="row align-items-center d-flex justify-content-center px-2 vh-100 black">
+          <div className="col d-flex justify-content-center">
+            <form className="airportForm" onSubmit={this.handleSubmit} >
+              <label className="labelStyle"> Airport Code:</label>
+              <input className="inputStyle" type="text" name="airportCode" placeholder="KSNA=John Wayne Airport" onChange={this.handleInputChange} required></input>
+              <label className="labelStyle"> Start-Date & time:</label>
+              <input className="inputStyle" type="datetime-local" name="startTime" onChange={this.handleInputChange} required></input>
+              <label className="labelStyle"> End-Date & time:</label>
+              <input className="inputStyle" type="datetime-local" name="endTime" onChange={this.handleInputChange} required></input>
+              <label className="labelStyle">  Departure or Arrival:</label>
+              <input className="inputStyle" type="text" name="dOrA" placeholder="departure or arrival" onChange={this.handleInputChange} required></input>
+              <div className="btnSubmit">
+                <Button type="submit" className="buttonStyle" variant="primary">SUBMIT</Button>
               </div>
-            </div>
+            </form>
           </div>
-
-          <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div className="footer fixed-bottom">
-              <NavBottom />
-            </div>
+        </div>
+        <div className="row align-items-end black">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+            <NavBottom />
           </div>
         </div>
       </div>

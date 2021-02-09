@@ -4,9 +4,9 @@
 
 html,
 body {
- margin: 0;
- padding: 0;
-
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 /***********************  Log In page sign in  ****************/
@@ -69,75 +69,70 @@ a:hover {
   height: 100vh;
 }
 
-/***************************Header Navigation *****************************/
-.topNavContainer{
-  background-color:black;
+/*************************** Header Navigation *****************************/
+.topNavContainer {
+  background-color: black;
 }
 
-.searchBar{
-  display:flex;
+.searchBar {
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/*****************Header for Saved ***********************************/
+/***************** Header for Saved ***********************************/
 
-.searchBarSaved{
-  display:flex;
+.searchBarSaved {
+  display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-/*****************************************************************/
+/****************************************************************   */
 
-.homeLogo{
-  width:55px;
-  height:50px;
+.homeLogo {
+  width: 50px;
+  height: 50px;
 }
 
-.homeHead{
-  width:40px;
-  height:38px;
+.homeHead {
+  width: 40px;
+  height: 38px;
 }
 
-.searchLengthBar{
-width:100%;
-}
-
-
-/***********HOME page***********************************/
-
-.leaflet{
+.searchLengthBar {
   width: 100%;
-  height:100vh;
-  position:fixed;
-  right:0;
-  bottom:0;
 }
 
-/************Navigation Footer ***************/
 
-.navBottomContainer{
-  background-color:black;
+/***********  HOME page  *********************************/
+
+.leaflet {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  bottom: 0;
 }
 
-.searchBarBottom{
-  display:flex;
-  justify-content: space-evenly;
-  align-items: center;
+
+/************ Navigation Footer ***************/
+
+.navBottomContainer {
+  background-color: black;
 }
 
-.bottomLogo{
-  height:40px;
-  width:40px;
+.bottomLogo {
+  height: 40px;
+  width: 40px;
 }
 
-.bottomLogoTwo{
-  height:35px;
-  width:35px;
+.bottomLogoTwo {
+  height: 35px;
+  width: 35px;
 }
 
-/**********Loading Animation*****************/
+/**********  Loading Animation  *****************/
 
 .lds-ring {
   display: inline-block;
@@ -145,6 +140,7 @@ width:100%;
   width: 80px;
   height: 80px;
 }
+
 .lds-ring div {
   box-sizing: border-box;
   display: block;
@@ -157,268 +153,279 @@ width:100%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: red transparent transparent transparent;
 }
+
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
 }
+
 .lds-ring div:nth-child(2) {
   animation-delay: -0.3s;
 }
+
 .lds-ring div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
 
-.loader{
-  position:fixed;
-  z-index:10;
+.loader {
+  position: fixed;
+  z-index: 10;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.containerLoading{
-  border:1px solid #666666;
+.containerLoading {
+  border: 1px solid #666;
   text-align: center;
 }
 
-.loaderText{
-  text-align:center;
-  color:  #666666;
-  font-weight:bold;
-  font-size:1.0rem;
+.loaderText {
+  text-align: center;
+  color: #666;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
-.textStyle{
+.textStyle {
   font-family: 'Markazi Text', serif;
-  line-height:1.0;
+  line-height: 1;
 }
 
-.hidden{
-  display:none;
+.hidden {
+  display: none;
 }
 
-/******Plane information panel************/
+/******  Plane information panel  ************/
 
 .planeInfo > p {
-  font-size:.6rem;
+  font-size: 0.6rem;
   padding: 0 5%;
-  color:white;
-  margin:0px;
+  color: white;
+  margin: 0;
 }
 
-.planeInfoRow{
-  display:flex;
+.planeInfoRow {
+  display: flex;
   align-items: flex-start;
 }
 
-.planeInfoSection{
-  border-bottom:1px solid white;
+.planeInfoSection {
+  border-bottom: 1px solid white;
   text-align: center;
-  width:100%;
-  display:flex;
-  align-items: center;
-}
-
-.flightOption{
+  width: 100%;
   display: flex;
   align-items: center;
 }
 
-.airplaneLogo{
-  width:10%;
+.flightOption {
+  display: flex;
+  align-items: center;
 }
 
-.size{
-  font-size:.6rem;
-  color:white;
+.airplaneLogo {
+  width: 10%;
 }
 
-.planeInfo{
-  flex-basis:30%;
-  display:flex;
-  flex-direction:column;
+.size {
+  font-size: 0.6rem;
+  color: white;
+}
+
+.planeInfo {
+  flex-basis: 30%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
- .panel{
-  width:100%;
-  position:fixed;
-  left:0;
-  z-index:400;
-  height:100vh;
-  top:63%;
-  background:rgba(0,0,0,0.73);
-  color:black;
-  transition: 0.5s
+.panel {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  z-index: 400;
+  height: 100vh;
+  top: 63%;
+  background: rgba(0, 0, 0, 0.73);
+  color: black;
+  transition: 0.5s;
 }
 
-.flag{
-  width:30%;
+.flag {
+  width: 30%;
 }
 
-.saveFlightBtn{
- background-color:#0074d9;
- color:white;
- border:none;
- margin: 0 15px;
+.saveFlightBtn {
+  background-color: #0074d9;
+  color: white;
+  border: none;
+  margin: 0 15px;
 }
 
-.saveFlightBtnRed{
- background-color:#8b0000;
- color:white;
- border:none;
+.saveFlightBtnRed {
+  background-color: #8b0000;
+  color: white;
+  border: none;
 }
 
-/************INPUT placeholder font **************************/
+/************ INPUT placeholder font **************************/
 
-input::placeholder{
-  font-size:1.0rem;
+input::placeholder {
+  font-size: 1rem;
   font-family: 'Markazi Text', serif;
-  font-weight:bold;
-  color:black;
+  font-weight: bold;
+  color: black;
 }
 
 
-/********************DROP CONTAINER ****************************/
+/******************** DROP CONTAINER ****************************/
 
-h5{
-  color:white;
+h5 {
+  color: white;
 }
 
-.dropContainer{
-  width:100%;
-  height:100vh;
+.dropContainer {
+  width: 100%;
+  height: 100vh;
   background-color: black;
 }
 
-.colDrop{
-
-  display:flex;
+.colDrop {
+  display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.optionMenu{
-  text-align:center;
-  display:flex;
+.optionMenu {
+  text-align: center;
+  display: flex;
   flex-direction: column;
-  width:100%;
-  position:fixed;
-  z-index:10;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.dropDownText{
-  font-size:1rem;
+.dropDownText {
+  font-size: 1rem;
 }
 
-/***********SAVED FLIGHTS****************************/
+/***********  SAVED FLIGHTS  ****************************/
 
-h3{
-  color:white;
+h3 {
+  color: white;
 }
 
-.render{
-  border-bottom:1px solid white;
+.render {
+  border-bottom: 1px solid white;
 }
 
-h6{
-  color:white;
-  font-size:.8rem;
-  border-bottom:1px solid white;
+h6 {
+  color: white;
+  font-size: 0.8rem;
+  border-bottom: 1px solid white;
 }
 
-.savedFlightContainer{
-  width:100%;
-  height:100%;
+.black {
   background-color: black;
 }
 
-.savedFlightRendered{
-  margin-bottom:10%;
-}
-.savedFlightTitle{
-  display:flex;
-  justify-content: center;
+.savedFlightRendered {
+  margin-bottom: 10%;
 }
 
-/***************Saved Flight render component ***************/
+/*************** Saved Flight render component ***************/
 
-.savedFlightRow{
-  text-align: center;
-  display:flex;
+.flightDelete {
+  width: 20%;
+  height: 1rem;
 }
 
-.flightDelete{
-  width:20%;
-  height:1rem;
+.delete {
+  font-size: 0.75rem;
+  color: red;
+  border: 1px solid red;
 }
 
-.delete{
-  font-size: .75rem;
-  color:red;
-  border:1px solid red;;
+.delete:hover {
+  color: white;
 }
 
-.delete:hover{
-  color:white;
-}
-
-.icaoNumber{
+.icaoNumber {
   border: 1px solid white;
-  color:white;
+  color: white;
 }
 
-.icaoNumber:hover{
+.icaoNumber:hover {
   color: #4169e1;
 }
 
-.renderSavedInfo{
-  height:100vh;
+.renderSavedInfo {
+  height: 100vh;
 }
 
-/************************SEARCH AIRPORT**********************/
+/************************  SEARCH AIRPORT  **********************/
 
-.airportContainer{
-  margin-top:2%;
-  width:100%;
+.airportContainer {
+  width: 100%;
 }
 
-.airportRow{
-  width:100%;
-  height:100vh;
+.airportForm {
+  width: 90%;
 }
 
-.airportCol{
-  width:100%;
-  display:flex;
-  justify-content: center;
+.labelStyle,
+.inputStyle {
+  display: block;
+  width: 100%;
 }
 
-.airportForm{
-  width:90%;
+.btnSubmit {
+  margin-top: 2%;
+  text-align: end;
 }
 
-.labelStyle, .inputStyle{
-  display:block;
-  width:100%;
+.labelStyle {
+  font-size: 0.8rem;
 }
 
-.btnSubmit{
-  margin-top:2%;
-  text-align:end;
+/********** Airport Result *********************/
+
+.savedAirportContainer {
+  height: 100vh;
+  border: 2px solid red;
+  background-color: black;
 }
 
-.labelStyle{
-  font-size:.8rem;
+.add {
+  width: 30px;
+  height: 30px;
+}
+
+/**********  Rendering Airlines  *******************/
+
+.airline {
+  width: 30%;
+}
+
+.flightFound {
+  color: #0892d0;
+}
+
+/********* SAVED AIRPORT *******************/
+
+.airportCode{
+  color:#ffcb05;
 }
