@@ -7,9 +7,10 @@ import { unix } from 'moment-timezone';
 export default class PopUp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({ flight: '' })
+    this.state = ({ flight: '', userSaved:false })
     this.planeInfo = this.planeInfo.bind(this);
     this.changeView = this.changeView.bind(this);
+    this.notifySaved = this.notifySaved.bind(this);
   }
 
   changeView(event) {
@@ -94,6 +95,12 @@ export default class PopUp extends React.Component {
   }
 }
 
+  notifySaved(){
+    if(this.state.userSaved){
+      return <h6 className="notifySaved">Saved!</h6>
+    }
+  }
+
   saveFlight(event, values) {
     event.stopPropagation();
     const unixTime = ((new Date().getTime() / 1000).toFixed(0))
@@ -107,6 +114,10 @@ export default class PopUp extends React.Component {
     fetch('/api/flight', req)
       .then(res => res.json())
       .then(result => {
+        if(result.length === 1){
+          console.log('TRUE!')
+          this.setState({userSaved:true})
+        }
         return result;
       })
       .catch(err=>{
@@ -170,6 +181,7 @@ export default class PopUp extends React.Component {
               <div className="col-12 planeInfoSection">
                 <img className="airplaneLogo" src="images/radar.png" alt="radar" />
                 <div className="planeInfo">
+                  {this.notifySaved()}
                 </div>
                 <div className="planeInfo">
                   <p>ICAO 24-bit</p>
