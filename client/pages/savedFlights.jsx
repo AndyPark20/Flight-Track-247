@@ -54,13 +54,13 @@ export default class Savedflights extends React.Component {
           <div className="col-3">
             <h5 className="render">Date</h5>
             {this.state.saved.map((values, i) => {
-              return <h6 key={i}>{moment.unix(values.time).format("MMM Do YY")}</h6>
+              return <h6 className="renderSavedTime" key={i}>{moment.unix(values.time).format("MMM Do YY")}</h6>
             })}
           </div>
           <div className="col-3">
             <h5 className="render">Time</h5>
             {this.state.saved.map((values, i) => {
-              return <h6 key={i}>{moment.unix(values.time).format("LT")}</h6>
+              return <h6 className="renderSavedTime" key={i}>{moment.unix(values.time).format("LT")}</h6>
             })}
           </div>
           <div className="col-3">
@@ -71,7 +71,7 @@ export default class Savedflights extends React.Component {
           </div>
           <div className="col-3">
             <h5 className="render">Options</h5>
-            {this.state.saved.map((values, i) => { return <a key={i} onClick={() => this.deleteFlight(values.flightId)}><h6 className="delete">DELETE</h6></a> })}
+            {this.state.saved.map((values, i) => { return <a key={i} onClick={() => this.deleteFlight(values.flightId)}><h6 className="delete deleteFlightBtn">DELETE</h6></a> })}
           </div>
         </div>
       </div>

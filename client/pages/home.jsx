@@ -18,14 +18,11 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     this.setState({ savedFlight: this.props.savedPlanes })
-    // clearInterval(this.intervalId)
     this.getData()
-    // this.intervalId = setInterval(() => this.getData(), 15000)
   }
 
 
   getData() {
-    console.log('Initial Fire!')
     const fetchController = new AbortController();
     const { signal } = fetchController;
     let time = setTimeout(() => {
@@ -36,12 +33,9 @@ export default class Home extends React.Component {
         return res.json();
       })
       .then(data => {
-
-        if(Boolean(this.state.icao)|| Boolean(this.state.savedFlight)){
-          console.log('canceling!')
+        if(Boolean(this.state.icao) || Boolean(this.state.savedFlight)){
           fetchController.abort();
         }else{
-          console.log('auto cancel')
           clearTimeout(time);
           const sliced = data.states.slice(0, 1000)
           this.setState({ value: sliced, load: true, pinPointPlane: false })
@@ -88,9 +82,6 @@ export default class Home extends React.Component {
         })
     }
     if(this.state.value !== pS.value && !pS.icao && !pS.savedFlight){
-      console.log('ICAO',this.state.icao)
-      console.log('pS icao', Boolean(pS.icao))
-      console.log('savedFlight', Boolean(pS.savedFlight))
        clearInterval(this.intervalId)
        this.intervalId = setInterval(() => this.getData(), 15000)
     }

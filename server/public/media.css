@@ -15,6 +15,9 @@
 .delete{
   font-size: .65rem;
 }
+.deleteFlightBtn{
+  font-size:.50rem;
+}
 .savedFlightRendered{
   margin-bottom:15%;
 }
@@ -138,6 +141,10 @@ h6{
 }
 h5{
   font-size:.9rem;
+}
+
+.renderSavedTime{
+  font-size:0.8rem;
 }
 
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import MyContext from '../lib/context';
-import Moment from 'react-moment';
-import 'moment-timezone'
+import 'moment-timezone';
+import moment from 'moment';
 import { unix } from 'moment-timezone';
 
 export default class PopUp extends React.Component {
@@ -32,15 +32,67 @@ export default class PopUp extends React.Component {
       const flag = this.context.map((values, i) => {
         if (values[0] === flightCiao) {
           if (values[2] === "United States") {
-            return <img key={i} className="flag" src="/images/usa.png" alt="American Flag" />
+            return <img key={i} className="flag" src="/images/flags/usa.png" alt="American Flag" />
           } else if (values[2] === "Mexico") {
-            return <img key={i} className="flag" src="/images/mexico.png" alt="Mexican Flag" />
+            return <img key={i} className="flag" src="/images/flags/mexico.png" alt="Mexican Flag" />
+          } else if (values[2] === "Austrailia") {
+            return <img key={i} className="flag" src="/images/flags/austrailia.jpg" alt="Austrailian Flag" />
+          } else if (values[2] === "Austria") {
+            return <img key={i} className="flag" src="/images/flags/austria.jpg" alt="Austrian Flag" />
+          } else if (values[2] === "Belgium") {
+            return <img key={i} className="flag" src="/images/flags/belgium.jpg" alt="Belgium Flag" />
+          } else if (values[2] === "Brazil") {
+            return <img key={i} className="flag" src="/images/flags/brazil.jpg" alt="Brazilian Flag" />
+          } else if (values[2] === "Canada") {
+            return <img key={i} className="flag" src="/images/flags/canada.jpg" alt="Canadian Flag" />
+          } else if (values[2] === "Chile") {
+            return <img key={i} className="flag" src="/images/flags/chile.jpg" alt="Chilean Flag" />
+          } else if (values[2] === "China") {
+            return <img key={i} className="flag" src="/images/flags/china.jpg" alt="China Flag" />
+          } else if (values[2] === "Ethiopia") {
+            return <img key={i} className="flag" src="/images/flags/ethiopia.jpg" alt="Ethiopian Flag" />
+          } else if (values[2] === "France") {
+            return <img key={i} className="flag" src="/images/flags/france.jpg" alt="French Flag" />
+          } else if (values[2] === "Germany") {
+            return <img key={i} className="flag" src="/images/flags/germany.jpg" alt="German Flag" />
+          } else if (values[2] === "Greece") {
+            return <img key={i} className="flag" src="/images/flags/greece.jpg" alt="Greek Flag" />
+          } else if (values[2] === "Iceland") {
+            return <img key={i} className="flag" src="/images/flags/iceland.jpg" alt="Iceland Flag" />
+          } else if (values[2] === "India") {
+            return <img key={i} className="flag" src="/images/flags/india.jpg" alt="Indian Flag" />
+          } else if (values[2] === "Italy") {
+            return <img key={i} className="flag" src="/images/flags/italy.jpg" alt="Italian Flag" />
+          } else if (values[2] === "Kuwait") {
+            return <img key={i} className="flag" src="/images/flags/kuwait.jpg" alt="Kuhwait Flag" />
+          } else if (values[2] === "Qatar") {
+            return <img key={i} className="flag" src="/images/flags/qatar.jpg" alt="Qatar Flag" />
+          } else if (values[2] === "Singapore") {
+            return <img key={i} className="flag" src="/images/flags/singapore.jpg" alt="Singapore Flag" />
+          } else if (values[2] === "Republic of Korea") {
+            return <img key={i} className="flag" src="/images/flags/southKorea.jpg" alt="S. Korean Flag" />
+          } else if (values[2] === "Spain") {
+            return <img key={i} className="flag" src="/images/flags/spain.jpg" alt="spain Flag" />
+          } else if (values[2] === "Taiwan") {
+            return <img key={i} className="flag" src="/images/flags/taiwan.jpg" alt="Taiwan Flag" />
+          } else if (values[2] === "United Kingdom") {
+            return <img key={i} className="flag" src="/images/flags/unitedKingdom.jpg" alt="U.K. Flag" />
+          } else if (values[2] === "Turkey") {
+            return <img key={i} className="flag" src="/images/flags/turkey.jpg" alt="Turkey Flag" />
+          } else if (values[2] === "Switzerland") {
+            return <img key={i} className="flag" src="/images/flags/switzerland.jpg" alt="Switzerland Flag" />
+          } else if (values[2] === "Portugal") {
+            return <img key={i} className="flag" src="/images/flags/portugal.jpg" alt="Portgual Flag" />
+          } else if (values[2] === "Indoesia") {
+            return <img key={i} className="flag" src="/images/flags/portugal.jpg" alt="Indoesian Flag" />
+          } else if (values[2] === "Japan") {
+            return <img key={i} className="flag" src="/images/flags/japan.jpg" alt="Japan Flag" />
           }
-        }
-      })
+      }
+    })
       return flag;
-    }
   }
+}
 
   saveFlight(event, values) {
     event.stopPropagation();
@@ -72,7 +124,7 @@ export default class PopUp extends React.Component {
                 <div className="col-12 planeInfoSection">
                   <img className="airplaneLogo" src="/images/airplane.png" alt="airplane" />
                   <div className="planeInfo">
-                    <p>Country of Reg.</p>
+                    <p>{values[2]}</p>
                     {this.renderCountry()}
                   </div>
                   <div className="planeInfo">
@@ -81,7 +133,7 @@ export default class PopUp extends React.Component {
                   </div>
                   <div className="planeInfo">
                     <p>Last Seen</p>
-                    <Moment className="size" unix tz="America/Los_Angeles">{values[3]}</Moment>
+                    <p>{moment.unix(values[3]).format('LT')}</p>
                   </div>
                 </div>
               </div>
