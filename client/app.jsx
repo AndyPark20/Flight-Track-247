@@ -70,7 +70,6 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     if (route.path === "home") {
-
       return <Home refresh={this.state.route.path} savedPlanes={this.state.icao24} />;
     }
     if (route.path === "") {

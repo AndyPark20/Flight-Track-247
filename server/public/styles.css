@@ -441,3 +441,15 @@ h6 {
 .airportCode{
   color:#ffcb05;
 }
+
+/*******landedPlane modal no result *********/
+
+.flightSearchLoader{
+  font-size:1.5rem;
+  font-weight:bold;
+  color: #666;
+}
+
+.warning{
+  width:30%;
+}

@@ -20,7 +20,6 @@ export default class Savedflights extends React.Component {
       .then(res => res.json())
       .then(result => {
         this.setState({ saved: result })
-
       })
   }
 

@@ -6,6 +6,7 @@ import Loader from '../lib/loading';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import MyContext from '../lib/context';
 import PopUp from '../components/popup';
+import LandedPlane from '../lib/landedPlane';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -20,7 +21,6 @@ export default class Home extends React.Component {
     this.setState({ savedFlight: this.props.savedPlanes })
     this.getData()
   }
-
 
   getData() {
     const fetchController = new AbortController();
@@ -72,7 +72,10 @@ export default class Home extends React.Component {
           return result.json();
         })
         .then(info => {
-          if (info !== null || info !== undefined) {
+          if (info.states ===null) {
+            console.log('IT IS RIGHT HERE')
+            this.setState({load:true})
+          }else if (info.states !== null || info.states !== undefined) {
             const slicedSolo = info.states.slice(0, 1)
             this.setState({ value: slicedSolo, load: true, pinPointPlane: true })
           }
@@ -117,6 +120,11 @@ export default class Home extends React.Component {
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
               <div className="loader">
                 <Loader spinLoad={this.state.load} />
+              </div>
+            </div>
+            <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div className="loader">
+                <LandedPlane spinLoad={this.state.load} planeArray={this.state.value} />
               </div>
             </div>
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
