@@ -13,7 +13,6 @@ export default class PopUp extends React.Component {
     this.notifySaved = this.notifySaved.bind(this);
   }
 
-
   changeView(event) {
     if (event.target.className === 'saveFlightBtnRed') {
       this.props.click()

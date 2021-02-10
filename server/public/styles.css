@@ -370,8 +370,7 @@ h6 {
 }
 
 .icaoNumber {
-  border: 1px solid white;
-  color: white;
+   color:#ffcb05;
 }
 
 .icaoNumber:hover {

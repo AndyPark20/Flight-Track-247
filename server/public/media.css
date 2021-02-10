@@ -9,9 +9,7 @@
   .airportSavedInfo{
     font-size:.55rem;
   }
-.icaoNumber{
-  font-size:.50rem;
-}
+
 .delete{
   font-size: .65rem;
 }
@@ -36,10 +34,6 @@
   .delete{
   font-size: .65rem;
 }
-.icaoNumber{
-  font-size:.65rem;
-}
-
 
 }
   /********  HORIZONTAL LAYOUT!  ****/
@@ -73,9 +67,7 @@
 .delete{
   font-size: .75rem;
 }
-.icaoNumber{
-  font-size:.75rem;
-}
+
 h6{
   font-size:0.8rem;
 }
