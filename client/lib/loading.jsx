@@ -19,8 +19,8 @@ export default class Loader extends React.Component {
   }
   render() {
     return (
-      <div className="containerLoading">
-        <div className={this.textLoad()}>
+      <div className={this.textLoad()}>
+        <div className="containerLoading">
           <div className={this.loading()}><div></div><div></div><div></div><div></div></div>
           <div className="textStyle">
             <p className="loaderText">This might take a while!</p>

@@ -7,11 +7,10 @@ import { unix } from 'moment-timezone';
 export default class PopUp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({ flight: '', userSaved: false})
+    this.state = ({ flight: ''})
     this.planeInfo = this.planeInfo.bind(this);
     this.changeView = this.changeView.bind(this);
     this.notifySaved = this.notifySaved.bind(this);
-    this.changeUserSaved = this.changeUserSaved.bind(this);
   }
 
 
@@ -27,10 +26,6 @@ export default class PopUp extends React.Component {
     } else {
       return 'pop';
     }
-  }
-
-  changeUserSaved(){
-    this.setState({userSaved:false})
   }
 
   renderCountry() {
@@ -102,9 +97,9 @@ export default class PopUp extends React.Component {
 }
 
   notifySaved(){
-    if(this.state.userSaved){
+    if(this.props.saveResult){
       return <h6 className="notifySaved">Saved!</h6>
-    }else if(this.props.saved ===false){
+    }else{
       return;
     }
   }
@@ -123,7 +118,7 @@ export default class PopUp extends React.Component {
       .then(res => res.json())
       .then(result => {
         if(result.length === 1){
-          this.setState({userSaved:true})
+          this.props.changeSave()
         }
         return result;
       })

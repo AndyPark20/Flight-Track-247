@@ -13,8 +13,8 @@ export default class LandedPlane extends React.Component {
   }
   render() {
     return (
-      <div className="containerLoading">
-        <div className={this.textLoad()}>
+      <div className={this.textLoad()}>
+        <div className="containerLoading">
           <div className="d-flex flex-column justify-content-center align-items-center">
             <img src="/images/warning.png" alt="warning logo" className="warning" />
             <div className="textStyle">
