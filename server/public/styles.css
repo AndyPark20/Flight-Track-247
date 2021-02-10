@@ -420,6 +420,12 @@ h6 {
   height: 30px;
 }
 
+.savedAirportConfirm{
+   color:#ffcb05;
+   font-weight:bold;
+   border:none;
+}
+
 /**********  Rendering Airlines  *******************/
 
 .airline {

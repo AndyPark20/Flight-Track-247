@@ -11,7 +11,7 @@ export default class PopUp extends React.Component {
     this.planeInfo = this.planeInfo.bind(this);
     this.changeView = this.changeView.bind(this);
     this.notifySaved = this.notifySaved.bind(this);
-    this.changeSavedNotification=this.changeSavedNotification.bind(this);
+    this.changeUserSaved = this.changeUserSaved.bind(this);
   }
 
 
@@ -29,10 +29,9 @@ export default class PopUp extends React.Component {
     }
   }
 
-  changeSavedNotification(){
+  changeUserSaved(){
     this.setState({userSaved:false})
   }
-
 
   renderCountry() {
     const flightCiao = this.props.flight;
@@ -105,6 +104,8 @@ export default class PopUp extends React.Component {
   notifySaved(){
     if(this.state.userSaved){
       return <h6 className="notifySaved">Saved!</h6>
+    }else if(this.props.saved ===false){
+      return;
     }
   }
 
