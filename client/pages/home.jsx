@@ -73,7 +73,6 @@ export default class Home extends React.Component {
         })
         .then(info => {
           if (info.states ===null) {
-            console.log('IT IS RIGHT HERE')
             this.setState({load:true})
           }else if (info.states !== null || info.states !== undefined) {
             const slicedSolo = info.states.slice(0, 1)
