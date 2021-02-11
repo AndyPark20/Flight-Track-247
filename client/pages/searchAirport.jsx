@@ -5,6 +5,7 @@ import Moment from 'react-moment';
 import moment from 'moment';
 import 'moment-timezone';
 import { unix } from 'moment-timezone';
+import Loader from '../lib/loadingAirport';
 
 export default class SearchAirport extends React.Component {
   constructor(props) {
@@ -15,10 +16,20 @@ export default class SearchAirport extends React.Component {
       start: null,
       end: null,
       type: '',
-      list:[]
+      list:[],
+      loader:true
     })
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.formView = this.formView.bind(this)
+  }
+
+  formView(){
+    if(this.state.loader){
+      return 'col d-flex justify-content-center'
+    }else{
+      return'hidden';
+    }
   }
 
   handleInputChange(event) {
@@ -36,22 +47,24 @@ export default class SearchAirport extends React.Component {
       const typeLowered=event.target.value.toLowerCase()
       this.setState({ type: typeLowered })
     }
-
   }
 
   handleSubmit(event) {
     event.preventDefault()
+    this.setState({loader:false})
     fetch(`/api/get/airport/${this.state.code}/${this.state.date}/${this.state.end}/${this.state.start}/${this.state.type}`)
       .then(res => res.json())
       .then(result => {
         if (!result.error) {
-        this.setState({list:result})
+        this.setState({list:result, loader:true})
           this.props.find(this.state)
           location.hash = 'airportResult'
           return result;
         }
       })
   }
+
+
 
   render() {
     return (
@@ -63,7 +76,8 @@ export default class SearchAirport extends React.Component {
           <h3>Search Airport</h3>
         </div>
         <div className="row align-items-center d-flex justify-content-center px-2 vh-100 black">
-          <div className="col d-flex justify-content-center">
+          <Loader spinning={this.state.loader} />
+          <div className={this.formView()}>
             <form className="airportForm" onSubmit={this.handleSubmit} >
               <label className="labelStyle"> Airport Code:</label>
               <input className="inputStyle" type="text" name="airportCode" placeholder="KSNA=John Wayne Airport" onChange={this.handleInputChange} required></input>

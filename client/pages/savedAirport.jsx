@@ -4,13 +4,15 @@ import Moment from 'react-moment';
 import moment from 'moment';
 import 'moment-timezone';
 import { unix } from 'moment-timezone';
+import Loader from '../lib/loadingAirport';
 
 export default class SavedAirport extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({ value: [] })
+    this.state = ({ value: [], loader: true })
     this.renderSavedAirport = this.renderSavedAirport.bind(this)
     this.selectAirport = this.selectAirport.bind(this)
+    this.formView = this.formView.bind(this)
   }
 
   componentDidMount() {
@@ -24,6 +26,14 @@ export default class SavedAirport extends React.Component {
       .catch(err => {
         console.error(err)
       })
+  }
+
+  formView() {
+    if (this.state.loader) {
+      return '';
+    } else {
+      return 'hidden';
+    }
   }
 
   deleteAirport(info) {
@@ -50,12 +60,14 @@ export default class SavedAirport extends React.Component {
   }
 
   selectAirport(event) {
+    this.setState({ loader: false })
     const selectArray= this.state.value.map((values, i) => {
       if (parseInt(event.target.id) === values.savedAirportId) {
         fetch(`/api/get/airport/${values.airportCode}/${values.date}/${values.endTime}/${values.startTime}/${values.type}`)
           .then(res => res.json())
           .then(result => {
             if (!result.error && this.state.value.length !== 0) {
+              this.setState({ list: result, loader: true })
               this.props.selectedAirport({ list: result, otherInfo: values })
               location.hash = 'airportResult';
               return result;
@@ -115,7 +127,8 @@ export default class SavedAirport extends React.Component {
           <h3>Saved Airports</h3>
         </div>
         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 black">
-          <div>{this.renderSavedAirport()}</div>
+          <Loader spinning={this.state.loader} />
+          <div className={this.formView()}>{this.renderSavedAirport()}</div>
         </div>
         <div className="row align-items-end black">
           <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
