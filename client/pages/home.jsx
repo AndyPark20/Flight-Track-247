@@ -41,7 +41,8 @@ export default class Home extends React.Component {
         return res.json();
       })
       .then(data => {
-        if(Boolean(this.state.icao) || Boolean(this.state.savedFlight)){
+        if(this.state.icao || this.state.savedFlight){
+          console.log(this.state.icao)
           console.log('CANCEL!')
           fetchController.abort();
         }else{
