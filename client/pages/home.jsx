@@ -19,10 +19,18 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     this.setState({ savedFlight: this.props.savedPlanes })
-    this.getData()
+    const retrievePlanes = JSON.parse(localStorage.getItem('retrieveAllPlanes'))
+    if(retrievePlanes ===null){
+      this.getData()
+    }else{
+      this.setState({value:retrievePlanes, load:true})
+    }
   }
 
+
+
   getData() {
+    console.log('FIRING!')
     const fetchController = new AbortController();
     const { signal } = fetchController;
     let time = setTimeout(() => {
@@ -34,11 +42,15 @@ export default class Home extends React.Component {
       })
       .then(data => {
         if(Boolean(this.state.icao) || Boolean(this.state.savedFlight)){
+          console.log('CANCEL!')
           fetchController.abort();
         }else{
           clearTimeout(time);
+          console.log('Auto Cancel')
           const sliced = data.states.slice(0, 750)
-          this.setState({ value: sliced, load: true, pinPointPlane: false })
+          localStorage.setItem('retrieveAllPlanes',JSON.stringify(sliced))
+          const retrievePlanes =JSON.parse(localStorage.getItem('retrieveAllPlanes'))
+          this.setState({ value: retrievePlanes, load: true, pinPointPlane: false })
         }
       })
       .catch(err => {
@@ -47,6 +59,7 @@ export default class Home extends React.Component {
   }
 
   getSinglePlane() {
+    console.log('getting single plane!')
     clearInterval(this.intervalId)
     fetch(`/api/select/${this.state.icao}`)
       .then(result => {
@@ -67,13 +80,14 @@ export default class Home extends React.Component {
     if(pS.savedFlight !==this.state.savedFlight){
       clearInterval(this.intervalId)
       const savedicao = this.props.savedPlanes
+      this.setState({load:false})
       fetch(`/api/select/${savedicao}`)
         .then(result => {
           return result.json();
         })
         .then(info => {
           if (info.states ===null) {
-            this.setState({load:true})
+            this.setState({value:[],load:true})
           }else if (info.states !== null || info.states !== undefined) {
             const slicedSolo = info.states.slice(0, 1)
             this.setState({ value: slicedSolo, load: true, pinPointPlane: true })
