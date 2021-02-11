@@ -1,31 +1,31 @@
-import React from 'react';
+import React from 'react'
 
 
 export default class Loader extends React.Component {
   loading() {
-    const spin = this.props.spinLoad
+    const spin = this.props.spinning
     if (spin) {
-      return;
+      return ""
     } else {
       return "lds-ring"
     }
   }
 
   textLoad() {
-    const spin = this.props.spinLoad
+    const spin = this.props.spinning
     if (spin) {
       return "hidden";
+    }else{
+      return;
     }
   }
   render() {
     return (
       <div className={this.textLoad()}>
-        <div className="containerLoading">
+        <div className="containerLoadingAirport">
           <div className={this.loading()}><div></div><div></div><div></div><div></div></div>
           <div className="textStyle">
-            <p className="loaderText">This might take a while!</p>
-            <p className="loaderText">Theres a lot of planes to retrieve in the sky!</p>
-            <p className="loaderText">Refresh the page and try it again after 30 seconds</p>
+            <p className="loaderAirport">Retrieving Results!</p>
           </div>
         </div>
       </div>

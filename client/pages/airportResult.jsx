@@ -9,9 +9,11 @@ import { Next } from 'react-bootstrap/esm/PageItem';
 export default class SavedAirport extends React.Component {
   constructor(props) {
     super(props);
+    this.state=({saveAirport:false})
     this.renderTimeDate = this.renderTimeDate.bind(this)
     this.renderSavedAirport = this.renderSavedAirport.bind(this)
     this.saveAirportInfo = this.saveAirportInfo.bind(this)
+    this.renderSave= this.renderSave.bind(this)
   }
 
   renderTimeDate() {
@@ -184,6 +186,9 @@ export default class SavedAirport extends React.Component {
         return res.json()
       })
       .then(result => {
+        if(result.length ===1){
+          this.setState({saveAirport:true})
+        }
         return result;
       })
       .catch(err => {
@@ -191,12 +196,23 @@ export default class SavedAirport extends React.Component {
       })
   }
 
+  renderSave(){
+    if(this.state.saveAirport){
+      return <h6 className="savedAirportConfirm">Saved!</h6>
+    }else{
+      return;
+    }
+  }
+
   render() {
     return (
       <div className="vh-100 w-100 black d-flex flex-column">
         <div className="row align-items-start d-flex justify-content-between align-items-center px-4">
           <a href="#save"><img className='homeLogo save' src="/images/back.png" alt="logo" /></a>
-          <a onClick={() => this.saveAirportInfo()}><img className='save add' src="/images/add.png" alt="logo" /></a>
+          <div className="d-flex flex-column justify-content-center align-items-center text-center">
+            <a onClick={() => this.saveAirportInfo()}><img className='save add' src="/images/add.png" alt="logo" /></a>
+            <div>{this.renderSave()}</div>
+          </div>
         </div>
         <div>{this.renderTimeDate()}</div>
         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 black">

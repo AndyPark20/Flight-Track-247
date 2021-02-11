@@ -97,7 +97,7 @@ a:hover {
 
 .homeHead {
   width: 40px;
-  height: 38px;
+  height: 40px;
 }
 
 .searchLengthBar {
@@ -278,6 +278,12 @@ a:hover {
   border: none;
 }
 
+.notifySaved{
+  color:#ffcb05;
+  font-weight:bold;
+  border:none;
+}
+
 /************ INPUT placeholder font **************************/
 
 input::placeholder {
@@ -364,8 +370,7 @@ h6 {
 }
 
 .icaoNumber {
-  border: 1px solid white;
-  color: white;
+   color:#ffcb05;
 }
 
 .icaoNumber:hover {
@@ -414,6 +419,12 @@ h6 {
   height: 30px;
 }
 
+.savedAirportConfirm{
+   color:#ffcb05;
+   font-weight:bold;
+   border:none;
+}
+
 /**********  Rendering Airlines  *******************/
 
 .airline {
@@ -428,4 +439,27 @@ h6 {
 
 .airportCode{
   color:#ffcb05;
+}
+
+/*******landedPlane modal no result *********/
+
+.flightSearchLoader{
+  font-size:1.5rem;
+  font-weight:bold;
+  color: #666;
+}
+
+.warning{
+  width:30%;
+}
+
+
+/*************Loading for Airport List *************/
+.loaderAirport{
+  color:white;
+  font-size:1.5rem;
+}
+
+.containerLoadingAirport{
+  text-align:center
 }

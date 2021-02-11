@@ -6,6 +6,7 @@ import Loader from '../lib/loading';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import MyContext from '../lib/context';
 import PopUp from '../components/popup';
+import LandedPlane from '../lib/landedPlane';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -18,8 +19,7 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     this.setState({ savedFlight: this.props.savedPlanes })
-    clearInterval(this.intervalId)
-    this.intervalId = setInterval(() => this.getData(), 15000)
+    this.getData()
   }
 
   getData() {
@@ -27,15 +27,19 @@ export default class Home extends React.Component {
     const { signal } = fetchController;
     let time = setTimeout(() => {
       fetchController.abort();
-    }, 15000)
+    }, 30000)
     fetch('/api/all', { signal })
       .then(res => {
         return res.json();
       })
       .then(data => {
-        clearTimeout(time);
-        const sliced = data.states.slice(0, 1000)
-        this.setState({ value: sliced, load: true, pinPointPlane: false })
+        if(Boolean(this.state.icao) || Boolean(this.state.savedFlight)){
+          fetchController.abort();
+        }else{
+          clearTimeout(time);
+          const sliced = data.states.slice(0, 750)
+          this.setState({ value: sliced, load: true, pinPointPlane: false })
+        }
       })
       .catch(err => {
         console.error(err)
@@ -68,7 +72,9 @@ export default class Home extends React.Component {
           return result.json();
         })
         .then(info => {
-          if (info !== null || info !== undefined) {
+          if (info.states ===null) {
+            this.setState({load:true})
+          }else if (info.states !== null || info.states !== undefined) {
             const slicedSolo = info.states.slice(0, 1)
             this.setState({ value: slicedSolo, load: true, pinPointPlane: true })
           }
@@ -76,6 +82,10 @@ export default class Home extends React.Component {
         .catch(err => {
           console.error(err)
         })
+    }
+    if(this.state.value !== pS.value && !pS.icao && !pS.savedFlight){
+       clearInterval(this.intervalId)
+       this.intervalId = setInterval(() => this.getData(), 30000)
     }
   }
 
@@ -109,6 +119,11 @@ export default class Home extends React.Component {
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
               <div className="loader">
                 <Loader spinLoad={this.state.load} />
+              </div>
+            </div>
+            <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div className="loader">
+                <LandedPlane spinLoad={this.state.load} planeArray={this.state.value} />
               </div>
             </div>
             <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

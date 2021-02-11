@@ -9,11 +9,12 @@
   .airportSavedInfo{
     font-size:.55rem;
   }
-.icaoNumber{
-  font-size:.50rem;
-}
+
 .delete{
   font-size: .65rem;
+}
+.deleteFlightBtn{
+  font-size:.50rem;
 }
 .savedFlightRendered{
   margin-bottom:15%;
@@ -33,10 +34,6 @@
   .delete{
   font-size: .65rem;
 }
-.icaoNumber{
-  font-size:.65rem;
-}
-
 
 }
   /********  HORIZONTAL LAYOUT!  ****/
@@ -70,9 +67,7 @@
 .delete{
   font-size: .75rem;
 }
-.icaoNumber{
-  font-size:.75rem;
-}
+
 h6{
   font-size:0.8rem;
 }
@@ -138,6 +133,10 @@ h6{
 }
 h5{
   font-size:.9rem;
+}
+
+.renderSavedTime{
+  font-size:0.8rem;
 }
 
 }
