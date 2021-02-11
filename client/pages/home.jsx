@@ -30,7 +30,6 @@ export default class Home extends React.Component {
 
 
   getData() {
-    console.log('FIRING!')
     const fetchController = new AbortController();
     const { signal } = fetchController;
     let time = setTimeout(() => {
@@ -41,13 +40,20 @@ export default class Home extends React.Component {
         return res.json();
       })
       .then(data => {
-        if(this.state.icao || this.state.savedFlight){
-          console.log(this.state.icao)
-          console.log('CANCEL!')
-          fetchController.abort();
-        }else{
+        // if(this.state.icao || this.state.savedFlight){
+        //   console.log(this.state.icao)
+        //   console.log('CANCEL!')
+        //   fetchController.abort();
+        // }else{
+        //   clearTimeout(time);
+        //   console.log('Auto Cancel')
+        //   const sliced = data.states.slice(0, 750)
+        //   localStorage.setItem('retrieveAllPlanes',JSON.stringify(sliced))
+        //   const retrievePlanes =JSON.parse(localStorage.getItem('retrieveAllPlanes'))
+        //   this.setState({ value: retrievePlanes, load: true, pinPointPlane: false })
+        // }
+        if(!this.state.icao || this.state.savedFlight){
           clearTimeout(time);
-          console.log('Auto Cancel')
           const sliced = data.states.slice(0, 750)
           localStorage.setItem('retrieveAllPlanes',JSON.stringify(sliced))
           const retrievePlanes =JSON.parse(localStorage.getItem('retrieveAllPlanes'))
