@@ -28,7 +28,6 @@ export default class Home extends React.Component {
   }
 
 
-
   getData() {
     const fetchController = new AbortController();
     const { signal } = fetchController;
@@ -40,18 +39,6 @@ export default class Home extends React.Component {
         return res.json();
       })
       .then(data => {
-        // if(this.state.icao || this.state.savedFlight){
-        //   console.log(this.state.icao)
-        //   console.log('CANCEL!')
-        //   fetchController.abort();
-        // }else{
-        //   clearTimeout(time);
-        //   console.log('Auto Cancel')
-        //   const sliced = data.states.slice(0, 750)
-        //   localStorage.setItem('retrieveAllPlanes',JSON.stringify(sliced))
-        //   const retrievePlanes =JSON.parse(localStorage.getItem('retrieveAllPlanes'))
-        //   this.setState({ value: retrievePlanes, load: true, pinPointPlane: false })
-        // }
         if(!this.state.icao || this.state.savedFlight){
           clearTimeout(time);
           const sliced = data.states.slice(0, 750)
@@ -73,11 +60,15 @@ export default class Home extends React.Component {
         return result.json();
       })
       .then(info => {
-        if (info !== null || info !== undefined) {
+        if (info.states === null || info.states === undefined) {
+          console.log('info not working')
+          this.setState({ value: [], load: true })
+        }else{
+          console.log('info working')
           const slicedSolo = info.states.slice(0, 1)
           this.setState({ value: slicedSolo, load: true, pinPointPlane: true })
-        }
-      })
+      }
+    })
       .catch(err => {
         console.error(err)
       })
@@ -116,6 +107,7 @@ export default class Home extends React.Component {
       this.setState({ pinPointPlane: true, load: false })
       this.getSinglePlane()
     }
+
   }
 
   componentWillUnmount(){
