@@ -12,7 +12,7 @@ export default class Nav extends React.Component {
         <div className="searchBar">
           <a href="#"><img className='homeLogo' src="/images/logoTitle.png" alt="logo"/></a>
           <div className="searchLengthBar">
-            <input name="username" className="form-group searchWidth form-control" type="username" placeholder="Please enter ICAO 24-bit address " onKeyUp={this.props.update} />
+            <input name="username" className="searchWidth form-control" type="username" placeholder="Please enter ICAO 24-bit address " onKeyUp={this.props.update} />
           </div>
           <img className="homeHead" src="/images/profile.png" alt="user"/>
         </div>
