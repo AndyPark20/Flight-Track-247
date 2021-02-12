@@ -9,8 +9,15 @@ const pg = require('pg');
 const jsonMiddleware = express.json();
 const app = express();
 
+// const db = new pg.Pool({
+//   connectionString: process.env.DATABASE_URL
+// });
+
 const db = new pg.Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 app.use(cors())
