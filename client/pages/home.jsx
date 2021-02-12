@@ -19,8 +19,14 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     this.setState({ savedFlight: this.props.savedPlanes })
-    this.getData()
+    const retrievePlanes = JSON.parse(localStorage.getItem('retrieveAllPlanes'))
+    if(retrievePlanes ===null){
+      this.getData()
+    }else{
+      this.setState({value:retrievePlanes, load:true})
+    }
   }
+
 
   getData() {
     const fetchController = new AbortController();
@@ -33,12 +39,12 @@ export default class Home extends React.Component {
         return res.json();
       })
       .then(data => {
-        if(Boolean(this.state.icao) || Boolean(this.state.savedFlight)){
-          fetchController.abort();
-        }else{
+        if(!this.state.icao || this.state.savedFlight){
           clearTimeout(time);
           const sliced = data.states.slice(0, 750)
-          this.setState({ value: sliced, load: true, pinPointPlane: false })
+          localStorage.setItem('retrieveAllPlanes',JSON.stringify(sliced))
+          const retrievePlanes =JSON.parse(localStorage.getItem('retrieveAllPlanes'))
+          this.setState({ value: retrievePlanes, load: true, pinPointPlane: false })
         }
       })
       .catch(err => {
@@ -53,11 +59,13 @@ export default class Home extends React.Component {
         return result.json();
       })
       .then(info => {
-        if (info !== null || info !== undefined) {
+        if (info.states === null || info.states === undefined) {
+          this.setState({ value: [], load: true })
+        }else{
           const slicedSolo = info.states.slice(0, 1)
           this.setState({ value: slicedSolo, load: true, pinPointPlane: true })
-        }
-      })
+      }
+    })
       .catch(err => {
         console.error(err)
       })
@@ -67,13 +75,14 @@ export default class Home extends React.Component {
     if(pS.savedFlight !==this.state.savedFlight){
       clearInterval(this.intervalId)
       const savedicao = this.props.savedPlanes
+      this.setState({load:false})
       fetch(`/api/select/${savedicao}`)
         .then(result => {
           return result.json();
         })
         .then(info => {
           if (info.states ===null) {
-            this.setState({load:true})
+            this.setState({value:[],load:true})
           }else if (info.states !== null || info.states !== undefined) {
             const slicedSolo = info.states.slice(0, 1)
             this.setState({ value: slicedSolo, load: true, pinPointPlane: true })
@@ -95,6 +104,7 @@ export default class Home extends React.Component {
       this.setState({ pinPointPlane: true, load: false })
       this.getSinglePlane()
     }
+
   }
 
   componentWillUnmount(){
