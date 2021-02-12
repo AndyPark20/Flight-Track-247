@@ -53,7 +53,6 @@ export default class Home extends React.Component {
   }
 
   getSinglePlane() {
-    console.log('getting single plane!')
     clearInterval(this.intervalId)
     fetch(`/api/select/${this.state.icao}`)
       .then(result => {
@@ -61,10 +60,8 @@ export default class Home extends React.Component {
       })
       .then(info => {
         if (info.states === null || info.states === undefined) {
-          console.log('info not working')
           this.setState({ value: [], load: true })
         }else{
-          console.log('info working')
           const slicedSolo = info.states.slice(0, 1)
           this.setState({ value: slicedSolo, load: true, pinPointPlane: true })
       }
