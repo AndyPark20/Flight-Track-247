@@ -463,3 +463,26 @@ h6 {
 .containerLoadingAirport{
   text-align:center
 }
+
+/********Delete Modal Confirmation ******/
+
+.deleteConfirmation {
+  background-color:black;
+}
+
+.loaderTextDelete {
+  color:white;
+  font-size:1.2rem;
+}
+
+.fix{
+  position: fixed;
+  top:25%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.textStyleModal{
+  text-align:center;
+
+}

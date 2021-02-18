@@ -9,26 +9,26 @@ export default class LoginPage extends React.Component {
   }
 
   handleSubmit(event) {
-    const{signIn}=this.props
-    const req={
-      method:'POST',
-      headers:{
+    const { signIn } = this.props;
+    const req = {
+      method: 'POST',
+      headers: {
         'Content-type': 'application/json'
       },
-      body:JSON.stringify(this.state)
-    }
+      body: JSON.stringify(this.state)
+    };
     event.preventDefault();
     fetch('/api/login', req)
-    .then(res=>{
-      return res.json()
-    })
-    .then(result=>{
-      location.hash='home'
-      signIn(result)
-    })
-    .catch(err=>{
-      console.error(err)
-    })
+      .then(res => {
+        return res.json();
+      })
+      .then(result => {
+        location.hash = 'home';
+        signIn(result);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   render() {
@@ -57,4 +57,4 @@ export default class LoginPage extends React.Component {
   }
 }
 
-LoginPage.contextType = MyContext
+LoginPage.contextType = MyContext;

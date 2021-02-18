@@ -11,104 +11,103 @@ import LandedPlane from '../lib/landedPlane';
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({ value: [], load: false, pinPointPlane: false, icao: '', savedFlight:'' })
-    this.updateSearch = this.updateSearch.bind(this)
-    this.getData = this.getData.bind(this)
-    this.getSinglePlane = this.getSinglePlane.bind(this)
+    this.state = ({ value: [], load: false, pinPointPlane: false, icao: '', savedFlight: '' });
+    this.updateSearch = this.updateSearch.bind(this);
+    this.getData = this.getData.bind(this);
+    this.getSinglePlane = this.getSinglePlane.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ savedFlight: this.props.savedPlanes })
-    const retrievePlanes = JSON.parse(localStorage.getItem('retrieveAllPlanes'))
-    if(retrievePlanes ===null){
-      this.getData()
-    }else{
-      this.setState({value:retrievePlanes, load:true})
+    this.setState({ savedFlight: this.props.savedPlanes });
+    const retrievePlanes = JSON.parse(localStorage.getItem('retrieveAllPlanes'));
+    if (retrievePlanes === null) {
+      this.getData();
+    } else {
+      this.setState({ value: retrievePlanes, load: true });
     }
   }
-
 
   getData() {
     const fetchController = new AbortController();
     const { signal } = fetchController;
-    let time = setTimeout(() => {
+    const time = setTimeout(() => {
       fetchController.abort();
-    }, 30000)
+    }, 30000);
     fetch('/api/all', { signal })
       .then(res => {
         return res.json();
       })
       .then(data => {
-        if(!this.state.icao || this.state.savedFlight){
+        if (!this.state.icao || this.state.savedFlight) {
           clearTimeout(time);
-          const sliced = data.states.slice(0, 750)
-          localStorage.setItem('retrieveAllPlanes',JSON.stringify(sliced))
-          const retrievePlanes =JSON.parse(localStorage.getItem('retrieveAllPlanes'))
-          this.setState({ value: retrievePlanes, load: true, pinPointPlane: false })
+          const sliced = data.states.slice(0, 750);
+          localStorage.setItem('retrieveAllPlanes', JSON.stringify(sliced));
+          const retrievePlanes = JSON.parse(localStorage.getItem('retrieveAllPlanes'));
+          this.setState({ value: retrievePlanes, load: true, pinPointPlane: false });
         }
       })
       .catch(err => {
-        console.error(err)
-      })
+        console.error(err);
+      });
   }
 
   getSinglePlane() {
-    clearInterval(this.intervalId)
+    clearInterval(this.intervalId);
     fetch(`/api/select/${this.state.icao}`)
       .then(result => {
         return result.json();
       })
       .then(info => {
         if (info.states === null || info.states === undefined) {
-          this.setState({ value: [], load: true })
-        }else{
-          const slicedSolo = info.states.slice(0, 1)
-          this.setState({ value: slicedSolo, load: true, pinPointPlane: true })
-      }
-    })
-      .catch(err => {
-        console.error(err)
+          this.setState({ value: [], load: true });
+        } else {
+          const slicedSolo = info.states.slice(0, 1);
+          this.setState({ value: slicedSolo, load: true, pinPointPlane: true });
+        }
       })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   componentDidUpdate(pP, pS, sS) {
-    if(pS.savedFlight !==this.state.savedFlight){
-      clearInterval(this.intervalId)
-      const savedicao = this.props.savedPlanes
-      this.setState({load:false})
+    if (pS.savedFlight !== this.state.savedFlight) {
+      clearInterval(this.intervalId);
+      const savedicao = this.props.savedPlanes;
+      this.setState({ load: false });
       fetch(`/api/select/${savedicao}`)
         .then(result => {
           return result.json();
         })
         .then(info => {
-          if (info.states ===null) {
-            this.setState({value:[],load:true})
-          }else if (info.states !== null || info.states !== undefined) {
-            const slicedSolo = info.states.slice(0, 1)
-            this.setState({ value: slicedSolo, load: true, pinPointPlane: true })
+          if (info.states === null) {
+            this.setState({ value: [], load: true });
+          } else if (info.states !== null || info.states !== undefined) {
+            const slicedSolo = info.states.slice(0, 1);
+            this.setState({ value: slicedSolo, load: true, pinPointPlane: true });
           }
         })
         .catch(err => {
-          console.error(err)
-        })
+          console.error(err);
+        });
     }
-    if(this.state.value !== pS.value && !pS.icao && !pS.savedFlight){
-       clearInterval(this.intervalId)
-       this.intervalId = setInterval(() => this.getData(), 30000)
+    if (this.state.value !== pS.value && !pS.icao && !pS.savedFlight) {
+      clearInterval(this.intervalId);
+      this.intervalId = setInterval(() => this.getData(), 30000);
     }
   }
 
   updateSearch(event) {
-    this.setState({ icao: event.target.value })
+    this.setState({ icao: event.target.value });
     if (event.key === 'Enter') {
-      this.setState({ pinPointPlane: true, load: false })
-      this.getSinglePlane()
+      this.setState({ pinPointPlane: true, load: false });
+      this.getSinglePlane();
     }
 
   }
 
-  componentWillUnmount(){
-    clearInterval(this.intervalId)
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
   }
 
   render() {

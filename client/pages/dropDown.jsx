@@ -1,7 +1,6 @@
 import React from 'react';
-import NavTop from '../components/navigationSaved';
 import NavBottom from '../components/navigationBottom';
-import {Dropdown, Toggle, Item, Menu} from 'react-bootstrap';
+import { Dropdown, Toggle, Item, Menu } from 'react-bootstrap';
 
 export default class DropDowns extends React.Component {
 
@@ -28,6 +27,6 @@ export default class DropDowns extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }

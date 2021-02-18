@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React from 'react';
 import NavBottom from '../components/navigationBottom';
 import Button from 'react-bootstrap/Button';
-import Moment from 'react-moment';
 import moment from 'moment';
-import 'moment-timezone';
-import { unix } from 'moment-timezone';
 import Loader from '../lib/loadingAirport';
 
 export default class SearchAirport extends React.Component {
@@ -16,55 +13,54 @@ export default class SearchAirport extends React.Component {
       start: null,
       end: null,
       type: '',
-      list:[],
-      loader:true
-    })
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.formView = this.formView.bind(this)
+      list: [],
+      loader: true
+    });
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.formView = this.formView.bind(this);
   }
 
-  formView(){
-    if(this.state.loader){
-      return 'col d-flex justify-content-center'
-    }else{
-      return'hidden';
+  formView() {
+
+    if (this.state.loader) {
+      return 'col d-flex justify-content-center';
+    } else {
+      return 'hidden';
     }
   }
 
   handleInputChange(event) {
-    const target = event.target.name
+    const target = event.target.name;
     if (target === 'airportCode') {
-      this.setState({ code: event.target.value })
+      this.setState({ code: event.target.value });
     } else if (target === 'startTime') {
-      const startUnix = moment(event.target.value).unix()
-      const currentDate = moment(new Date()).unix()
-      this.setState({ start: startUnix, date: currentDate })
+      const startUnix = moment(event.target.value).unix();
+      const currentDate = moment(new Date()).unix();
+      this.setState({ start: startUnix, date: currentDate });
     } else if (target === 'endTime') {
-      const endUnix = moment(event.target.value).unix()
-      this.setState({ end: endUnix })
+      const endUnix = moment(event.target.value).unix();
+      this.setState({ end: endUnix });
     } else if (target === 'dOrA') {
-      const typeLowered=event.target.value.toLowerCase()
-      this.setState({ type: typeLowered })
+      const typeLowered = event.target.value.toLowerCase();
+      this.setState({ type: typeLowered });
     }
   }
 
   handleSubmit(event) {
-    event.preventDefault()
-    this.setState({loader:false})
+    event.preventDefault();
+    this.setState({ loader: false });
     fetch(`/api/get/airport/${this.state.code}/${this.state.date}/${this.state.end}/${this.state.start}/${this.state.type}`)
       .then(res => res.json())
       .then(result => {
         if (!result.error) {
-        this.setState({list:result, loader:true})
-          this.props.find(this.state)
-          location.hash = 'airportResult'
+          this.setState({ list: result, loader: true });
+          this.props.find(this.state);
+          location.hash = 'airportResult';
           return result;
         }
-      })
+      });
   }
-
-
 
   render() {
     return (
@@ -99,6 +95,6 @@ export default class SearchAirport extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }

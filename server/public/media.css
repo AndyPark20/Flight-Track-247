@@ -41,9 +41,7 @@
   .planeInfo > p{
     font-size:.60rem;
   }
-  .logo {
-    width: 15%;
-  }
+
   .searchLengthBar{
     width:40%;
   }
@@ -97,7 +95,6 @@ h6{
 .airline{
   width:10%;
 }
-
 }
 
 @media screen and (min-width:1900px){
@@ -138,5 +135,9 @@ h5{
 .renderSavedTime{
   font-size:0.8rem;
 }
+
+  .fix{
+    width:50%;
+  }
 
 }
