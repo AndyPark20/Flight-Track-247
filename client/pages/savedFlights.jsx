@@ -6,7 +6,7 @@ import MyContext from '../lib/context';
 export default class Savedflights extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({ saved: [], airplaneId: null, listHide: true });
+    this.state = ({ saved: [], airplaneId: null, listHide: true, icao: '' });
     this.renderSavedFlights = this.renderSavedFlights.bind(this);
     this.deleteFlight = this.deleteFlight.bind(this);
     this.modal = this.modal.bind(this);
@@ -57,6 +57,8 @@ export default class Savedflights extends React.Component {
         const filtered = this.state.saved.filter(values => {
           if (values.flightId !== result.flightId) {
             return values;
+          } else {
+            return false;
           }
         });
         this.setState({ saved: filtered, listHide: true, airplaneId: null });
@@ -81,7 +83,7 @@ export default class Savedflights extends React.Component {
           </div>
           <div className="d-flex flex-column align-items-center justify-content-center">
             <h6>Options:</h6>
-            <a onClick={() => this.setState({ airplaneId: values.flightId, listHide: false })}><h5 className="airportSavedInfo delete">DELETE</h5></a>
+            <a onClick={() => this.setState({ airplaneId: values.flightId, icao: values.icao24, listHide: false })}><h5 className="airportSavedInfo delete">DELETE</h5></a>
           </div>
         </div>
       );
@@ -105,7 +107,7 @@ export default class Savedflights extends React.Component {
         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 black fix">
           <div className={this.modal()}>
             <div className="deleteConfirmation">
-              <p className="loaderTextDelete">{`Are you sure you want to delete ${this.state.airportCode}?`}</p>
+              <p className="loaderTextDelete">{`Are you sure you want to delete ${this.state.icao}?`}</p>
               <div className="d-flex justify-content-around">
                 <button onClick={this.deleteFlight} type="button" className="btn btn-danger">Delete</button>
                 <button onClick={this.cancel} type="button" className="btn btn-warning">Cancel</button>
