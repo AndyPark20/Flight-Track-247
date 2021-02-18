@@ -63,6 +63,8 @@ export default class SavedAirport extends React.Component {
         const filtered = this.state.value.filter(values => {
           if (values.savedAirportId !== result.savedAirportId) {
             return values;
+          } else {
+            return false;
           }
         });
         this.setState({ value: filtered, airportId: null, listHide: true });
@@ -74,7 +76,7 @@ export default class SavedAirport extends React.Component {
 
   selectAirport(event) {
     this.setState({ loader: false, listHide: false });
-    const selectArray = this.state.value.map((values, i) => {
+    this.state.value.forEach((values, i) => {
       if (parseInt(event.target.id) === values.savedAirportId) {
         fetch(`/api/get/airport/${values.airportCode}/${values.date}/${values.endTime}/${values.startTime}/${values.type}`)
           .then(res => res.json())
@@ -91,7 +93,6 @@ export default class SavedAirport extends React.Component {
           });
       }
     });
-    return selectArray;
   }
 
   renderSavedAirport() {
