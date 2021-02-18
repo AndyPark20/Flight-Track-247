@@ -3,14 +3,15 @@ import React from 'react';
 export default class LandedPlane extends React.Component {
 
   textLoad() {
-    const spin = this.props.spinLoad
-    const selectedplane = this.props.planeArray
+    const spin = this.props.spinLoad;
+    const selectedplane = this.props.planeArray;
     if (spin && selectedplane.length === 0) {
-      return "";
+      return '';
     } else {
-      return "hidden"
+      return 'hidden';
     }
   }
+
   render() {
     return (
       <div className={this.textLoad()}>
@@ -23,6 +24,6 @@ export default class LandedPlane extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }

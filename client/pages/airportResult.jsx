@@ -1,30 +1,26 @@
-import React from 'react'
-import Moment from 'react-moment';
+import React from 'react';
 import moment from 'moment';
-import 'moment-timezone';
-import { unix } from 'moment-timezone';
-import NavBottom from '../components/navigationBottom'
-import { Next } from 'react-bootstrap/esm/PageItem';
+import NavBottom from '../components/navigationBottom';
 
 export default class SavedAirport extends React.Component {
   constructor(props) {
     super(props);
-    this.state=({saveAirport:false})
-    this.renderTimeDate = this.renderTimeDate.bind(this)
-    this.renderSavedAirport = this.renderSavedAirport.bind(this)
-    this.saveAirportInfo = this.saveAirportInfo.bind(this)
-    this.renderSave= this.renderSave.bind(this)
+    this.state = ({ saveAirport: false });
+    this.renderTimeDate = this.renderTimeDate.bind(this);
+    this.renderSavedAirport = this.renderSavedAirport.bind(this);
+    this.saveAirportInfo = this.saveAirportInfo.bind(this);
+    this.renderSave = this.renderSave.bind(this);
   }
 
   renderTimeDate() {
     return (
       <div className="d-flex flex-column align-items-center text-center">
         <h3>{`${this.props.result.code} ${this.props.result.type} `}</h3>
-        <h5>{`${moment.unix(this.props.result.start).format("l")} ~ ${moment.unix(this.props.result.end).format("l")}`}</h5>
+        <h5>{`${moment.unix(this.props.result.start).format('l')} ~ ${moment.unix(this.props.result.end).format('l')}`}</h5>
         <h5>{`${moment.unix(this.props.result.start).format('HH:mm')} ~ ${moment.unix(this.props.result.end).format('HH:mm')}`}</h5>
         <h5 className="flightFound">({this.props.result.savedAirport.length} Flights Found)</h5>
       </div>
-    )
+    );
   }
 
   renderSavedAirport() {
@@ -47,7 +43,7 @@ export default class SavedAirport extends React.Component {
                 <h5>{value.estArrivalAirport}</h5>
               </div>
             </div>
-          )
+          );
         } else if (String(value.callsign).startsWith('AAL')) {
           return (
             <div key={i} className="d-flex justify-content-between align-items-center border-bottom">
@@ -65,7 +61,7 @@ export default class SavedAirport extends React.Component {
                 <h5>{value.estArrivalAirport}</h5>
               </div>
             </div>
-          )
+          );
         } else if (String(value.callsign).startsWith('ASA')) {
           return (
             <div key={i} className="d-flex justify-content-between align-items-center border-bottom">
@@ -83,7 +79,7 @@ export default class SavedAirport extends React.Component {
                 <h5>{value.estArrivalAirport}</h5>
               </div>
             </div>
-          )
+          );
         } else if (String(value.callsign).startsWith('SWA')) {
           return (
             <div key={i} className="d-flex justify-content-between align-items-center border-bottom">
@@ -101,7 +97,7 @@ export default class SavedAirport extends React.Component {
                 <h5>{value.estArrivalAirport}</h5>
               </div>
             </div>
-          )
+          );
         } else if (String(value.callsign).startsWith('UAL')) {
           return (
             <div key={i} className="d-flex justify-content-between align-items-center border-bottom">
@@ -119,7 +115,7 @@ export default class SavedAirport extends React.Component {
                 <h5>{value.estArrivalAirport}</h5>
               </div>
             </div>
-          )
+          );
         } else if (String(value.callsign).startsWith('SKW')) {
           return (
             <div key={i} className="d-flex justify-content-between align-items-center border-bottom">
@@ -137,7 +133,7 @@ export default class SavedAirport extends React.Component {
                 <h5>{value.estArrivalAirport}</h5>
               </div>
             </div>
-          )
+          );
         } else if (String(value.callsign).startsWith('NKS')) {
           return (
             <div key={i} className="d-flex justify-content-between align-items-center border-bottom">
@@ -155,10 +151,10 @@ export default class SavedAirport extends React.Component {
                 <h5>{value.estArrivalAirport}</h5>
               </div>
             </div>
-          )
+          );
         }
       }
-    })
+    });
     return (
       <div className="mb-10">
         <div className="row d-flex align-self-center">
@@ -167,7 +163,7 @@ export default class SavedAirport extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   saveAirportInfo() {
@@ -183,24 +179,22 @@ export default class SavedAirport extends React.Component {
       })
     })
       .then(res => {
-        return res.json()
+        return res.json();
       })
       .then(result => {
-        if(result.length ===1){
-          this.setState({saveAirport:true})
+        if (result.length === 1) {
+          this.setState({ saveAirport: true });
         }
         return result;
       })
       .catch(err => {
-        console.error(err)
-      })
+        console.error(err);
+      });
   }
 
-  renderSave(){
-    if(this.state.saveAirport){
-      return <h6 className="savedAirportConfirm">Saved!</h6>
-    }else{
-      return;
+  renderSave() {
+    if (this.state.saveAirport) {
+      return <h6 className="savedAirportConfirm">Saved!</h6>;
     }
   }
 
@@ -224,6 +218,6 @@ export default class SavedAirport extends React.Component {
           </div>
         </div>
       </div >
-    )
+    );
   }
 }

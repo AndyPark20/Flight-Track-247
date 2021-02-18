@@ -17,22 +17,23 @@ export default class App extends React.Component {
       user: false,
       route: parseRoute(window.location.hash),
       savedAirport: [],
-      code:[]
+      code: []
     };
 
     this.signIn = this.signIn.bind(this);
     this.renderPage = this.renderPage.bind(this);
     this.retrievePlane = this.retrievePlane.bind(this);
     this.retrieveAirport = this.retrieveAirport.bind(this);
-    this.savedAirportRetrieve = this.savedAirportRetrieve.bind(this)
+    this.savedAirportRetrieve = this.savedAirportRetrieve.bind(this);
   }
 
   signIn(message) {
     const { password, userId } = message;
     if (password && userId) {
-      this.setState({ user: true })
+      this.setState({ user: true });
     }
   }
+
   componentDidMount() {
     window.addEventListener('hashchange', () => {
       const changedHash = window.location.hash;
@@ -42,7 +43,7 @@ export default class App extends React.Component {
   }
 
   retrievePlane(event) {
-    this.setState({ icao24: event })
+    this.setState({ icao24: event });
   }
 
   retrieveAirport(event) {
@@ -56,45 +57,45 @@ export default class App extends React.Component {
     });
   }
 
-  savedAirportRetrieve(event){
+  savedAirportRetrieve(event) {
     this.setState({
-      savedAirport:event.list,
+      savedAirport: event.list,
       code: event.otherInfo.airportCode,
       date: event.otherInfo.date,
-      start:event.otherInfo.startTime,
-      end:event.otherInfo.endTime,
+      start: event.otherInfo.startTime,
+      end: event.otherInfo.endTime,
       type: event.otherInfo.type.charAt(0).toUpperCase() + event.otherInfo.type.slice(1)
     });
   }
 
   renderPage() {
     const { route } = this.state;
-    if (route.path === "home") {
+    if (route.path === 'home') {
       return <Home refresh={this.state.route.path} savedPlanes={this.state.icao24} />;
     }
-    if (route.path === "") {
+    if (route.path === '') {
       return <LoginPage signIn={this.signIn} />;
     }
-    if (route.path === "save") {
+    if (route.path === 'save') {
       return <DropDown />;
     }
-    if (route.path === "flights") {
-      return <SavedFlights retrieve={this.retrievePlane} />
+    if (route.path === 'flights') {
+      return <SavedFlights retrieve={this.retrievePlane} />;
     }
     if (route.path === 'searchAirport') {
-      return <SearchAirport find={this.retrieveAirport} />
+      return <SearchAirport find={this.retrieveAirport} />;
     }
     if (route.path === 'airportResult') {
-      return <AirportResult result={this.state} airportData={this.state} />
+      return <AirportResult result={this.state} airportData={this.state} />;
     }
-    if(route.path ==='savedAirport'){
-      return <SavedAirport airportData={this.state} selectedAirport={this.savedAirportRetrieve} />
+    if (route.path === 'savedAirport') {
+      return <SavedAirport airportData={this.state} selectedAirport={this.savedAirportRetrieve} />;
     }
   }
 
   render() {
-    return<div className="mainContainer">{this.renderPage()}</div>
+    return <div className="mainContainer">{this.renderPage()}</div>;
   }
 }
 
-App.contextType = MyContext
+App.contextType = MyContext;

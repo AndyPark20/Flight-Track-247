@@ -2,12 +2,11 @@ import React from 'react';
 import MyContext from '../lib/context';
 import 'moment-timezone';
 import moment from 'moment';
-import { unix } from 'moment-timezone';
 
 export default class PopUp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({ flight: '' })
+    this.state = ({ flight: '' });
     this.planeInfo = this.planeInfo.bind(this);
     this.changeView = this.changeView.bind(this);
     this.notifySaved = this.notifySaved.bind(this);
@@ -15,7 +14,7 @@ export default class PopUp extends React.Component {
 
   changeView(event) {
     if (event.target.className === 'saveFlightBtnRed') {
-      this.props.click()
+      this.props.click();
     }
   }
 
@@ -33,50 +32,48 @@ export default class PopUp extends React.Component {
       const flag = this.context.map((values, i) => {
         if (values[0] === flightCiao) {
           if (values[2]) {
-            return <img key={i} className="flag" src={`/images/flags/${values[2].toLowerCase()}.jpg`} alt={`${values} flag`} />
+            return <img key={i} className="flag" src={`/images/flags/${values[2].toLowerCase()}.jpg`} alt={`${values} flag`} />;
           }
         }
-    })
-    return flag;
+      });
+      return flag;
+    }
   }
-}
 
-notifySaved(){
-  if (this.props.saveResult) {
-    return <h6 className="notifySaved">Saved!</h6>
-  } else {
-    return;
+  notifySaved() {
+    if (this.props.saveResult) {
+      return <h6 className="notifySaved">Saved!</h6>;
+    }
   }
-}
 
-saveFlight(event, values) {
-  event.stopPropagation();
-  const unixTime = ((new Date().getTime() / 1000).toFixed(0))
-  const req = {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify({ icao24: values, time: unixTime })
+  saveFlight(event, values) {
+    event.stopPropagation();
+    const unixTime = ((new Date().getTime() / 1000).toFixed(0));
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({ icao24: values, time: unixTime })
+    };
+    fetch('/api/flight', req)
+      .then(res => res.json())
+      .then(result => {
+        if (result.length === 1) {
+          this.props.changeSave();
+        }
+        return result;
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
-  fetch('/api/flight', req)
-    .then(res => res.json())
-    .then(result => {
-      if (result.length === 1) {
-        this.props.changeSave()
-      }
-      return result;
-    })
-    .catch(err => {
-      console.error(err)
-    })
-}
 
-planeInfo() {
-  if (this.context !== undefined) {
-    const airplane = this.context.map((values, i) => {
-      if (values[0] === this.props.flight) {
-        return (
+  planeInfo() {
+    if (this.context !== undefined) {
+      const airplane = this.context.map((values, i) => {
+        if (values[0] === this.props.flight) {
+          return (
           <div className="panel" key={i}>
             <div className="planeInfoRow">
               <div className="col-12 planeInfoSection">
@@ -140,28 +137,28 @@ planeInfo() {
               </div>
             </div>
             <div className="planeInfoSection flightOption">
-              <button className="saveFlightBtn" onClick={(event) => { this.saveFlight(event, values[0]) }}>SAVE FLIGHT</button>
+              <button className="saveFlightBtn" onClick={event => { this.saveFlight(event, values[0]); }}>SAVE FLIGHT</button>
               <button className="saveFlightBtnRed">CLOSE</button>
             </div>
           </div>
-        )
-      }
-    })
-    return airplane;
+          );
+        }
+      });
+      return airplane;
+    }
   }
-}
 
-render() {
-  return (
-    <div className={this.hidePopUp()} onClick={(event) => this.changeView(event)}>
+  render() {
+    return (
+    <div className={this.hidePopUp()} onClick={event => this.changeView(event)}>
       <div className="row">
         <div className="column">
           {this.planeInfo()}
         </div>
       </div>
     </div>
-  );
-}
+    );
+  }
 }
 
-PopUp.contextType = MyContext
+PopUp.contextType = MyContext;

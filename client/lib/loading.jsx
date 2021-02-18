@@ -1,22 +1,22 @@
 import React from 'react';
 
-
 export default class Loader extends React.Component {
   loading() {
-    const spin = this.props.spinLoad
+    const spin = this.props.spinLoad;
     if (spin) {
-      return;
+      return '';
     } else {
-      return "lds-ring"
+      return 'lds-ring';
     }
   }
 
   textLoad() {
-    const spin = this.props.spinLoad
+    const spin = this.props.spinLoad;
     if (spin) {
-      return "hidden";
+      return 'hidden';
     }
   }
+
   render() {
     return (
       <div className={this.textLoad()}>
@@ -29,6 +29,6 @@ export default class Loader extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }

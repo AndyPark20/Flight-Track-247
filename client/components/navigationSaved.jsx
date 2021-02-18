@@ -3,7 +3,7 @@ import React from 'react';
 export default class Nav extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({ icao: '' })
+    this.state = ({ icao: '' });
   }
 
   render() {
@@ -14,6 +14,6 @@ export default class Nav extends React.Component {
           <img className="homeHead" src="/images/profile.png" alt="user" />
         </div>
       </div>
-    )
+    );
   }
 }
