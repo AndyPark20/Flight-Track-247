@@ -12,6 +12,8 @@ Tools used to build this project:
 * React                 
 * CSS3
 * HTML5
+* Bootstrap5
+* PostgreSQL
 * Node.js
 
 
