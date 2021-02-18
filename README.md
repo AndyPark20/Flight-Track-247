@@ -8,11 +8,11 @@ Checkout live demo: https://flight-track-247.herokuapp.com/
 
 Tools used to build this project:
 ---
-JavaScript (ES6)
-React
-CSS3
-HTML5
-Node.js
+* JavaScript (ES6)                                                                                                                  
+* React                 
+* CSS3
+* HTML5
+* Node.js
 
 
 Features:
