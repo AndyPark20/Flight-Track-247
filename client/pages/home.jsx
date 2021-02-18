@@ -3,7 +3,7 @@ import Nav from '../components/navigationTop';
 import NavBottom from '../components/navigationBottom';
 import PlaneRender from '../components/renderPlanes';
 import Loader from '../lib/loading';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import MyContext from '../lib/context';
 import PopUp from '../components/popup';
 import LandedPlane from '../lib/landedPlane';
@@ -38,7 +38,9 @@ export default class Home extends React.Component {
         return res.json();
       })
       .then(data => {
-        if (!this.state.icao || this.state.savedFlight) {
+        if (Boolean(this.state.icao) || Boolean(this.state.savedFlight)) {
+          fetchController.abort();
+        } else {
           clearTimeout(time);
           const sliced = data.states.slice(0, 750);
           localStorage.setItem('retrieveAllPlanes', JSON.stringify(sliced));
