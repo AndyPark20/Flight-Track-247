@@ -1,6 +1,6 @@
 Flight-Track-247
 ---
-Flight-Track-247 is a full-stack web and mobile responsive application that allows users to search all the flights currently in route as well asretrieve selected airport departure and arrival information.   
+Flight-Track-247 is a full-stack web and mobile responsive application that allows users to search all the flights currently in route as well as retrieve selected airport's departure and arrival information.   
 
 Live Demo
 --- 
