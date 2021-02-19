@@ -486,3 +486,8 @@ h6 {
   text-align:center;
 
 }
+
+.dropdown{
+  display:flex;
+  flex-direction: column;
+}

@@ -82,11 +82,11 @@ export default class SearchAirport extends React.Component {
               <input className="inputStyle" type="datetime-local" name="startTime" onChange={this.handleInputChange} required></input>
               <label className="labelStyle"> End-Date & time:</label>
               <input className="inputStyle" type="datetime-local" name="endTime" onChange={this.handleInputChange} required></input>
-              <label className="labelStyle">  Departure or Arrival:</label>
-              <label>
-                <select name="dOrA" onChange={this.handleInputChange} defaultValue='Please Select'>
-                  <option value="Arrival">Arrival</option>
-                  <option value="Departure">Departure</option>
+              <label className="labelStyle dropdown">  Departure or Arrival:
+                <select name="dOrA" onChange={this.handleInputChange} defaultValue={'Please Select'} required>
+                  <option value="Please Select" disabled>Please Select</option>
+                  <option value="Arrival" >Arrival</option>
+                  <option value="Departure" >Departure</option>
                 </select>
               </label>
               {/* <input className="inputStyle" type="text" name="dOrA" placeholder="departure or arrival" onChange={this.handleInputChange} required></input> */}
