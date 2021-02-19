@@ -14,20 +14,35 @@ export default class SearchAirport extends React.Component {
       end: null,
       type: '',
       list: [],
-      loader: true
+      loader: true,
+      firstModal: false
     });
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.formView = this.formView.bind(this);
+    this.modal = this.modal.bind(this);
+    this.cancel = this.cancel.bind(this);
   }
 
   formView() {
 
-    if (this.state.loader) {
+    if (this.state.loader && this.state.firstModal) {
       return 'col d-flex justify-content-center';
     } else {
       return 'hidden';
     }
+  }
+
+  modal() {
+    if (this.state.firstModal) {
+      return 'hidden';
+    } else {
+      return 'textStyleModal';
+    }
+  }
+
+  cancel() {
+    this.setState({ firstModal: true });
   }
 
   handleInputChange(event) {
@@ -71,15 +86,27 @@ export default class SearchAirport extends React.Component {
         <div className="d-flex justify-content-center">
           <h3>Search Airport</h3>
         </div>
+        <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 black fix">
+          <div className={this.modal()}>
+            <div className="deleteConfirmation">
+              <p className="loaderTextDelete">1. Please note that search airport can only retrieve arrival and departure schedule up to 7 days prior to current date.</p>
+              <p></p>
+              <p className="loaderTextDelete">2. Current date search will be available after 7:00pm pacfic time after server has been updated</p>
+              <div className="d-flex justify-content-around">
+                <button onClick={this.cancel} type="button" className="btn btn-warning">Ok</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="row align-items-center d-flex justify-content-center px-2 vh-100 black">
           <Loader spinning={this.state.loader} />
           <div className={this.formView()}>
             <form className="airportForm" onSubmit={this.handleSubmit} >
               <label className="labelStyle"> Airport Code:</label>
               <input className="inputStyle" type="text" name="airportCode" placeholder="KSNA=John Wayne Airport" onChange={this.handleInputChange} required></input>
-              <label className="labelStyle"> Start-Date & time:</label>
+              <label className="labelStyle">Airport schedule start-time:</label>
               <input className="inputStyle" type="datetime-local" name="startTime" onChange={this.handleInputChange} required></input>
-              <label className="labelStyle"> End-Date & time:</label>
+              <label className="labelStyle">Airport schedule end-time:</label>
               <input className="inputStyle" type="datetime-local" name="endTime" onChange={this.handleInputChange} required></input>
               <label className="labelStyle selectForm">  Departure or Arrival:
                 <select name="dOrA" onChange={this.handleInputChange} required>
