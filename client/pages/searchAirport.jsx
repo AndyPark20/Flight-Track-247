@@ -81,8 +81,13 @@ export default class SearchAirport extends React.Component {
               <input className="inputStyle" type="datetime-local" name="startTime" onChange={this.handleInputChange} required></input>
               <label className="labelStyle"> End-Date & time:</label>
               <input className="inputStyle" type="datetime-local" name="endTime" onChange={this.handleInputChange} required></input>
-              <label className="labelStyle">  Departure or Arrival:</label>
-              <input className="inputStyle" type="text" name="dOrA" placeholder="departure or arrival" onChange={this.handleInputChange} required></input>
+              <label className="labelStyle selectForm">  Departure or Arrival:
+                <select name="dOrA" onChange={this.handleInputChange} required>
+                  <option value="">Please Select</option>
+                  <option value="Arrival" >Arrival</option>
+                  <option value="Departure" >Departure</option>
+                </select>
+              </label>
               <div className="btnSubmit">
                 <Button type="submit" className="buttonStyle" variant="primary">SUBMIT</Button>
               </div>
@@ -98,3 +103,5 @@ export default class SearchAirport extends React.Component {
     );
   }
 }
+
+{ /* <input className="inputStyle" type="text" name="dOrA" placeholder="departure or arrival" onChange={this.handleInputChange} required></input> */ }
