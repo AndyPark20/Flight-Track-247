@@ -406,6 +406,11 @@ h6 {
   font-size: 0.8rem;
 }
 
+.selectForm{
+  display:flex;
+  flex-direction: column;
+}
+
 /********** Airport Result *********************/
 
 .savedAirportContainer {
@@ -485,9 +490,4 @@ h6 {
 .textStyleModal{
   text-align:center;
 
-}
-
-.dropdown{
-  display:flex;
-  flex-direction: column;
 }
