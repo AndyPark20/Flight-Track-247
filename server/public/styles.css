@@ -123,15 +123,26 @@ a:hover {
 }
 
 .bottomLogo {
-  height: 40px;
-  width: 40px;
+  height: 36px;
+  width: 36px;
 }
+
+.iconText {
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  text-align:center;
+}
+
 
 .bottomLogoTwo {
   height: 35px;
   width: 35px;
 }
-
+.btnIcon {
+  text-align:center;
+  margin: 0px;
+}
 /**********  Loading Animation  *****************/
 
 .lds-ring {
@@ -371,6 +382,8 @@ h6 {
 
 .icaoNumber {
    color:#ffcb05;
+   margin:0;
+   font-size:1.35rem;
 }
 
 .icaoNumber:hover {
@@ -379,6 +392,9 @@ h6 {
 
 .renderSavedInfo {
   height: 100vh;
+}
+.savedIcaoText{
+  margin:0;
 }
 
 /************************  SEARCH AIRPORT  **********************/

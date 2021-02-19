@@ -72,14 +72,17 @@ export default class Savedflights extends React.Component {
     const savedFlight = this.state.saved.map((values, i) => {
       return (
         <div key={i} className="d-flex justify-content-between align-items-center border-bottom text-align text-center">
-          <a href="#home" onClick={() => this.props.retrieve(values.icao24)}><h4 className="icaoNumber">{values.icao24}</h4></a>
           <div className="d-flex flex-column">
-            <h6>Date:</h6>
-            <h5 className="renderSavedTime" key={i}>{moment.unix(values.time).format('MMM Do YY')}</h5>
+            <h6 className="savedIcaoText">Flight icao24:</h6>
+            <a href="#home" onClick={() => this.props.retrieve(values.icao24)}><h4 className="icaoNumber">{values.icao24}</h4></a>
           </div>
           <div className="d-flex flex-column">
-            <h6>Time:</h6>
-            <h5 className="renderSavedTime" key={i}>{moment.unix(values.time).format('LT')}</h5>
+            <h6>Saved On:</h6>
+            <h5 className="renderSavedTime" key={i}>{moment.unix(values.time).format('MMM Do YY')} @ {moment.unix(values.time).format('LT')}</h5>
+          </div>
+          <div className="d-flex flex-column">
+            <h6>Time-Zone:</h6>
+            <h5 className="renderSavedTime" key={i}>PST</h5>
           </div>
           <div className="d-flex flex-column align-items-center justify-content-center">
             <h6>Options:</h6>

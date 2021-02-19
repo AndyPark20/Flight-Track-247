@@ -19,7 +19,7 @@ export default class LandedPlane extends React.Component {
           <div className="d-flex flex-column justify-content-center align-items-center">
             <img src="/images/warning.png" alt="warning logo" className="warning" />
             <div className="textStyle">
-              <p className="flightSearchLoader">Sorry that Flight has either landed or there is an error!</p>
+              <p className="flightSearchLoader">Sorry, that flight has landed!</p>
             </div>
           </div>
         </div>
