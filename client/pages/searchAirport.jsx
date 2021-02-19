@@ -3,6 +3,7 @@ import NavBottom from '../components/navigationBottom';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment';
 import Loader from '../lib/loadingAirport';
+import { Dropdown, Toggle, Item, Menu } from 'react-bootstrap';
 
 export default class SearchAirport extends React.Component {
   constructor(props) {
@@ -82,9 +83,15 @@ export default class SearchAirport extends React.Component {
               <label className="labelStyle"> End-Date & time:</label>
               <input className="inputStyle" type="datetime-local" name="endTime" onChange={this.handleInputChange} required></input>
               <label className="labelStyle">  Departure or Arrival:</label>
-              <input className="inputStyle" type="text" name="dOrA" placeholder="departure or arrival" onChange={this.handleInputChange} required></input>
+              <label>
+                <select name="dOrA" onChange={this.handleInputChange} defaultValue='Please Select'>
+                  <option value="Arrival">Arrival</option>
+                  <option value="Departure">Departure</option>
+                </select>
+              </label>
+              {/* <input className="inputStyle" type="text" name="dOrA" placeholder="departure or arrival" onChange={this.handleInputChange} required></input> */}
               <div className="btnSubmit">
-                <Button type="submit" className="buttonStyle" variant="primary">SUBMIT</Button>
+                <Button type="submit" className="buttonStyle" variant="secondary">SUBMIT</Button>
               </div>
             </form>
           </div>
